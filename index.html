@@ -14,13 +14,20 @@
   <header class="topbar">
     <div class="container topbar-inner">
       <a class="brand-mark" href="#top">THALZERON LABS</a>
-      <nav class="nav-tabs">
+
+      <nav class="nav-tabs" aria-label="Navegação principal">
         <a href="#apps">Apps</a>
         <a href="#sobre">Sobre</a>
         <a href="solicitacao-exclusao-de-conta.html">Exclusão de Conta</a>
         <a href="#suporte">Suporte</a>
       </nav>
-      <a class="topbar-cta" href="https://play.google.com/store/apps/dev?id=5631578905073739839" target="_blank" rel="noopener noreferrer">Play Store</a>
+
+      <div class="topbar-tools">
+        <div class="topbar-search">
+          <input id="appSearchTop" type="text" placeholder="Pesquisar app..." aria-label="Pesquisar aplicativo" />
+        </div>
+        <a class="topbar-cta" href="https://play.google.com/store/apps/dev?id=5631578905073739839" target="_blank" rel="noopener noreferrer">Play Store</a>
+      </div>
     </div>
   </header>
 
@@ -31,6 +38,7 @@
       <p class="hero-text">
         A <strong>Thalzeron Labs</strong> é um estúdio independente fundado por <strong>Esdras Souza</strong>,
         desenvolvedor Android focado em construir aplicativos modernos, rápidos, confiáveis e realmente úteis.
+        Cada produto nasce com arquitetura estratégica, design funcional e obsessão por qualidade.
       </p>
 
       <div class="hero-actions">
@@ -38,15 +46,19 @@
         <a class="btn btn-secondary" href="solicitacao-exclusao-de-conta.html">Exclusão de conta e dados</a>
       </div>
 
-      <div class="search-panel">
-        <div class="search-copy">
-          <span class="section-tag">BUSCA RÁPIDA</span>
-          <h2>Encontre um app no site</h2>
-          <p>Pesquise pelo nome para localizar política de privacidade, termos de uso e exclusão de conta/dados.</p>
-        </div>
-        <div class="search-box">
-          <input id="appSearch" type="text" placeholder="Digite o nome do app..." aria-label="Pesquisar aplicativo" />
-        </div>
+      <div class="hero-grid">
+        <article class="info-card">
+          <h2>Transparência</h2>
+          <p>Este site centraliza páginas oficiais, políticas de privacidade, termos de uso, suporte e instruções de exclusão de conta ou dados quando aplicável.</p>
+        </article>
+        <article class="info-card">
+          <h2>Arquitetura de Produto</h2>
+          <p>Cada aplicativo é pensado com mentalidade de evolução contínua: base sólida, interface limpa, desempenho consistente e documentação organizada.</p>
+        </article>
+        <article class="info-card">
+          <h2>Operação Enxuta</h2>
+          <p>O ecossistema da Thalzeron Labs cresce de forma modular. Novos apps, links oficiais e documentos legais são adicionados continuamente aqui.</p>
+        </article>
       </div>
     </div>
   </header>
@@ -57,13 +69,13 @@
         <div class="section-heading">
           <span class="section-tag">APPS</span>
           <h2>Central oficial de aplicativos</h2>
-          <p>Os projetos abaixo já possuem base oficial no site.</p>
+          <p>Os projetos abaixo já possuem base oficial no site. Onde a publicação ainda não estiver concluída, o status permanecerá como <strong>Em breve</strong>.</p>
         </div>
 
         <div class="app-grid" id="appGrid">
           <article class="app-card" data-app-name="motrix+ motrix plus">
             <div class="app-top"><h3>Motrix+</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="motrix-plus/politica-de-privacidade.html">Política de Privacidade</a>
@@ -74,7 +86,7 @@
 
           <article class="app-card" data-app-name="calc pro max">
             <div class="app-top"><h3>Calc Pro Max</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="calc-pro-max/politica-de-privacidade.html">Política de Privacidade</a>
@@ -85,7 +97,7 @@
 
           <article class="app-card" data-app-name="qalc">
             <div class="app-top"><h3>Qalc</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="qalc/politica-de-privacidade.html">Política de Privacidade</a>
@@ -96,7 +108,7 @@
 
           <article class="app-card" data-app-name="luminex pro">
             <div class="app-top"><h3>Luminex Pro</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="luminex-pro/politica-de-privacidade.html">Política de Privacidade</a>
@@ -107,7 +119,7 @@
 
           <article class="app-card" data-app-name="infinigrid">
             <div class="app-top"><h3>InfiniGrid</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="infinigrid/politica-de-privacidade.html">Política de Privacidade</a>
@@ -118,7 +130,7 @@
 
           <article class="app-card" data-app-name="boltgap">
             <div class="app-top"><h3>BoltGap</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="boltgap/politica-de-privacidade.html">Política de Privacidade</a>
@@ -129,7 +141,7 @@
 
           <article class="app-card" data-app-name="lume">
             <div class="app-top"><h3>Lume</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="lume/politica-de-privacidade.html">Política de Privacidade</a>
@@ -140,7 +152,7 @@
 
           <article class="app-card" data-app-name="ignis">
             <div class="app-top"><h3>Ignis</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="ignis/politica-de-privacidade.html">Política de Privacidade</a>
@@ -151,7 +163,7 @@
 
           <article class="app-card" data-app-name="metas semanais">
             <div class="app-top"><h3>Metas Semanais</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="metas-semanais/politica-de-privacidade.html">Política de Privacidade</a>
@@ -162,7 +174,7 @@
 
           <article class="app-card" data-app-name="astro">
             <div class="app-top"><h3>Astro</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="astro/politica-de-privacidade.html">Política de Privacidade</a>
@@ -173,7 +185,7 @@
 
           <article class="app-card" data-app-name="meu shape pro">
             <div class="app-top"><h3>Meu Shape Pro</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Conteúdo completo será adicionado em atualizações futuras.</p>
+            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
             <div class="app-links">
               <span class="ghost-link disabled">Play Store · Em breve</span>
               <a href="meu-shape-pro/politica-de-privacidade.html">Política de Privacidade</a>
@@ -201,6 +213,10 @@
             Seu trabalho na Play Store e nos projetos da Thalzeron Labs segue uma premissa simples: criar aplicativos com propósito claro,
             sensação premium e estrutura preparada para crescer sem perder desempenho, legibilidade e utilidade.
           </p>
+          <p>
+            A assinatura da Thalzeron Labs está na combinação entre visão estratégica, refinamento técnico e foco absoluto em resolver
+            necessidades reais com software Android bem construído.
+          </p>
           <a class="btn btn-primary" href="https://play.google.com/store/apps/dev?id=5631578905073739839" target="_blank" rel="noopener noreferrer">Abrir página geral na Play Store</a>
         </div>
       </div>
@@ -211,7 +227,7 @@
         <div class="support-card">
           <span class="section-tag">SUPORTE &amp; LEGAL</span>
           <h2>Contato oficial</h2>
-          <p>Dúvidas, privacidade, termos de uso, exclusão de conta/dados ou assuntos relacionados aos apps da Thalzeron Labs.</p>
+          <p>Dúvidas, solicitações, bugs, privacidade, termos de uso, exclusão de conta/dados ou assuntos relacionados aos apps da Thalzeron Labs.</p>
           <a class="email-link" href="mailto:thalzeronlabs@gmail.com">thalzeronlabs@gmail.com</a>
         </div>
       </div>
@@ -225,7 +241,7 @@
   </footer>
 
   <script>
-    const searchInput = document.getElementById('appSearch');
+    const searchInput = document.getElementById('appSearchTop');
     const appCards = Array.from(document.querySelectorAll('.app-card'));
     const noResults = document.getElementById('noResults');
 
@@ -236,13 +252,19 @@
     searchInput.addEventListener('input', function () {
       const query = normalize(this.value.trim());
       let visibleCount = 0;
+
       appCards.forEach(card => {
         const name = normalize(card.dataset.appName || '');
         const match = !query || name.includes(query);
         card.style.display = match ? '' : 'none';
         if (match) visibleCount++;
       });
+
       noResults.hidden = visibleCount !== 0;
+
+      if (query) {
+        document.getElementById('apps').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   </script>
 </body>
