@@ -1,0 +1,50 @@
+DETALHES COMPLETOS - H2OFlow
+
+Nome do app:
+H2OFlow
+
+Posicionamento:
+Aplicativo de hidratação e controle de consumo de água com foco em experiência simples, visual limpa e rotina prática.
+
+Descrição curta sugerida:
+Hidratação inteligente com controle simples, rápido e visual.
+
+Slogan sugerido:
+Controle sua água. Mantenha o fluxo.
+
+Proposta central:
+H2OFlow foi pensado para usuários que desejam monitorar a ingestão de água com praticidade, constância e clareza visual, transformando uma tarefa simples em um hábito consistente.
+
+Público-alvo sugerido:
+• Pessoas que querem melhorar hábitos diários
+• Usuários focados em saúde e rotina
+• Quem busca apps simples, rápidos e bonitos
+• Usuários que preferem organização visual sem excesso de complexidade
+
+Pilares do produto:
+• simplicidade operacional
+• interface moderna
+• agilidade de uso
+• clareza visual
+• consistência de rotina
+• estrutura pronta para expansão futura
+
+Tom de marca sugerido:
+Tecnológico, limpo, confiável, disciplinado e objetivo.
+
+Texto institucional curto:
+O H2OFlow foi desenvolvido para tornar o controle da hidratação mais simples, mais visual e mais natural no dia a dia. A experiência é pensada para reduzir atrito, reforçar constância e manter o usuário no comando da própria rotina.
+
+Privacidade e exclusão:
+O app deve apontar para:
+• Política de Privacidade
+• Termos de Uso
+• Página de exclusão de conta e dados
+
+Links internos sugeridos no site:
+• h2oflow/politica-de-privacidade.html
+• h2oflow/termos-de-uso.html
+• h2oflow/exclusao-de-conta-e-dados.html
+
+Observação importante:
+Como você ainda não enviou as funcionalidades reais do H2OFlow, esta descrição final foi construída com base no nome do app e no posicionamento mais provável de hidratação/água. Quando você trouxer os recursos reais, eu atualizo tudo para uma versão definitiva, mais precisa e mais comercial.
