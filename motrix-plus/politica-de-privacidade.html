@@ -8,15 +8,160 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css" />
+  <style>
+    .accordion-wrap { display:grid; gap:14px; margin-top:20px; }
+    .privacy-intro { margin-bottom:10px; text-align:justify; }
+    .policy-accordion { border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.02); overflow:hidden; }
+    .policy-accordion summary { list-style:none; cursor:pointer; padding:18px 20px; font-weight:800; display:flex; align-items:center; gap:10px; user-select:none; }
+    .policy-accordion summary::-webkit-details-marker { display:none; }
+    .policy-accordion[open] summary { border-bottom:1px solid rgba(255,255,255,0.08); color:#ffe100; }
+    .policy-body { padding:18px 20px 20px; }
+    .policy-body p { margin:0 0 12px; text-align:justify; color:#b8b8be; }
+    .policy-body ul { margin:0 0 12px 20px; padding:0; color:#b8b8be; }
+    .policy-body li { margin-bottom:8px; }
+    .policy-note { margin-top:18px; padding:16px 18px; border-radius:16px; border:1px solid rgba(255,225,0,0.16); background:rgba(255,225,0,0.05); color:#d8d8dd; text-align:justify; }
+  </style>
 </head>
 <body>
   <main class="legal-page">
     <section class="legal-card">
       <span class="mini">Política de Privacidade</span>
       <h1>Motrix+</h1>
-      <p>Esta página já foi criada e reservada com endereço próprio.</p>
-      <p>O conteúdo oficial desta seção será publicado em breve, assim que a versão final do app e seus respectivos documentos forem concluídos.</p>
-      <p>Quando você enviar as informações específicas deste aplicativo, esta página será atualizada com o texto definitivo.</p>
+
+      <p class="privacy-intro"><strong>Última atualização:</strong> 21 de abril de 2026</p>
+
+      <p class="privacy-intro">
+        A <strong>Thalzeron Labs</strong> leva a sua privacidade a sério. Esta Política de Privacidade descreve como o
+        aplicativo <strong>Motrix+</strong> coleta, utiliza, armazena, compartilha e protege suas informações ao utilizar
+        nossos serviços de assistência veicular, gestão automotiva, backup e recursos inteligentes integrados.
+      </p>
+
+      <p class="privacy-intro">
+        Ao instalar, acessar, criar conta, realizar login ou utilizar o Motrix+, você declara ciência e concordância
+        com as práticas previstas neste documento, sem prejuízo dos direitos assegurados pela Lei Geral de Proteção de Dados
+        Pessoais (Lei nº 13.709/2018) e demais normas aplicáveis.
+      </p>
+
+      <div class="accordion-wrap">
+        <details class="policy-accordion" open>
+          <summary>🚗 1. Informações que coletamos</summary>
+          <div class="policy-body">
+            <p>Para oferecer uma experiência completa, personalizada e funcional, o Motrix+ poderá coletar os seguintes tipos de dados:</p>
+
+            <p><strong>1.1. Informações de identificação e conta</strong></p>
+            <ul>
+              <li><strong>Dados de autenticação:</strong> ao utilizar Google Sign-In, Firebase Auth ou outros mecanismos compatíveis, poderemos coletar seu nome, endereço de e-mail e foto de perfil para criação, autenticação e gestão da sua conta.</li>
+              <li><strong>Perfil do veículo:</strong> informações técnicas e operacionais sobre o seu veículo, como placa, modelo, quilometragem, histórico de manutenção, documentos, abastecimentos, despesas e demais registros inseridos pelo usuário.</li>
+            </ul>
+
+            <p><strong>1.2. Dados de localização (GPS)</strong></p>
+            <ul>
+              <li><strong>Localização precisa e aproximada:</strong> poderá ser utilizada para sugerir postos de combustíveis próximos, prever condições climáticas no trajeto, registrar o local de eventos e melhorar a experiência contextual do usuário.</li>
+              <li><strong>Localização em segundo plano:</strong> se a permissão correspondente for concedida pelo usuário, o aplicativo poderá acessar a localização em segundo plano para alertas críticos de segurança, contexto climático e recursos automatizados, mesmo quando o app não estiver em uso ativo.</li>
+            </ul>
+
+            <p><strong>1.3. Dados de mídia e sensores</strong></p>
+            <ul>
+              <li><strong>Câmera:</strong> utilizada exclusivamente para digitalização de notas fiscais, comprovantes, documentos do veículo e outros registros necessários às funcionalidades do app.</li>
+              <li><strong>Microfone:</strong> utilizado para recursos de voz, incluindo a funcionalidade “Papo de Mecânico”, comandos por fala e interações compatíveis com a IA assistente.</li>
+              <li><strong>Armazenamento e arquivos:</strong> acesso necessário para salvar relatórios em PDF, exportar documentos, anexar arquivos existentes e gerenciar conteúdos relacionados ao usuário e ao veículo.</li>
+            </ul>
+
+            <p><strong>1.4. Dados técnicos e operacionais</strong></p>
+            <ul>
+              <li>Informações sobre dispositivo, sistema operacional, idioma, falhas, desempenho, eventos técnicos e métricas de estabilidade podem ser coletadas para funcionamento, segurança e melhoria contínua do aplicativo.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>📍 2. Como utilizamos as informações</summary>
+          <div class="policy-body">
+            <p>Os dados coletados poderão ser utilizados para:</p>
+            <ul>
+              <li>Gerenciar o histórico completo do veículo, incluindo combustível, multas, seguros, IPVA, manutenções, documentos e demais despesas.</li>
+              <li>Fornecer análises inteligentes de desempenho, custo, economia, uso e manutenção preventiva.</li>
+              <li>Enviar notificações push sobre vencimentos, lembretes críticos, alertas climáticos, documentos e manutenção.</li>
+              <li>Realizar backups automáticos e sincronização em nuvem por meio de integrações autorizadas pelo usuário.</li>
+              <li>Personalizar a experiência da IA assistente com base nos registros e preferências configuradas.</li>
+              <li>Melhorar estabilidade, segurança, performance e qualidade geral da experiência no aplicativo.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>☁️ 3. Compartilhamento de dados com terceiros</summary>
+          <div class="policy-body">
+            <p>O Motrix+ utiliza serviços e infraestruturas de parceiros tecnológicos confiáveis, que possuem suas próprias políticas de privacidade e termos de uso.</p>
+            <ul>
+              <li><strong>Google Play Services, Maps e Places:</strong> para funcionalidades de mapas, geolocalização, busca de locais e contexto geográfico.</li>
+              <li><strong>Firebase (Google):</strong> para autenticação, relatórios de falha, análise de uso, segurança, infraestrutura e recursos correlatos.</li>
+              <li><strong>Google Drive API:</strong> para armazenamento e restauração de backups sob controle do próprio usuário, quando a funcionalidade estiver habilitada.</li>
+            </ul>
+            <p><strong>Importante:</strong> a Thalzeron Labs não vende, aluga ou comercializa dados pessoais para terceiros com finalidade de marketing.</p>
+            <p>O compartilhamento poderá ocorrer também quando necessário para cumprimento de obrigação legal, ordem judicial, requisição de autoridade competente ou proteção de direitos, segurança e integridade do serviço.</p>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>🛡️ 4. Segurança dos dados</summary>
+          <div class="policy-body">
+            <p>Implementamos medidas técnicas e organizacionais para proteger suas informações contra acesso não autorizado, perda, alteração, destruição ou divulgação indevida.</p>
+            <ul>
+              <li>Criptografia de dados em trânsito e, quando aplicável, em repouso.</li>
+              <li>Uso de recursos como Firebase App Check para mitigar abusos e reforçar a legitimidade do acesso aos serviços integrados.</li>
+              <li>Armazenamento local estruturado e protegido, inclusive via banco local do aplicativo, conforme a arquitetura adotada.</li>
+              <li>Controles de autenticação, segregação lógica e boas práticas de segurança compatíveis com o estágio técnico do produto.</li>
+            </ul>
+            <p>Apesar de nossos esforços, nenhum sistema é absolutamente invulnerável. Por isso, o usuário também deve proteger suas credenciais e manter seu dispositivo atualizado.</p>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>⚖️ 5. Direitos do usuário (LGPD)</summary>
+          <div class="policy-body">
+            <p>Nos termos da LGPD, você poderá exercer, quando cabível, direitos como:</p>
+            <ul>
+              <li><strong>Acesso e retificação:</strong> consultar e corrigir dados pessoais e cadastrais.</li>
+              <li><strong>Exclusão:</strong> solicitar a exclusão total da conta e dos dados associados, pelas configurações do app ou pelo canal oficial de suporte.</li>
+              <li><strong>Portabilidade:</strong> exportar relatórios e documentos em formatos compatíveis, como PDF, sempre que a funcionalidade estiver disponível.</li>
+              <li><strong>Confirmação do tratamento:</strong> obter informação sobre a existência de tratamento dos seus dados.</li>
+              <li><strong>Revogação do consentimento:</strong> quando o tratamento depender de consentimento, você poderá revogá-lo, observadas as consequências técnicas da desativação da funcionalidade correspondente.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>👶 6. Privacidade de crianças</summary>
+          <div class="policy-body">
+            <p>O Motrix+ não é direcionado a menores de 18 anos. Não coletamos intencionalmente dados pessoais de crianças.</p>
+            <p>Se tomarmos conhecimento de que houve coleta indevida de dados de menores sem a devida base legal, adotaremos medidas razoáveis para exclusão dessas informações.</p>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>🔄 7. Alterações nesta política</summary>
+          <div class="policy-body">
+            <p>Esta Política de Privacidade poderá ser atualizada periodicamente para refletir alterações legais, técnicas, operacionais ou funcionais do Motrix+.</p>
+            <p>Quando houver mudanças relevantes, o usuário poderá ser informado por avisos no aplicativo, por e-mail ou por outros meios adequados.</p>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>📩 8. Contato</summary>
+          <div class="policy-body">
+            <p>Para dúvidas, solicitações, exercício de direitos ou suporte relacionado à privacidade, utilize o canal oficial da Thalzeron Labs:</p>
+            <p><strong>E-mail:</strong> <a href="mailto:thalzeronlabs@gmail.com">thalzeronlabs@gmail.com</a></p>
+            <p><strong>Desenvolvedor:</strong> Thalzeron Labs</p>
+            <p><strong>Site:</strong> <a href="https://thalzeronlabs.github.io/Site-Oficial/" target="_blank" rel="noopener noreferrer">https://thalzeronlabs.github.io/Site-Oficial/</a></p>
+          </div>
+        </details>
+      </div>
+
+      <div class="policy-note">
+        Esta versão foi estruturada para maior clareza, leitura em dispositivos móveis e alinhamento com as exigências gerais de transparência,
+        consentimento, segurança e exercício de direitos previstas na LGPD e nas políticas de distribuição de aplicativos.
+      </div>
 
       <div class="legal-actions">
         <a class="back-link" href="../index.html">Voltar ao site oficial</a>
