@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verificar Certificado | Motrix+ | Thalzeron Labs</title>
+  <meta name="description" content="Verifique a autenticidade de um certificado de curso livre da Elite AI Academy do Motrix+ pelo código impresso no documento." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .code-box {
+      margin: 18px 0; padding: 16px 18px; border-radius: 14px;
+      background: rgba(201,165,78,0.10); border: 1px solid rgba(201,165,78,0.45);
+      font-family: 'Courier New', monospace; font-size: 20px; font-weight: 700;
+      letter-spacing: 2px; text-align: center; word-break: break-all;
+    }
+    .code-box .lbl { display:block; font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; opacity:.7; margin-bottom:6px; }
+  </style>
+</head>
+<body>
+  <main class="legal-page">
+    <section class="legal-card">
+      <span class="mini">Verificação de Certificado</span>
+      <h1>Elite AI Academy — Motrix+</h1>
+
+      <p>
+        Esta é a página oficial de <strong>verificação de certificados</strong> do Curso Livre de Mecânica
+        Automotiva da <strong>Elite AI Academy</strong>, no aplicativo <strong>Motrix+</strong> da
+        <strong>Thalzeron Labs</strong>.
+      </p>
+
+      <div id="codeArea" class="code-box" style="display:none;">
+        <span class="lbl">Código do certificado</span>
+        <span id="certCode">—</span>
+      </div>
+
+      <h2>Como confirmar a autenticidade</h2>
+      <p>
+        A conferência oficial é feita <strong>dentro do aplicativo Motrix+</strong>, que consulta em tempo real a base
+        de certificados emitidos:
+      </p>
+      <p>
+        <strong>a)</strong> abra o <strong>Motrix+</strong> em qualquer aparelho;<br>
+        <strong>b)</strong> vá à aba <strong>Saúde Mecânica</strong> e toque no ícone
+        <strong>Verificar Certificado</strong> (QR Code);<br>
+        <strong>c)</strong> <strong>escaneie o QR</strong> do certificado ou <strong>digite o código</strong> mostrado acima;<br>
+        <strong>d)</strong> o app confirma na hora o nome, o curso, a nota e a data de emissão.
+      </p>
+
+      <p>
+        Se os dados exibidos pelo app coincidirem com os do documento impresso, o certificado é
+        <strong>autêntico</strong>. Certificados não localizados ou com dados divergentes devem ser considerados
+        <strong>inválidos</strong>.
+      </p>
+
+      <h2>Sobre o certificado</h2>
+      <p>
+        Trata-se de um <strong>certificado de curso livre</strong>, cuja natureza e base legal estão descritas em
+        <a href="curso-livre.html">Curso Livre e Certificado</a>. Curso livre não é regulado pelo MEC.
+      </p>
+
+      <p>
+        Dúvidas: <a href="mailto:thalzeronlabs@gmail.com">thalzeronlabs@gmail.com</a>.
+      </p>
+
+      <p class="updated">Thalzeron Labs · Motrix+ — verificação de certificados.</p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var code = (params.get('c') || '').trim().toUpperCase();
+        if (code) {
+          document.getElementById('certCode').textContent = code;
+          document.getElementById('codeArea').style.display = 'block';
+        }
+      } catch (e) { /* silencioso */ }
+    })();
+  </script>
+</body>
+</html>
