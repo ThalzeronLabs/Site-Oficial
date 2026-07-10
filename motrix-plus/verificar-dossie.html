@@ -3,46 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verificar Certificado | Motrix+ | Thalzeron Labs</title>
-  <meta name="description" content="Verifique a autenticidade de um certificado de curso livre da Elite AI Academy do Motrix+ pelo código impresso no documento." />
+  <title>Verificar Super Dossiê | Motrix+ | Thalzeron Labs</title>
+  <meta name="description" content="Verifique a autenticidade de um Super Dossiê veicular gerado pelo aplicativo Motrix+ da Thalzeron Labs pelo código do QR." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css" />
   <style>
     .vr-shell { margin: 22px 0 8px; }
-    .vr-status { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 16px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); }
-    .vr-status .ico { width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; }
+    .vr-status {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 20px; border-radius: 16px;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.02);
+    }
+    .vr-status .ico {
+      width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800;
+    }
     .vr-status .msg .t { font-weight: 800; font-size: 17px; letter-spacing: .2px; }
     .vr-status .msg .s { font-size: 13px; color: var(--muted); margin-top: 2px; }
-    .vr-ok { border-color: rgba(46,224,138,0.45); background: rgba(46,224,138,0.07); }
-    .vr-ok .ico { background: rgba(46,224,138,0.16); color: #2fe08a; }
-    .vr-ok .t { color: #57e6a2; }
-    .vr-bad { border-color: rgba(255,97,97,0.45); background: rgba(255,97,97,0.07); }
-    .vr-bad .ico { background: rgba(255,97,97,0.16); color: #ff6161; }
-    .vr-bad .t { color: #ff7a7a; }
-    .vr-wait .ico { background: rgba(255,225,0,0.14); color: var(--yellow); }
+    /* Estados */
+    .vr-ok    { border-color: rgba(46,224,138,0.45); background: rgba(46,224,138,0.07); }
+    .vr-ok    .ico { background: rgba(46,224,138,0.16); color: #2fe08a; }
+    .vr-ok    .t { color: #57e6a2; }
+    .vr-bad   { border-color: rgba(255,97,97,0.45); background: rgba(255,97,97,0.07); }
+    .vr-bad   .ico { background: rgba(255,97,97,0.16); color: #ff6161; }
+    .vr-bad   .t { color: #ff7a7a; }
+    .vr-wait  .ico { background: rgba(255,225,0,0.14); color: var(--yellow); }
+    /* spinner */
     .spin { width: 22px; height: 22px; border: 3px solid rgba(255,225,0,0.25); border-top-color: var(--yellow); border-radius: 50%; animation: sp 0.8s linear infinite; }
     @keyframes sp { to { transform: rotate(360deg); } }
+
     .vr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
     .vr-cell { background: rgba(255,255,255,0.025); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
     .vr-cell .k { font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); font-weight: 700; }
     .vr-cell .v { font-size: 16px; font-weight: 700; margin-top: 5px; color: var(--text); }
     .vr-cell .v.mono { font-family: 'Courier New', monospace; font-size: 14px; letter-spacing: 1px; color: var(--yellow); }
     .vr-cell.full { grid-column: 1 / -1; }
+    .health-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
     @media (max-width: 560px) { .vr-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <main class="legal-page">
     <section class="legal-card">
-      <span class="mini">Verificação de Certificado</span>
-      <h1>Elite AI Academy — Motrix+</h1>
+      <span class="mini">Verificação de Documento</span>
+      <h1>Super Dossiê — Motrix+</h1>
 
       <p>
-        Esta é a página oficial de <strong>verificação de certificados</strong> do Curso Livre de Mecânica
-        Automotiva da <strong>Elite AI Academy</strong>, no aplicativo <strong>Motrix+</strong> da
-        <strong>Thalzeron Labs</strong>. A conferência abaixo é feita em tempo real na base oficial de certificados emitidos.
+        Esta é a página oficial de <strong>verificação de autenticidade</strong> do
+        <strong>Super Dossiê</strong> veicular gerado pelo aplicativo <strong>Motrix+</strong> da
+        <strong>Thalzeron Labs</strong>. A conferência abaixo é feita em tempo real na base oficial de documentos emitidos.
       </p>
 
       <div class="vr-shell">
@@ -50,27 +61,28 @@
           <div class="ico"><div class="spin"></div></div>
           <div class="msg">
             <div class="t">Consultando a base oficial…</div>
-            <div class="s">Verificando o código do certificado.</div>
+            <div class="s">Verificando o código do documento.</div>
           </div>
         </div>
         <div id="vrDetails"></div>
       </div>
 
-      <h2>Sobre o certificado</h2>
+      <h2>Como funciona</h2>
       <p>
-        Se o resultado acima for <strong>Certificado autêntico</strong> e os dados (nome, curso e nota) coincidirem com o
-        documento impresso, ele é legítimo. Certificados <strong>não localizados</strong> ou com dados divergentes devem
-        ser considerados <strong>inválidos</strong>.
+        Cada Super Dossiê traz um <strong>QR Code</strong> e um <strong>código de verificação</strong> únicos. Ao apontar a
+        câmera para o QR (ou abrir este endereço com o código), o sistema confirma se aquele documento foi realmente
+        emitido pelo Motrix+ e para qual veículo — <strong>sem expor dados pessoais</strong> do proprietário (LGPD).
       </p>
       <p>
-        Trata-se de um <strong>certificado de curso livre</strong>, cuja natureza e base legal estão descritas em
-        <a href="curso-livre.html">Curso Livre e Certificado</a>. Curso livre não é regulado pelo MEC.
+        Se o resultado acima for <strong>Documento autêntico</strong> e os dados (placa e veículo) coincidirem com o
+        documento em mãos, ele é legítimo. Documentos <strong>não localizados</strong> ou com dados divergentes devem ser
+        considerados <strong>inválidos</strong>.
       </p>
 
       <p>
         Dúvidas: <a href="mailto:thalzeronlabs@gmail.com">thalzeronlabs@gmail.com</a>.
       </p>
-      <p class="updated">Thalzeron Labs · Motrix+ — verificação de certificados.</p>
+      <p class="updated">Thalzeron Labs · Motrix+ — verificação de Super Dossiê.</p>
     </section>
   </main>
 
@@ -79,21 +91,24 @@
       var PROJECT = "motrix-e2197";
       var DATABASE = "bancomotrix";
       var API_KEY = "AIzaSyAUQ_sKKbsPuNfft5Kl71aYW_vZhRSQCv4";
-      var COLLECTION = "certificates";
+      var COLLECTION = "dossies";
 
       var statusEl = document.getElementById("vrStatus");
       var detailsEl = document.getElementById("vrDetails");
 
       function setStatus(kind, icon, title, sub) {
         statusEl.className = "vr-status " + kind;
-        statusEl.innerHTML = '<div class="ico">' + icon + '</div>' +
+        statusEl.innerHTML =
+          '<div class="ico">' + icon + '</div>' +
           '<div class="msg"><div class="t">' + title + '</div><div class="s">' + sub + '</div></div>';
       }
+
       function esc(s) {
         return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
           return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
         });
       }
+      // Extrai o valor de um campo do formato REST do Firestore.
       function fv(f) {
         if (!f) return null;
         if (f.stringValue !== undefined) return f.stringValue;
@@ -107,37 +122,47 @@
         try { return new Date(ms).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" }); }
         catch (e) { return "—"; }
       }
-      function fmtGrade(g) {
-        if (g == null) return "—";
-        return (Math.round(g * 10) / 10).toFixed(1).replace(".", ",") + " / 10";
+      function healthLabel(h) {
+        if (h >= 80) return { t: "Bom estado", c: "#2fe08a" };
+        if (h >= 50) return { t: "Atenção", c: "#f5b14c" };
+        return { t: "Crítico", c: "#ff6161" };
       }
 
       function renderOk(fields) {
-        var name = esc(fv(fields.name) || "");
-        var course = esc(fv(fields.course) || "");
-        var grade = fv(fields.grade);
-        var workload = fv(fields.workloadHours);
-        var issuedAt = fv(fields.issuedAt);
-        var certId = esc(fv(fields.certId) || "");
-        setStatus("vr-ok", "✓", "Certificado autêntico",
-          "Emitido pela Elite AI Academy · confira se os dados batem com o documento.");
+        var brand = esc(fv(fields.brand) || "");
+        var model = esc(fv(fields.model) || "");
+        var year = fv(fields.year);
+        var plate = esc(fv(fields.plate) || "—");
+        var health = fv(fields.healthScore);
+        var records = fv(fields.recordCount);
+        var genAt = fv(fields.generatedAt);
+        var docId = esc(fv(fields.docId) || "");
+        var hl = healthLabel(health || 0);
+
+        var veic = (brand + " " + model).trim() + (year ? " · " + year : "");
+        setStatus("vr-ok", "✓", "Documento autêntico",
+          "Emitido pelo Motrix+ · confira se os dados batem com o documento em mãos.");
         detailsEl.innerHTML =
           '<div class="vr-grid">' +
-            '<div class="vr-cell full"><div class="k">Aluno(a)</div><div class="v">' + (name || "—") + '</div></div>' +
-            '<div class="vr-cell full"><div class="k">Curso</div><div class="v">' + (course || "—") + '</div></div>' +
-            '<div class="vr-cell"><div class="k">Aproveitamento</div><div class="v">' + fmtGrade(grade) + '</div></div>' +
-            '<div class="vr-cell"><div class="k">Carga horária</div><div class="v">' + (workload != null ? workload + " h" : "—") + '</div></div>' +
-            '<div class="vr-cell"><div class="k">Emitido em</div><div class="v">' + fmtDate(issuedAt) + '</div></div>' +
-            '<div class="vr-cell"><div class="k">Código</div><div class="v mono">' + certId + '</div></div>' +
+            '<div class="vr-cell full"><div class="k">Veículo</div><div class="v">' + (veic || "—") + '</div></div>' +
+            '<div class="vr-cell"><div class="k">Placa</div><div class="v mono">' + plate + '</div></div>' +
+            '<div class="vr-cell"><div class="k">Saúde mecânica no dia</div><div class="v">' +
+              '<span class="health-dot" style="background:' + hl.c + '"></span>' +
+              (health != null ? health + '% · ' + hl.t : "—") + '</div></div>' +
+            '<div class="vr-cell"><div class="k">Registros no histórico</div><div class="v">' + (records != null ? records : "—") + '</div></div>' +
+            '<div class="vr-cell"><div class="k">Gerado em</div><div class="v">' + fmtDate(genAt) + '</div></div>' +
+            '<div class="vr-cell full"><div class="k">Código de verificação</div><div class="v mono">' + docId + '</div></div>' +
           '</div>';
       }
+
       function renderNotFound(code) {
-        setStatus("vr-bad", "✕", "Certificado não encontrado",
-          "Nenhum certificado com este código foi emitido pela Elite AI Academy.");
+        setStatus("vr-bad", "✕", "Documento não encontrado",
+          "Nenhum Super Dossiê com este código foi emitido pelo Motrix+.");
         detailsEl.innerHTML =
           '<div class="vr-grid"><div class="vr-cell full"><div class="k">Código consultado</div>' +
           '<div class="v mono">' + esc(code || "—") + '</div></div></div>';
       }
+
       function renderError() {
         setStatus("vr-wait", "!", "Não foi possível verificar agora",
           "Sem conexão ou serviço indisponível. Tente novamente em instantes.");
@@ -145,10 +170,10 @@
 
       try {
         var params = new URLSearchParams(window.location.search);
-        var id = (params.get("c") || params.get("id") || "").trim().toUpperCase();
+        var id = (params.get("d") || params.get("id") || "").trim().toUpperCase();
         if (!id) {
           setStatus("vr-bad", "?", "Nenhum código informado",
-            "Abra esta página pelo QR do certificado ou informe o código na barra de endereço (?c=CÓDIGO).");
+            "Abra esta página pelo QR do documento ou informe o código na barra de endereço (?d=CÓDIGO).");
           return;
         }
         var url = "https://firestore.googleapis.com/v1/projects/" + PROJECT +
@@ -164,8 +189,8 @@
           if (data.fields && fv(data.fields.valid) !== false) {
             renderOk(data.fields);
           } else if (data.fields) {
-            setStatus("vr-bad", "✕", "Certificado revogado",
-              "Este certificado existe, mas foi marcado como inválido pelo emissor.");
+            setStatus("vr-bad", "✕", "Documento revogado",
+              "Este documento existe, mas foi marcado como inválido pelo emissor.");
           } else {
             renderNotFound(id);
           }
