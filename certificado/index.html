@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificado — Cursos IA NA PRÁTICA</title>
+<meta name="description" content="Faça a prova do curso gratuito do IA NA PRÁTICA, acerte 70% e emita seu certificado.">
+<style>
+  :root{
+    --bg:#0b0f1a; --card:#121a2b; --card2:#0f1626; --ink:#eaf0ff; --muted:#9fb0d0;
+    --brand:#3ba0ff; --brand2:#7c5cff; --ok:#2ec16b; --bad:#ff5d6c; --line:#22304d;
+    --gold:#e8c15a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(160deg,#0b0f1a 0%,#0e1526 100%);
+    color:var(--ink); line-height:1.55; min-height:100vh;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:28px 18px 80px}
+  header.brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .logo{
+    width:44px;height:44px;border-radius:11px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff;
+    box-shadow:0 6px 22px rgba(59,160,255,.35)
+  }
+  .brand h1{font-size:16px;margin:0;letter-spacing:.3px}
+  .brand small{color:var(--muted);font-size:12px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:22px;margin:16px 0;box-shadow:0 10px 34px rgba(0,0,0,.28)
+  }
+  .card h2{margin:0 0 8px;font-size:20px}
+  .lead{color:var(--muted);font-size:14.5px}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .cta-playlist{
+    display:inline-flex;align-items:center;gap:8px;margin-top:12px;
+    background:#14213b;border:1px solid var(--line);padding:10px 14px;border-radius:10px;
+    color:var(--ink);font-weight:600;font-size:14px
+  }
+  .q{margin:0 0 18px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--card2)}
+  .q .num{color:var(--brand);font-weight:700;font-size:12.5px;letter-spacing:.5px}
+  .q .txt{font-weight:600;margin:4px 0 12px;font-size:15.5px}
+  .opt{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid transparent;border-radius:9px;cursor:pointer;transition:.12s}
+  .opt:hover{background:#16203a}
+  .opt input{margin-top:3px;accent-color:var(--brand)}
+  .opt.correct{border-color:var(--ok);background:rgba(46,193,107,.10)}
+  .opt.wrong{border-color:var(--bad);background:rgba(255,93,108,.10)}
+  .btn{
+    display:inline-block;border:0;cursor:pointer;font-weight:700;font-size:15px;
+    padding:13px 22px;border-radius:11px;color:#fff;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    box-shadow:0 8px 24px rgba(124,92,255,.30)
+  }
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn.ghost{background:#16203a;border:1px solid var(--line);box-shadow:none}
+  .result{font-size:16px;font-weight:700;margin:6px 0 2px}
+  .result.ok{color:var(--ok)} .result.bad{color:var(--bad)}
+  .bar{height:10px;border-radius:6px;background:#1a2540;overflow:hidden;margin:10px 0}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--ok))}
+  label.field{display:block;margin:12px 0 4px;font-size:13px;color:var(--muted);font-weight:600}
+  input.inp{
+    width:100%;padding:12px 13px;border-radius:10px;border:1px solid var(--line);
+    background:#0d1526;color:var(--ink);font-size:15px
+  }
+  input.inp:focus{outline:2px solid var(--brand);border-color:transparent}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0;font-size:12.5px;color:var(--muted)}
+  .consent input{margin-top:3px;accent-color:var(--brand)}
+  .hidden{display:none}
+  .note{font-size:12px;color:var(--muted);margin-top:10px}
+  .flag{background:#3a2a12;border:1px solid #6b4e1c;color:#f0d79a;font-size:12.5px;padding:10px 12px;border-radius:9px;margin-top:14px}
+  /* ===== CERTIFICADO ===== */
+  #certificado-area{margin-top:8px}
+  .cert{
+    background:#fdfbf4;color:#1a2338;border-radius:14px;padding:38px 34px;
+    border:2px solid var(--gold);position:relative;overflow:hidden;
+    box-shadow:0 12px 40px rgba(0,0,0,.4)
+  }
+  .cert::before{content:"";position:absolute;inset:10px;border:1px solid #d8c583;border-radius:8px;pointer-events:none}
+  .cert .kicker{color:#a9852a;font-weight:800;letter-spacing:3px;font-size:12px;text-align:center}
+  .cert .title{text-align:center;font-size:26px;font-weight:800;margin:6px 0 2px;color:#141c2e}
+  .cert .sub{text-align:center;color:#5a6480;font-size:13.5px;margin-bottom:22px}
+  .cert .para{text-align:center;font-size:14.5px;color:#38415c}
+  .cert .name{text-align:center;font-size:30px;font-weight:800;margin:12px 0 4px;color:#0f1626;
+    border-bottom:2px solid #e0d3a0;display:inline-block;padding:0 24px 6px}
+  .cert .name-wrap{text-align:center}
+  .cert .course{text-align:center;font-size:17px;font-weight:700;margin:16px 0 6px;color:#1a2338}
+  .cert .foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:30px;gap:20px;flex-wrap:wrap}
+  .cert .foot div{font-size:12px;color:#5a6480;text-align:center;flex:1;min-width:140px}
+  .cert .foot b{display:block;color:#1a2338;font-size:13px;border-top:1px solid #b9c0d0;padding-top:6px;margin-top:22px}
+  .cert .seal{
+    position:absolute;right:26px;top:24px;width:76px;height:76px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#f3dd8f,#d4ab3c);color:#5a4210;
+    display:grid;place-items:center;text-align:center;font-weight:800;font-size:10px;line-height:1.2;
+    box-shadow:0 4px 12px rgba(0,0,0,.2);border:2px solid #fff
+  }
+  .cert .verif{text-align:center;font-size:10.5px;color:#8a90a3;margin-top:18px}
+  .cert .sig{
+    display:block;font-family:"Segoe Script","Brush Script MT","Snell Roundhand",
+    "Apple Chancery","Comic Sans MS",cursive;
+    font-size:26px;line-height:1;color:#243056;margin:0 0 2px;
+    transform:rotate(-3deg);white-space:nowrap
+  }
+  .cert .legal{
+    text-align:center;font-size:9.5px;line-height:1.5;color:#7a8199;
+    margin-top:12px;padding-top:10px;border-top:1px dashed #d8d0b0
+  }
+  @media(max-width:520px){ .cert{padding:26px 18px} .cert .name{font-size:24px} }
+  /* ===== IMPRESSÃO / PDF ===== */
+  @media print{
+    body{background:#fff}
+    .wrap > *:not(#certificado-area), #certificado-area > .note, #certificado-area > .btn{display:none !important}
+    #certificado-area{margin:0}
+    .cert{box-shadow:none;border-color:#caa93f}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="brand">
+    <div class="logo">IA</div>
+    <div>
+      <h1>IA NA PRÁTICA</h1>
+      <small>Cursos gratuitos · certificado de conclusão</small>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="card" id="intro">
+    <h2 id="curso-titulo">Certificado do curso</h2>
+    <p class="lead" id="curso-desc"></p>
+    <a class="cta-playlist" id="playlist-link" target="_blank" rel="noopener">▶ Assistir a playlist completa do curso</a>
+    <p class="note">Assista a todas as aulas, responda às <b id="nq">20</b> perguntas abaixo e acerte <b>70%</b> para emitir seu certificado com seu nome.</p>
+  </section>
+
+  <!-- QUIZ -->
+  <form id="quiz" class="card">
+    <h2>Prova de conclusão</h2>
+    <p class="lead">Uma resposta certa por pergunta. Sem pressa — o que importa é entender.</p>
+    <div id="perguntas"></div>
+    <button type="submit" class="btn" id="corrigir">Corrigir prova</button>
+  </form>
+
+  <!-- RESULTADO -->
+  <section class="card hidden" id="resultado-card">
+    <div class="bar"><i id="bar-fill" style="width:0%"></i></div>
+    <p class="result" id="result-txt"></p>
+    <p class="lead" id="result-sub"></p>
+    <button type="button" class="btn ghost" id="refazer">Refazer a prova</button>
+  </section>
+
+  <!-- FORMULÁRIO (só aparece ao passar) -->
+  <section class="card hidden" id="form-card">
+    <h2>Emitir seu certificado</h2>
+    <p class="lead">Preencha seus dados para gerar o certificado com seu nome. Você recebe novidades dos próximos cursos gratuitos do canal.</p>
+    <form id="lead-form">
+      <label class="field" for="nome">Nome completo</label>
+      <input class="inp" id="nome" name="nome" required autocomplete="name" placeholder="Seu nome como vai no certificado">
+      <label class="field" for="email">E-mail</label>
+      <input class="inp" id="email" name="email" type="email" required autocomplete="email" placeholder="voce@email.com">
+      <label class="field" for="telefone">Telefone / WhatsApp</label>
+      <input class="inp" id="telefone" name="telefone" type="tel" autocomplete="tel" placeholder="(00) 00000-0000">
+      <label class="consent">
+        <input type="checkbox" id="consent" required>
+        <span>Autorizo o <b>IA NA PRÁTICA</b> a guardar meu nome, e-mail e telefone para me enviar conteúdos e novidades dos cursos gratuitos. Posso pedir a remoção dos meus dados a qualquer momento (LGPD).</span>
+      </label>
+      <button type="submit" class="btn" id="emitir">Gerar meu certificado</button>
+      <p class="note" id="form-status"></p>
+    </form>
+  </section>
+
+  <!-- CERTIFICADO -->
+  <section id="certificado-area" class="hidden">
+    <div class="cert" id="certificado">
+      <div class="seal">IA NA<br>PRÁTICA</div>
+      <div class="kicker">CERTIFICADO DE CONCLUSÃO</div>
+      <div class="title">Curso concluído com aproveitamento</div>
+      <div class="sub">Emitido pelo canal educacional IA NA PRÁTICA</div>
+      <div class="para">Certificamos que</div>
+      <div class="name-wrap"><span class="name" id="cert-nome">—</span></div>
+      <div class="para">concluiu e foi aprovado(a) no curso gratuito</div>
+      <div class="course" id="cert-curso">—</div>
+      <div class="para" id="cert-score">com aproveitamento de —%</div>
+      <div class="foot">
+        <div><span class="sig">IA na Prática</span><b>IA NA PRÁTICA</b>Assinatura do canal · Educação em Tecnologia e IA</div>
+        <div><b id="cert-data">—</b>Data de emissão</div>
+      </div>
+      <div class="verif" id="cert-verif"></div>
+      <div class="legal">
+        Certificado de <b>curso livre</b> de qualificação/atualização, na modalidade de educação não formal,
+        nos termos da Lei nº 9.394/1996 (LDB), art. 42, e do Decreto Federal nº 5.154/2004.
+        Curso livre independe de autorização prévia do MEC e não equivale a diploma de curso técnico ou de graduação.
+      </div>
+    </div>
+    <button type="button" class="btn" id="baixar" style="margin-top:16px">⬇ Baixar certificado (PDF)</button>
+    <p class="note">Ao clicar, abre a janela de impressão — escolha <b>“Salvar como PDF”</b> como destino.</p>
+  </section>
+
+  <p class="note" style="text-align:center;margin-top:30px;opacity:.7">
+    IA NA PRÁTICA — ajudando o Brasil a entender e usar IA de verdade, na prática.
+  </p>
+</div>
+
+<script>
+/* =====================================================================
+   CONFIG DE CURSOS — reutilizável. Para um curso novo, adicione uma
+   entrada neste objeto e acesse a página com ?curso=<slug>.
+   ===================================================================== */
+const CURSOS = {
+  "llm-do-zero": {
+    titulo: "Como funciona um LLM (do zero, sem enrolação)",
+    descricao: "Você aprendeu, do texto ao token e do treino ao chat, como um modelo de linguagem funciona por dentro. Faça a prova e leve seu certificado.",
+    playlist: "https://www.youtube.com/playlist?list=PLXuLBDRE6KG4",
+    aprovacao: 0.70,
+    // 20 perguntas: 2 por aula (1–4) + 3 por aula (5–8). Cada uma exige ter
+    // assistido AQUELA aula (ancorada num exemplo/analogia específico dela).
+    perguntas: [
+      // ===== AULA 1 — O que é um LLM (2) =====
+      { q:"Aula 1 — No fundo, qual é a tarefa central que um LLM executa?", o:[
+        "Prever qual é o próximo pedaço de texto (token) mais provável",
+        "Pensar e raciocinar como um ser humano consciente",
+        "Buscar a resposta pronta no Google em tempo real",
+        "Consultar um banco de respostas fixas escritas por humanos"], c:0 },
+      { q:"Aula 1 — Qual destas coisas um LLM NÃO faz sozinho, por vontade própria?", o:[
+        "Prever a próxima palavra de uma frase",
+        "Gerar texto que parece inteligente",
+        "Navegar na internet em tempo real por conta própria",
+        "Recombinar padrões que viu no treino"], c:2 },
+      // ===== AULA 2 — Tokens (2) =====
+      { q:"Aula 2 — Por que uma palavra como 'eletrodoméstico' costuma virar VÁRIOS tokens?", o:[
+        "Porque a IA não conhece palavras longas",
+        "Porque o modelo quebra em pedaços comuns para não precisar de um vocabulário gigante",
+        "Porque palavras com acento são proibidas",
+        "Para deixar a resposta mais lenta de propósito"], c:1 },
+      { q:"Aula 2 — Na aula, a 'janela de contexto' é comparada a quê — e explica o quê?", o:[
+        "À tela onde você digita; define a cor do texto",
+        "À memória de curto prazo do modelo; por isso ele esquece conversas muito longas",
+        "Ao horário em que a IA fica no ar; define quando ela responde",
+        "Ao número de usuários online; define a velocidade"], c:1 },
+      // ===== AULA 3 — Embeddings (2) =====
+      { q:"Aula 3 — Na analogia do 'mapa de significado' (embeddings), palavras como 'rei' e 'rainha'...", o:[
+        "Ficam bem distantes uma da outra",
+        "Ficam PERTO uma da outra nesse mapa",
+        "Recebem exatamente o mesmo número",
+        "São apagadas do modelo"], c:1 },
+      { q:"Aula 3 — Que uso do dia a dia, citado na aula, os embeddings já tornam possível?", o:[
+        "Deixar jogos mais rápidos",
+        "A busca por SIGNIFICADO e as recomendações (não só por palavra exata)",
+        "Aumentar a bateria do celular",
+        "Imprimir documentos mais rápido"], c:1 },
+      // ===== AULA 4 — Atenção / Transformer (2) =====
+      { q:"Aula 4 — Qual ideia, do paper de 2017 'Attention Is All You Need', deu origem à arquitetura Transformer?", o:[
+        "A impressora 3D",
+        "A atenção (attention)",
+        "A internet 5G",
+        "O reconhecimento facial"], c:1 },
+      { q:"Aula 4 — Por que a palavra 'banco' pode ter sentidos diferentes para o modelo?", o:[
+        "Porque a IA sorteia o sentido aleatoriamente",
+        "Porque a atenção olha o contexto ao redor da palavra para definir o sentido",
+        "Porque 'banco' só existe em inglês",
+        "Porque o modelo não entende palavras com dois sentidos"], c:1 },
+      // ===== AULA 5 — Treinamento (3) =====
+      { q:"Aula 5 — No 'pré-treino', o que o modelo aprende a fazer com trilhões de tokens?", o:[
+        "Decorar perguntas e respostas de um professor",
+        "Prever a próxima palavra do texto",
+        "Copiar sites da internet em tempo real",
+        "Reconhecer rostos em fotos"], c:1 },
+      { q:"Aula 5 — Quando um modelo é chamado de '8B', '70B' ou '405B', esse número indica...", o:[
+        "O ano de lançamento",
+        "A velocidade em megabytes por segundo",
+        "A quantidade de parâmetros (em bilhões)",
+        "O preço em reais"], c:2 },
+      { q:"Aula 5 — Só o pré-treino, sozinho, produz o quê?", o:[
+        "Um assistente educado, pronto para o chat",
+        "Um modelo bruto e estranho, que ainda não sabe se comportar como assistente",
+        "Um aplicativo de celular completo",
+        "Um site pronto para publicar"], c:1 },
+      // ===== AULA 6 — RLHF / fine-tuning (3) =====
+      { q:"Aula 6 — O que transforma o modelo bruto num assistente educado como o ChatGPT?", o:[
+        "Trocar a placa de vídeo",
+        "O ajuste fino (fine-tuning) e o RLHF — treino com notas dadas por humanos",
+        "Reiniciar o computador",
+        "Aumentar a janela de contexto"], c:1 },
+      { q:"Aula 6 — O que é o 'system prompt'?", o:[
+        "Um erro do sistema",
+        "Uma instrução inicial que orienta como o modelo deve se comportar",
+        "A senha do administrador",
+        "O botão de desligar a IA"], c:1 },
+      { q:"Aula 6 — Como a aula explica, de forma honesta, o que é um 'jailbreak'?", o:[
+        "Um recurso oficial para deixar a IA mais rápida",
+        "Uma tentativa de contornar as regras e limitações ensinadas ao modelo de chat",
+        "Um vírus que apaga o modelo",
+        "O nome do modelo base antes do treino"], c:1 },
+      // ===== AULA 7 — Alucinação (3) =====
+      { q:"Aula 7 — Por que a IA 'alucina' (inventa um fato com confiança)?", o:[
+        "Porque ela prevê palavras prováveis, e nem sempre a mais provável é a verdadeira",
+        "Porque alguém a programou para mentir de propósito",
+        "Porque está sem internet",
+        "Porque o usuário digitou errado"], c:0 },
+      { q:"Aula 7 — O que a 'temperatura' controla na resposta de uma IA?", o:[
+        "A temperatura física do processador",
+        "O quão criativa/aleatória (ou mais previsível) a resposta fica",
+        "Quantas pessoas podem usar ao mesmo tempo",
+        "O tamanho da letra na tela"], c:1 },
+      { q:"Aula 7 — O que é o 'RAG', apresentado na aula como jeito de reduzir alucinação?", o:[
+        "Um botão que apaga o histórico",
+        "Dar à IA fontes/documentos para consultar antes de responder",
+        "Aumentar a temperatura ao máximo",
+        "Repetir a mesma pergunta várias vezes"], c:1 },
+      // ===== AULA 8 — Rodar local + futuro (3) =====
+      { q:"Aula 8 — O que é a 'quantização' de um modelo?", o:[
+        "Contar quantas perguntas ele já respondeu",
+        "Comprimir o modelo para ele rodar em hardware mais fraco",
+        "Aumentar o número de parâmetros",
+        "Conectar dois modelos ao mesmo tempo"], c:1 },
+      { q:"Aula 8 — Quais ferramentas a aula cita para você rodar um LLM no SEU computador?", o:[
+        "Photoshop e Excel",
+        "LM Studio e Ollama",
+        "WhatsApp e Instagram",
+        "Word e PowerPoint"], c:1 },
+      { q:"Aula 8 — Qual é a grande vantagem de rodar um LLM localmente, no seu PC?", o:[
+        "Ele fica infinitamente mais inteligente",
+        "Privacidade: seus dados não saem do seu computador",
+        "Ele nunca mais alucina",
+        "Não precisa mais de energia elétrica"], c:1 }
+    ]
+  }
+  // Para cursos futuros: "outro-curso": { titulo, descricao, playlist, aprovacao, perguntas:[...] }
+};
+
+/* ---- endpoint de captura de lead (o dono configura ao publicar) ----
+   Deixe "" para testar sem backend (o certificado é gerado mesmo assim).
+   Ao publicar: coloque a URL do serviço de coleta (ex.: Google Apps Script,
+   Formspree, etc.) que recebe {nome,email,telefone,curso,nota}.            */
+const LEAD_ENDPOINT = "";
+
+/* ===================== LÓGICA ===================== */
+const params = new URLSearchParams(location.search);
+const slug = params.get("curso") || "llm-do-zero";
+const curso = CURSOS[slug] || CURSOS["llm-do-zero"];
+const perguntas = curso.perguntas;
+const TOTAL = perguntas.length;
+const MIN = Math.ceil(TOTAL * curso.aprovacao);
+
+document.getElementById("curso-titulo").textContent = "Certificado — " + curso.titulo;
+document.getElementById("curso-desc").textContent = curso.descricao;
+document.getElementById("playlist-link").href = curso.playlist;
+document.getElementById("nq").textContent = TOTAL;
+
+// embaralha a ordem das opções por pergunta (mantendo o índice correto)
+function montar(){
+  const box = document.getElementById("perguntas");
+  box.innerHTML = "";
+  perguntas.forEach((p, i) => {
+    const ordem = p.o.map((_,k)=>k);
+    for(let a=ordem.length-1;a>0;a--){ const b=Math.floor(Math.random()*(a+1)); [ordem[a],ordem[b]]=[ordem[b],ordem[a]]; }
+    const div = document.createElement("div");
+    div.className = "q"; div.dataset.correct = ordem.indexOf(p.c);
+    let html = `<div class="num">PERGUNTA ${i+1} / ${TOTAL}</div><div class="txt">${p.q}</div>`;
+    ordem.forEach((idx, pos) => {
+      html += `<label class="opt"><input type="radio" name="q${i}" value="${pos}"><span>${p.o[idx]}</span></label>`;
+    });
+    div.innerHTML = html;
+    box.appendChild(div);
+  });
+}
+montar();
+
+document.getElementById("quiz").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const qs = document.querySelectorAll(".q");
+  let acertos = 0, respondidas = 0;
+  qs.forEach(q => {
+    const sel = q.querySelector("input:checked");
+    const correct = +q.dataset.correct;
+    if(sel){ respondidas++;
+      const opts = q.querySelectorAll(".opt");
+      opts[correct].classList.add("correct");
+      if(+sel.value === correct){ acertos++; }
+      else { sel.closest(".opt").classList.add("wrong"); }
+    }
+  });
+  if(respondidas < TOTAL){
+    alert(`Responda todas as ${TOTAL} perguntas antes de corrigir. Faltam ${TOTAL - respondidas}.`);
+    // desfaz marcações
+    document.querySelectorAll(".opt").forEach(o=>o.classList.remove("correct","wrong"));
+    return;
+  }
+  const pct = Math.round(acertos / TOTAL * 100);
+  window._nota = pct; window._acertos = acertos;
+  const rc = document.getElementById("resultado-card");
+  rc.classList.remove("hidden");
+  document.getElementById("bar-fill").style.width = pct + "%";
+  const rt = document.getElementById("result-txt");
+  const passou = acertos >= MIN;
+  rt.className = "result " + (passou ? "ok" : "bad");
+  rt.textContent = `Você acertou ${acertos} de ${TOTAL} (${pct}%).`;
+  document.getElementById("result-sub").textContent = passou
+    ? `Parabéns — você foi aprovado(a)! (mínimo: ${MIN}/${TOTAL}). Emita seu certificado abaixo.`
+    : `Faltou pouco — o mínimo para o certificado é ${MIN}/${TOTAL} (70%). Reveja as aulas destacadas em verde e tente de novo. As respostas certas estão marcadas acima.`;
+  document.getElementById("corrigir").disabled = true;
+  document.getElementById("form-card").classList.toggle("hidden", !passou);
+  rc.scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("refazer").addEventListener("click", () => {
+  montar();
+  document.getElementById("resultado-card").classList.add("hidden");
+  document.getElementById("form-card").classList.add("hidden");
+  document.getElementById("certificado-area").classList.add("hidden");
+  document.getElementById("corrigir").disabled = false;
+  document.getElementById("intro").scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("lead-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const nome = document.getElementById("nome").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  if(!nome || !email){ return; }
+  const status = document.getElementById("form-status");
+  const dados = { nome, email, telefone, curso: curso.titulo, slug, nota: window._nota, data: new Date().toISOString() };
+
+  // envia o lead se houver endpoint configurado (falha não bloqueia o certificado)
+  // OBS: Content-Type text/plain = requisição "simples" (sem preflight CORS),
+  // que é o que o Google Apps Script aceita. NÃO use application/json aqui.
+  if(LEAD_ENDPOINT){
+    status.textContent = "Enviando...";
+    try{
+      await fetch(LEAD_ENDPOINT, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(dados) });
+      status.textContent = "Dados registrados. Gerando certificado...";
+    }catch(err){ status.textContent = "Não consegui registrar agora, mas seu certificado foi gerado."; }
+  }
+
+  // preenche e mostra o certificado
+  document.getElementById("cert-nome").textContent = nome;
+  document.getElementById("cert-curso").textContent = "«" + curso.titulo + "»";
+  document.getElementById("cert-score").textContent = `com aproveitamento de ${window._nota}% na prova de conclusão`;
+  const d = new Date();
+  document.getElementById("cert-data").textContent = d.toLocaleDateString("pt-BR");
+  const code = (slug.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,4) || "IANP") + "-" +
+               d.getFullYear() + ("0"+(d.getMonth()+1)).slice(-2) + ("0"+d.getDate()).slice(-2) + "-" +
+               Math.abs(hash(nome+email+slug)).toString(36).toUpperCase().slice(0,6);
+  document.getElementById("cert-verif").textContent = "Código de verificação: " + code + " · IA NA PRÁTICA · youtube.com/@ia-na-pratica";
+  document.getElementById("certificado-area").classList.remove("hidden");
+  document.getElementById("certificado-area").scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("baixar").addEventListener("click", () => window.print());
+
+function hash(s){ let h=0; for(let i=0;i<s.length;i++){ h=(h<<5)-h+s.charCodeAt(i); h|=0; } return h; }
+</script>
+</body>
+</html>
