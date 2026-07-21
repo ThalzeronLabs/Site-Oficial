@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materiais grátis — IA NA PRÁTICA</title>
+<meta name="description" content="Todos os materiais gratuitos do canal IA NA PRÁTICA: PDF de prompts, guia de IA local no seu PC, prompts avançados e curso de LLM. Tudo de graça, sem cadastro.">
+<meta property="og:title" content="Materiais grátis — IA NA PRÁTICA">
+<meta property="og:description" content="PDFs de prompts, guia de IA local e curso de LLM. Tudo de graça.">
+<style>
+  :root{
+    --bg:#0b0f1a; --card:#121a2b; --card2:#0f1626; --ink:#eaf0ff; --muted:#9fb0d0;
+    --brand:#3ba0ff; --brand2:#7c5cff; --ok:#2ec16b; --amber:#ffc531; --line:#22304d;
+    --red:#ff5d6c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(160deg,#0b0f1a 0%,#0e1526 100%);
+    color:var(--ink); line-height:1.55; min-height:100vh;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:28px 18px 90px}
+  header.brand{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .logo{
+    width:46px;height:46px;border-radius:12px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff;
+    box-shadow:0 6px 22px rgba(59,160,255,.35)
+  }
+  .brand h1{font-size:17px;margin:0;letter-spacing:.3px}
+  .brand small{color:var(--muted);font-size:12px}
+  .hero{
+    background:linear-gradient(150deg,rgba(255,197,49,.10),var(--card));
+    border:1px solid var(--line);border-left:6px solid var(--amber);
+    border-radius:18px;padding:26px 24px;margin:18px 0 10px;box-shadow:0 10px 34px rgba(0,0,0,.28)
+  }
+  .hero .kick{color:var(--amber);font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase}
+  .hero h2{margin:6px 0 8px;font-size:27px;line-height:1.2}
+  .hero p{margin:0;color:var(--muted);font-size:15px}
+  .how{
+    background:var(--card2);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:14px 0 6px;font-size:14px;color:var(--muted)
+  }
+  .how b{color:var(--ink)}
+  .cat{margin:30px 0 10px;display:flex;align-items:center;gap:10px}
+  .cat h3{margin:0;font-size:18px;letter-spacing:.3px}
+  .cat .ic{font-size:20px}
+  .cat .ln{flex:1;height:1px;background:var(--line)}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 16px;margin:12px 0;box-shadow:0 8px 26px rgba(0,0,0,.22);
+    position:relative
+  }
+  .card .n{
+    position:absolute;top:-11px;left:16px;background:linear-gradient(135deg,var(--brand),var(--brand2));
+    color:#fff;font-weight:800;font-size:12.5px;padding:3px 10px;border-radius:20px;
+    box-shadow:0 4px 14px rgba(124,92,255,.4)
+  }
+  .card h4{margin:8px 0 10px;font-size:16px}
+  .pbox{
+    background:#0d1526;border:1px solid var(--line);border-left:4px solid var(--amber);
+    border-radius:10px;padding:14px 15px;font-size:14.5px;line-height:1.55;
+    white-space:pre-wrap;color:#f2f6ff;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace
+  }
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .tip{font-size:12.5px;color:var(--muted);flex:1;min-width:220px}
+  .tip b{color:var(--amber)}
+  .copy{
+    border:0;cursor:pointer;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;
+    color:#fff;background:#16203a;border:1px solid var(--line);transition:.12s;white-space:nowrap
+  }
+  .copy:hover{background:#1c2a49}
+  .copy.done{background:rgba(46,193,107,.18);border-color:var(--ok);color:#8ff0bb}
+  .foot{
+    margin-top:34px;background:var(--card2);border:1px solid var(--line);border-radius:16px;
+    padding:22px;text-align:center
+  }
+  .foot h3{margin:0 0 8px;font-size:19px}
+  .foot p{color:var(--muted);font-size:14px;margin:6px 0 14px}
+  .btn{
+    display:inline-block;border:0;cursor:pointer;font-weight:700;font-size:15px;
+    padding:13px 22px;border-radius:11px;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    box-shadow:0 8px 24px rgba(124,92,255,.30);margin:4px
+  }
+  .btn.ghost{background:#16203a;border:1px solid var(--line);box-shadow:none}
+  .note{font-size:12px;color:var(--muted);margin-top:16px;text-align:center}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  /* ===== IMPRESSÃO (Salvar como PDF) ===== */
+  @media print{
+    body{background:#fff;color:#111}
+    .wrap{max-width:100%;padding:0}
+    .no-print{display:none!important}
+    .card,.hero,.how,.foot{box-shadow:none;background:#fff;border:1px solid #ccc}
+    .hero{border-left:6px solid #d9a400}
+    .pbox{background:#f6f7fb;color:#111;border-left:4px solid #d9a400}
+    .card .n{background:#3ba0ff}
+    .cat h3,.hero h2,.hero .kick,.tip b{color:#111}
+    .tip{color:#444}
+    a{color:#0b57d0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brand">
+    <div class="logo">IA</div>
+    <div>
+      <h1>IA NA PRÁTICA</h1>
+      <small>IA e tecnologia de verdade, na prática — sem hype, sem enganação.</small>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="kick">Central de materiais · 100% grátis · sem cadastro</div>
+    <h2>Tudo que a comunidade já desbloqueou</h2>
+    <p>Todo material aqui é gratuito, feito pelo canal e fica no ar pra sempre. Sem e-mail, sem cadastro, sem pegadinha. Conforme a comunidade cresce, a gente publica mais — e tudo novo aparece nesta página.</p>
+  </div>
+
+  <div class="how no-print">
+    <b>Como funciona:</b> a cada meta de inscritos batida, o canal produz e publica um material novo aqui. Nada de sorteio, nada de promessa que depende de terceiro — só conteúdo que a gente mesmo faz e hospeda.
+  </div>
+
+  <div class="cat"><span class="ic">📚</span><h3>Materiais disponíveis agora</h3><span class="ln"></span></div>
+
+      <div class="card" style="margin:14px 0">
+        <span class="n">500</span>
+        <h4>📄 30 prompts de IA que resolvem o seu dia</h4>
+        <p style="color:var(--muted);font-size:14px;margin:6px 0 12px">Prompts prontos pra trabalho, e-mail, estudo, casa e dinheiro. Copiar, colar e usar em qualquer IA.</p>
+        <a class="btn" href="https://thalzeronlabs.github.io/Site-Oficial/prompts/" >Abrir material</a>
+      </div>
+      <div class="card" style="margin:14px 0">
+        <span class="n">600</span>
+        <h4>🖥️ Guia: rode uma IA no seu PC (LLM local)</h4>
+        <p style="color:var(--muted);font-size:14px;margin:6px 0 12px">Do "meu PC aguenta?" até a IA respondendo offline. Ollama, LM Studio, qual modelo cabe na sua placa e como resolver travamento.</p>
+        <a class="btn" href="https://thalzeronlabs.github.io/Site-Oficial/ia-local/" >Abrir guia</a>
+      </div>
+      <div class="card" style="margin:14px 0">
+        <span class="n">750</span>
+        <h4>🧠 40 prompts avançados</h4>
+        <p style="color:var(--muted);font-size:14px;margin:6px 0 12px">Cadeia de raciocínio, auto-crítica, revisão de código, matriz de decisão e como obrigar a IA a admitir que não sabe.</p>
+        <a class="btn" href="https://thalzeronlabs.github.io/Site-Oficial/prompts-avancados/" >Abrir material</a>
+      </div>
+      <div class="card" style="margin:14px 0">
+        <span class="n">🎓</span>
+        <h4>🎬 Curso: como funciona um LLM (do zero)</h4>
+        <p style="color:var(--muted);font-size:14px;margin:6px 0 12px">Mini-curso em vídeo, já publicado e gratuito no canal. Entenda de verdade o que acontece por dentro de uma IA.</p>
+        <a class="btn" href="https://www.youtube.com/playlist?list=PLXuLBDRE6KG4" target="_blank" rel="noopener">Assistir no YouTube</a>
+      </div>
+      <div class="card" style="margin:14px 0">
+        <span class="n">1000</span>
+        <h4>🤖 Curso em vídeo: agentes de IA na prática</h4>
+        <p style="color:var(--muted);font-size:14px;margin:6px 0 12px">Como sair do chat e fazer a IA executar tarefas de verdade, usando ferramentas. Em produção pela equipe do canal.</p>
+        <div class="tip" style="font-size:13px"><b>Em produção.</b> Publicamos aqui assim que a meta for batida.</div>
+      </div>
+      <div class="card" style="margin:14px 0">
+        <span class="n">1500</span>
+        <h4>💰 Guia de compra de GPU pra IA no Brasil</h4>
+        <p style="color:var(--muted);font-size:14px;margin:6px 0 12px">Quanto de VRAM você precisa, o que cabe em cada placa e o preço real no Brasil — com os dados do painel ao vivo.</p>
+        <div class="tip" style="font-size:13px"><b>Em produção.</b> Publicamos aqui assim que a meta for batida.</div>
+      </div>
+      <div class="card" style="margin:14px 0">
+        <span class="n">2000</span>
+        <h4>🔧 Série: montando um PC de IA barato</h4>
+        <p style="color:var(--muted);font-size:14px;margin:6px 0 12px">Passo a passo em vídeo, peça por peça, com o custo real de montar uma máquina que roda IA local.</p>
+        <div class="tip" style="font-size:13px"><b>Em produção.</b> Publicamos aqui assim que a meta for batida.</div>
+      </div>
+
+  <div class="foot">
+    <h3>Acompanhe ao vivo</h3>
+    <p>O painel da IA fica no ar 24 horas por dia, com preço de GPU, modelos em alta e o placar da comunidade. Passa lá.</p>
+    <a class="btn" href="https://www.youtube.com/@ia_na_pratica_ofc?sub_confirmation=1" target="_blank" rel="noopener">▶ Inscrever no canal</a>
+    <div class="note">IA NA PRÁTICA · materiais gratuitos, pra sempre.</div>
+  </div>
+
+</div>
+</body>
+</html>

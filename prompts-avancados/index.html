@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>40 prompts avançados de IA (trabalho, código e análise) — IA NA PRÁTICA</title>
+<meta name="description" content="PDF gratuito do canal IA NA PRÁTICA: 40 prompts avançados de IA com técnicas de raciocínio, revisão de código, análise de decisão e uso consciente. Copie, cole e use.">
+<meta property="og:title" content="40 prompts avançados de IA — grátis">
+<meta property="og:description" content="Cadeia de raciocínio, auto-crítica, revisão de código e análise de decisão. Prontos pra colar.">
+<style>
+  :root{
+    --bg:#0b0f1a; --card:#121a2b; --card2:#0f1626; --ink:#eaf0ff; --muted:#9fb0d0;
+    --brand:#3ba0ff; --brand2:#7c5cff; --ok:#2ec16b; --amber:#ffc531; --line:#22304d;
+    --red:#ff5d6c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(160deg,#0b0f1a 0%,#0e1526 100%);
+    color:var(--ink); line-height:1.55; min-height:100vh;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:28px 18px 90px}
+  header.brand{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .logo{
+    width:46px;height:46px;border-radius:12px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff;
+    box-shadow:0 6px 22px rgba(59,160,255,.35)
+  }
+  .brand h1{font-size:17px;margin:0;letter-spacing:.3px}
+  .brand small{color:var(--muted);font-size:12px}
+  .hero{
+    background:linear-gradient(150deg,rgba(255,197,49,.10),var(--card));
+    border:1px solid var(--line);border-left:6px solid var(--amber);
+    border-radius:18px;padding:26px 24px;margin:18px 0 10px;box-shadow:0 10px 34px rgba(0,0,0,.28)
+  }
+  .hero .kick{color:var(--amber);font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase}
+  .hero h2{margin:6px 0 8px;font-size:27px;line-height:1.2}
+  .hero p{margin:0;color:var(--muted);font-size:15px}
+  .how{
+    background:var(--card2);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:14px 0 6px;font-size:14px;color:var(--muted)
+  }
+  .how b{color:var(--ink)}
+  .cat{margin:30px 0 10px;display:flex;align-items:center;gap:10px}
+  .cat h3{margin:0;font-size:18px;letter-spacing:.3px}
+  .cat .ic{font-size:20px}
+  .cat .ln{flex:1;height:1px;background:var(--line)}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 16px;margin:12px 0;box-shadow:0 8px 26px rgba(0,0,0,.22);
+    position:relative
+  }
+  .card .n{
+    position:absolute;top:-11px;left:16px;background:linear-gradient(135deg,var(--brand),var(--brand2));
+    color:#fff;font-weight:800;font-size:12.5px;padding:3px 10px;border-radius:20px;
+    box-shadow:0 4px 14px rgba(124,92,255,.4)
+  }
+  .card h4{margin:8px 0 10px;font-size:16px}
+  .pbox{
+    background:#0d1526;border:1px solid var(--line);border-left:4px solid var(--amber);
+    border-radius:10px;padding:14px 15px;font-size:14.5px;line-height:1.55;
+    white-space:pre-wrap;color:#f2f6ff;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace
+  }
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .tip{font-size:12.5px;color:var(--muted);flex:1;min-width:220px}
+  .tip b{color:var(--amber)}
+  .copy{
+    border:0;cursor:pointer;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;
+    color:#fff;background:#16203a;border:1px solid var(--line);transition:.12s;white-space:nowrap
+  }
+  .copy:hover{background:#1c2a49}
+  .copy.done{background:rgba(46,193,107,.18);border-color:var(--ok);color:#8ff0bb}
+  .foot{
+    margin-top:34px;background:var(--card2);border:1px solid var(--line);border-radius:16px;
+    padding:22px;text-align:center
+  }
+  .foot h3{margin:0 0 8px;font-size:19px}
+  .foot p{color:var(--muted);font-size:14px;margin:6px 0 14px}
+  .btn{
+    display:inline-block;border:0;cursor:pointer;font-weight:700;font-size:15px;
+    padding:13px 22px;border-radius:11px;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    box-shadow:0 8px 24px rgba(124,92,255,.30);margin:4px
+  }
+  .btn.ghost{background:#16203a;border:1px solid var(--line);box-shadow:none}
+  .note{font-size:12px;color:var(--muted);margin-top:16px;text-align:center}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  /* ===== IMPRESSÃO (Salvar como PDF) ===== */
+  @media print{
+    body{background:#fff;color:#111}
+    .wrap{max-width:100%;padding:0}
+    .no-print{display:none!important}
+    .card,.hero,.how,.foot{box-shadow:none;background:#fff;border:1px solid #ccc}
+    .hero{border-left:6px solid #d9a400}
+    .pbox{background:#f6f7fb;color:#111;border-left:4px solid #d9a400}
+    .card .n{background:#3ba0ff}
+    .cat h3,.hero h2,.hero .kick,.tip b{color:#111}
+    .tip{color:#444}
+    a{color:#0b57d0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brand">
+    <div class="logo">IA</div>
+    <div>
+      <h1>IA NA PRÁTICA</h1>
+      <small>IA e tecnologia de verdade, na prática — sem hype, sem enganação.</small>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="kick">Material da comunidade · 100% grátis</div>
+    <h2>40 prompts avançados de IA</h2>
+    <p>O nível seguinte: técnicas que fazem a IA <b>raciocinar, se criticar e admitir o que não sabe</b>. Pra trabalho, código e decisão de verdade. Troque o que está <b>[entre colchetes]</b> pelo seu caso.</p>
+  </div>
+
+  <div class="how no-print"><b>Como usar:</b> clique em <b>Copiar</b>, cole na sua IA e substitua os <b>[campos entre colchetes]</b>. Se já usa IA todo dia, comece pela primeira seção — é a que mais muda o resultado. Quer levar tudo? Toque em <b>“Baixar em PDF”</b>.</div>
+
+  <div id="list"></div>
+
+  <div class="foot">
+    <h3>Ainda não pegou os 30 prompts do dia a dia?</h3>
+    <p>Este aqui é a continuação. O primeiro material, com 30 prompts pro dia a dia, está em https://thalzeronlabs.github.io/Site-Oficial/prompts — também de graça.</p>
+    <a class="btn" href="https://www.youtube.com/@ia_na_pratica_ofc?sub_confirmation=1" target="_blank" rel="noopener">▶ Inscrever no canal</a>
+    <button class="btn ghost no-print" onclick="window.print()">⬇ Baixar em PDF</button>
+    <div class="note">Feito com carinho pelo IA NA PRÁTICA · use à vontade, compartilhe com quem precisa.</div>
+  </div>
+
+</div>
+
+<script>
+const CATS = [
+ {
+  "ic": "🧠",
+  "nome": "Técnicas que mudam o jogo",
+  "prompts": [
+   {
+    "t": "Cadeia de raciocínio (o passo a passo antes da resposta)",
+    "tip": "Forçar a IA a pensar em voz alta antes de concluir reduz muito o erro em conta, lógica e análise.",
+    "p": "Resolva o problema abaixo pensando passo a passo, em voz alta, ANTES de dar a resposta final.\nAo terminar, revise seu próprio raciocínio procurando erros e só então escreva:\n\nRESPOSTA FINAL: <sua resposta>\n\nProblema: [descreva]"
+   },
+   {
+    "t": "Auto-crítica em duas passadas",
+    "tip": "A segunda passada costuma ser bem melhor que a primeira. Você ganha um revisor de graça.",
+    "p": "Tarefa: [descreva]\n\nFaça em 3 etapas, mostrando cada uma:\n1) RASCUNHO: sua primeira versão.\n2) CRÍTICA: aponte sem dó os 3 pontos mais fracos do seu rascunho.\n3) VERSÃO FINAL: reescreva corrigindo exatamente essas críticas."
+   },
+   {
+    "t": "Conselho de especialistas (várias cabeças)",
+    "tip": "Ótimo pra decisão difícil: você vê o problema por ângulos que sozinho não veria.",
+    "p": "Simule uma mesa com 3 especialistas discutindo: [assunto].\nEspecialistas: [ex.: um engenheiro cético, um advogado, um empreendedor].\n\nCada um dá sua posição e rebate a do outro por 2 rodadas.\nNo fim, um moderador resume onde eles CONCORDARAM,\nonde discordaram, e qual é a recomendação prática."
+   },
+   {
+    "t": "Poucos exemplos (few-shot)",
+    "tip": "Mostrar 2 ou 3 exemplos do formato que você quer funciona muito melhor do que descrever o formato.",
+    "p": "Vou te dar exemplos do padrão que eu quero. Siga EXATAMENTE o mesmo estilo, tom e formato.\n\nEntrada: [exemplo 1]\nSaída: [resultado 1]\n\nEntrada: [exemplo 2]\nSaída: [resultado 2]\n\nAgora faça para:\nEntrada: [seu caso real]\nSaída:"
+   },
+   {
+    "t": "Pergunte antes de responder",
+    "tip": "Evita a resposta genérica: a IA levanta o contexto que faltou antes de trabalhar.",
+    "p": "Quero que você me ajude com: [objetivo].\n\nNÃO responda ainda. Primeiro, me faça as 5 perguntas cuja resposta\nmais mudaria o resultado final. Uma de cada vez, esperando minha resposta.\nDepois das 5, aí sim entregue o resultado."
+   },
+   {
+    "t": "Defina o papel, o público e a restrição",
+    "tip": "Papel + público + limite é o esqueleto de todo prompt bom.",
+    "p": "PAPEL: você é [especialista em X] com 15 anos de experiência.\nPÚBLICO: [quem vai ler] com nível de conhecimento [básico/médio/alto].\nTAREFA: [o que fazer].\nRESTRIÇÕES: máximo [X] palavras, tom [Y], sem jargão, sem introdução genérica.\nFORMATO: [tópicos / tabela / texto corrido].\n\nSe faltar informação essencial, pergunte antes de começar."
+   },
+   {
+    "t": "Force o formato de saída (JSON)",
+    "tip": "Essencial quando a saída vai alimentar planilha, script ou sistema.",
+    "p": "Analise o texto abaixo e devolva SOMENTE um JSON válido, sem comentários,\nsem markdown, sem texto antes ou depois, neste schema exato:\n\n{\"tema\":\"string\",\"sentimento\":\"positivo|neutro|negativo\",\"pontos\":[\"string\"],\"acao_sugerida\":\"string\"}\n\nTexto: [cole aqui]"
+   },
+   {
+    "t": "Rubrica: faça a IA se dar nota",
+    "tip": "Ela melhora sozinha quando você dá o critério de avaliação junto com a tarefa.",
+    "p": "Tarefa: [descreva]\n\nCritérios de qualidade (0 a 10 cada): clareza, precisão técnica,\nutilidade prática, ausência de enrolação.\n\nProduza o resultado, depois se avalie nesses 4 critérios com nota e justificativa.\nSe qualquer nota for menor que 8, refaça automaticamente e me mostre só a versão boa."
+   }
+  ]
+ },
+ {
+  "ic": "💻",
+  "nome": "Programação",
+  "prompts": [
+   {
+    "t": "Revisão de código de verdade",
+    "tip": "Pedir por severidade evita que ela gaste seu tempo com vírgula quando tem bug de segurança.",
+    "p": "Revise o código abaixo como um engenheiro sênior faria num pull request.\nOrganize os achados por severidade: CRÍTICO / IMPORTANTE / DETALHE.\nPara cada um: o problema, por que importa e o trecho corrigido.\nNão reescreva o arquivo inteiro — só o que precisa mudar.\n\n```\n[cole o código]\n```"
+   },
+   {
+    "t": "Achar a causa raiz de um bug",
+    "tip": "Dê o erro E o que você já tentou: corta metade dos palpites inúteis.",
+    "p": "Estou com este erro: [cole a mensagem completa]\nContexto: [linguagem, framework, versão]\nJá tentei: [o que você testou e não resolveu]\n\nLevante as 3 causas mais prováveis, em ordem de probabilidade.\nPara cada uma: como confirmar rapidamente se é ela, e a correção.\nComece pela mais provável."
+   },
+   {
+    "t": "Explicar um código que você herdou",
+    "tip": "Salva vidas em código legado sem documentação.",
+    "p": "Explique o que este código faz, em português:\n1) Uma frase resumindo o objetivo geral.\n2) O fluxo, passo a passo.\n3) Trechos que parecem gambiarra, risco ou dívida técnica.\n4) O que quebraria se eu mudasse [a parte que você quer mexer].\n\n```\n[cole o código]\n```"
+   },
+   {
+    "t": "Escrever testes que valem a pena",
+    "tip": "Peça os casos de borda — é onde os bugs realmente moram.",
+    "p": "Escreva testes para a função abaixo usando [framework de teste].\nCubra: caminho feliz, entradas inválidas, valores nulos/vazios,\nlimites (zero, negativo, muito grande) e o caso de borda que\nprovavelmente ninguém pensou.\nCada teste com nome descritivo do que ele garante.\n\n```\n[cole a função]\n```"
+   },
+   {
+    "t": "Refatorar sem quebrar",
+    "tip": "Refatoração em passos pequenos é a única que não vira desastre.",
+    "p": "Refatore o código abaixo melhorando legibilidade e manutenção,\nSEM mudar o comportamento externo.\n\nEntregue: (1) o código refatorado, (2) a lista do que mudou e por quê,\n(3) o que eu devo testar pra ter certeza de que nada quebrou.\n\n```\n[cole o código]\n```"
+   },
+   {
+    "t": "Traduzir de uma linguagem pra outra",
+    "tip": "Peça o idiomático: tradução literal entre linguagens costuma ficar horrível.",
+    "p": "Converta este código de [linguagem A] para [linguagem B].\nNão traduza ao pé da letra: escreva como um dev experiente\nem [linguagem B] escreveria, usando as convenções da linguagem.\nAponte o que não tem equivalente direto e como você resolveu.\n\n```\n[cole o código]\n```"
+   },
+   {
+    "t": "Modelar dados antes de codar",
+    "tip": "Uma hora modelando economiza uma semana de migração.",
+    "p": "Preciso modelar os dados de: [descreva o sistema].\nRegras de negócio: [liste].\n\nProponha o schema (tabelas, campos, tipos, relacionamentos, índices).\nExplique cada decisão, aponte onde vai doer quando escalar\ne mostre 2 consultas típicas funcionando nesse modelo."
+   },
+   {
+    "t": "Script pra automatizar uma tarefa chata",
+    "tip": "Sempre peça o modo de simulação antes de deixar um script mexer nos seus arquivos.",
+    "p": "Escreva um script em [linguagem] que: [descreva a tarefa].\nRequisitos: comentado em português, tratamento de erro,\nfuncionar em [sistema operacional], e um modo --dry-run que\nmostra o que faria SEM executar de fato.\nNo fim, explique como rodar, passo a passo."
+   }
+  ]
+ },
+ {
+  "ic": "📊",
+  "nome": "Análise & decisão",
+  "prompts": [
+   {
+    "t": "Extrair dado estruturado de texto solto",
+    "tip": "Vira planilha na hora. Peça o marcador pro que não achar, senão ela inventa.",
+    "p": "Extraia do texto abaixo os seguintes campos: [campo1, campo2, campo3].\nDevolva em tabela markdown, uma linha por registro.\nSe algum campo não estiver no texto, escreva NÃO INFORMADO.\nNÃO invente nenhum dado.\n\nTexto: [cole aqui]"
+   },
+   {
+    "t": "Pré-mortem: por que isso vai dar errado",
+    "tip": "Imaginar o fracasso ANTES revela riscos que o otimismo esconde.",
+    "p": "Plano: [descreva].\n\nImagine que estamos 6 meses no futuro e esse plano fracassou feio.\nEscreva a história de COMO ele fracassou.\nDepois liste os 5 pontos de falha mais prováveis e,\npara cada um, o sinal de alerta precoce e como se proteger agora."
+   },
+   {
+    "t": "Decidir com critério, não com achismo",
+    "tip": "A matriz com peso força você a admitir o que realmente importa.",
+    "p": "Preciso decidir entre: [opções].\nObjetivo: [o que você quer maximizar].\nRestrições: [orçamento, prazo, time].\n\nMonte uma matriz de decisão com critérios ponderados (peso de 1 a 5),\npontue cada opção, some, e mostre o resultado.\nDepois diga se você concorda com o que a matriz apontou — e se não, por quê."
+   },
+   {
+    "t": "Advogado do diabo contra a SUA ideia",
+    "tip": "Peça pra ela atacar, não pra concordar. IA tende a puxar seu saco.",
+    "p": "Minha tese é: [descreva o que você acredita].\n\nSeu papel é DISCORDAR. Construa o argumento mais forte possível\ncontra a minha tese, com os pontos cegos que eu provavelmente tenho.\nNão suavize, não faça o \"por outro lado\".\nSó no fim diga: o que da minha tese ainda sobreviveu ao ataque?"
+   },
+   {
+    "t": "Analisar números e achar a história",
+    "tip": "Peça o que os dados NÃO mostram — é aí que mora a decisão errada.",
+    "p": "Analise os dados abaixo e me diga:\n1) As 3 conclusões mais relevantes.\n2) Qualquer padrão ou anomalia que salte aos olhos.\n3) O que esses dados NÃO conseguem provar (limitações).\n4) Qual seria a próxima pergunta a investigar.\n\nDados: [cole a tabela]"
+   },
+   {
+    "t": "Resumo executivo de documento longo",
+    "tip": "Formato pronto pra mandar pra quem tem 2 minutos.",
+    "p": "Resuma o documento abaixo em formato executivo:\n• CONTEXTO (2 linhas)\n• CONCLUSÃO PRINCIPAL (1 frase)\n• 3 PONTOS DE APOIO (1 linha cada)\n• RISCOS / RESSALVAS\n• DECISÃO OU AÇÃO RECOMENDADA\n\nMáximo 200 palavras no total. Sem adjetivo vazio.\n\nDocumento: [cole aqui]"
+   },
+   {
+    "t": "Comparar fornecedores/ferramentas sem viés",
+    "tip": "Exigir a fonte reduz muito a chance de a IA inventar recurso que não existe.",
+    "p": "Compare [opção A], [opção B] e [opção C] para o caso de uso: [descreva].\n\nTabela com: preço, curva de aprendizado, limitações reais,\npra quem serve e pra quem NÃO serve.\nMarque claramente o que você tem certeza e o que é estimativa\nque eu preciso confirmar na fonte oficial."
+   },
+   {
+    "t": "Traduzir jargão técnico pra decisão de negócio",
+    "tip": "Ponte entre time técnico e quem assina o cheque.",
+    "p": "Traduza o problema técnico abaixo para linguagem de negócio,\npara [diretor / cliente / investidor]:\n\n1) O que é, sem termo técnico.\n2) Qual o impacto em dinheiro, prazo ou risco.\n3) As opções que existem, com o custo/benefício de cada.\n4) A recomendação, em uma frase.\n\nProblema técnico: [descreva]"
+   }
+  ]
+ },
+ {
+  "ic": "✍️",
+  "nome": "Escrita & conteúdo",
+  "prompts": [
+   {
+    "t": "Escrever com a SUA voz",
+    "tip": "Dê amostras suas: a IA imita padrão muito melhor do que segue adjetivo.",
+    "p": "Abaixo estão 2 textos que EU escrevi. Estude o meu ritmo, vocabulário,\ntamanho de frase e manias de escrita.\n\n[texto seu 1]\n---\n[texto seu 2]\n\nAgora escreva sobre [novo tema] soando como eu.\nAntes de escrever, descreva em 3 tópicos o que você identificou\ncomo característico do meu estilo."
+   },
+   {
+    "t": "Estrutura antes do texto",
+    "tip": "Aprovar o esqueleto antes evita reescrever 2.000 palavras.",
+    "p": "Vou escrever sobre [tema] para [público], com objetivo de [informar/convencer/vender].\n\nNÃO escreva o texto ainda. Primeiro me entregue a ESTRUTURA:\ntítulo, gancho de abertura, seções com o argumento de cada uma,\ne o fechamento. Quando eu aprovar, aí escrevemos."
+   },
+   {
+    "t": "Cortar a gordura de um texto",
+    "tip": "Mostrar o antes/depois te ensina a escrever melhor da próxima vez.",
+    "p": "Reduza o texto abaixo em 40% sem perder nenhuma informação essencial.\nCorte advérbio inútil, redundância e frase de enrolação.\nMostre o texto final e, embaixo, liste os 5 cortes mais\nimportantes que você fez e por quê.\n\n[cole o texto]"
+   },
+   {
+    "t": "Adaptar um conteúdo pra vários formatos",
+    "tip": "Um conteúdo bom vira cinco. Reaproveitar é o que sustenta cadência.",
+    "p": "A partir do conteúdo base abaixo, gere:\n1) Um post curto (até 100 palavras)\n2) Um roteiro de vídeo de 60 segundos, com gancho nos 3 primeiros segundos\n3) Uma thread de 5 partes\n4) Um e-mail curto\n5) Cinco títulos alternativos\n\nMantenha a mesma ideia central, mude o ritmo pra cada formato.\n\nConteúdo base: [cole aqui]"
+   },
+   {
+    "t": "Ganchos que seguram a atenção",
+    "tip": "Peça variação de estilo e escolha depois — o primeiro nunca é o melhor.",
+    "p": "Escreva 10 aberturas diferentes para um conteúdo sobre [tema],\ndirigido a [público]. Varie: pergunta provocativa, dado surpreendente,\nafirmação polêmica, história pessoal, erro comum.\nCada uma com no máximo 2 frases.\nMarque com ⭐ as 3 mais fortes e explique por que funcionam."
+   },
+   {
+    "t": "Revisar sem descaracterizar",
+    "tip": "Sem essa instrução, a IA reescreve tudo no tom genérico dela.",
+    "p": "Revise o texto abaixo corrigindo gramática, pontuação e clareza.\nREGRA: mantenha a minha voz, minhas escolhas de palavra e meu tom.\nNão \"melhore\" o estilo, não deixe mais formal, não padronize.\nMostre a lista das correções feitas no fim.\n\n[cole o texto]"
+   },
+   {
+    "t": "Roteiro de vídeo com retenção",
+    "tip": "Marcar os pontos de queda força o texto a ter virada, não ladainha.",
+    "p": "Escreva um roteiro de vídeo de [X] minutos sobre [tema].\nEstrutura: gancho (5s) → promessa → desenvolvimento em blocos →\nvirada → chamada pra ação.\nMarque com [⚠️ QUEDA] os momentos em que o espectador\nprovavelmente sairia, e resolva cada um com uma virada ou pergunta."
+   },
+   {
+    "t": "Descobrir a pergunta que o público realmente faz",
+    "tip": "Você escreve pra dúvida real, não pra que você imagina que ela seja.",
+    "p": "Meu público é [descreva] e o tema é [tema].\n\nListe as 10 perguntas que essa pessoa realmente digitaria no Google\nou perguntaria pra um amigo — com as palavras dela, não com termo técnico.\nDepois marque quais ninguém está respondendo bem hoje."
+   }
+  ]
+ },
+ {
+  "ic": "🛡️",
+  "nome": "Segurança, limites e uso consciente",
+  "prompts": [
+   {
+    "t": "Obrigar a IA a admitir que não sabe",
+    "tip": "O maior risco da IA não é errar — é errar com confiança total.",
+    "p": "Responda a pergunta abaixo seguindo esta regra rígida:\n- O que você tem certeza → responda normalmente.\n- O que é provável mas não certo → marque com [INCERTO].\n- O que você não sabe ou não consegue verificar → diga\n  \"NÃO SEI\" explicitamente, em vez de estimar.\n\nNão preencha lacuna com suposição plausível.\n\nPergunta: [sua pergunta]"
+   },
+   {
+    "t": "Checar se a IA inventou (alucinação)",
+    "tip": "Rode isso sobre a resposta anterior dela. Pega invenção com frequência assustadora.",
+    "p": "Analise a resposta abaixo (que foi gerada por uma IA) e liste:\n1) Toda afirmação factual verificável que ela contém.\n2) Quais dessas eu preciso conferir na fonte primária antes de usar.\n3) Qualquer dado, número, citação, lei ou nome que possa ter sido inventado.\n\nSeja implacável: é melhor levantar suspeita à toa do que deixar passar.\n\nResposta: [cole aqui]"
+   },
+   {
+    "t": "Anonimizar antes de colar num chat na nuvem",
+    "tip": "Dado sensível não volta depois de enviado. Anonimize primeiro — ou rode local.",
+    "p": "Reescreva o texto abaixo substituindo TODA informação identificável\n(nome, CPF, e-mail, telefone, endereço, nome de empresa, valores exatos)\npor marcadores genéricos: [NOME], [EMPRESA], [VALOR], [DOC].\nMantenha o sentido e o contexto intactos.\n\nTexto: [cole aqui]"
+   },
+   {
+    "t": "Auditar seu próprio uso de IA",
+    "tip": "Nem toda tarefa deve ir pra IA. Esse prompt te ajuda a traçar a linha.",
+    "p": "Uso IA para estas tarefas: [liste].\n\nPara cada uma, classifique:\n• RISCO DE VAZAMENTO (o dado é sensível?)\n• RISCO DE ERRO (o que acontece se a resposta estiver errada e eu não notar?)\n• DEVE SER LOCAL, PODE SER NUVEM, ou NÃO DEVE USAR IA\n\nSeja conservador quando envolver dado de terceiro, saúde, dinheiro ou questão jurídica."
+   },
+   {
+    "t": "Identificar viés na resposta que você recebeu",
+    "tip": "A IA herda o viés dos textos em que foi treinada — inclusive o de puxar seu saco.",
+    "p": "Analise criticamente a resposta abaixo, gerada por uma IA, procurando:\n1) Viés de confirmação (ela só concordou comigo?)\n2) Perspectiva cultural ou geográfica embutida (soa dos EUA?)\n3) Afirmação apresentada como consenso que na verdade é disputada\n4) O que ficou de fora e deveria ter sido dito\n\nResposta: [cole aqui]"
+   },
+   {
+    "t": "Detectar golpe e phishing feito com IA",
+    "tip": "Golpe com IA está mais bem escrito do que antes. O erro de português deixou de ser o sinal.",
+    "p": "Recebi a mensagem abaixo e quero avaliar se é golpe.\n\nAnalise: (1) sinais de urgência artificial ou medo,\n(2) o remetente/domínio bate com a empresa real,\n(3) o que ela pede que empresa nenhuma pediria,\n(4) veredito: PROVÁVEL GOLPE / SUSPEITO / PARECE LEGÍTIMO,\n(5) como confirmar por um canal independente, sem clicar em nada.\n\nMensagem: [cole aqui]"
+   },
+   {
+    "t": "Revisar decisão que envolve outra pessoa",
+    "tip": "Antes de deixar a IA influenciar algo que afeta alguém, cheque o que ela não sabe.",
+    "p": "Vou tomar esta decisão que afeta outras pessoas: [descreva].\n\nAntes de opinar, liste:\n1) Que informação sobre as pessoas envolvidas você NÃO tem\n   e que mudaria a recomendação.\n2) Quem é afetado e não está na sala pra se defender.\n3) O que eu deveria perguntar a elas antes de decidir.\n\nSó depois disso dê sua recomendação — e marque o grau de confiança dela."
+   },
+   {
+    "t": "Verificar uma fonte que a IA citou",
+    "tip": "IA inventa citação, autor, número de lei e link com uma naturalidade assustadora. Sempre confira.",
+    "p": "Você citou a seguinte fonte: [cole a citação/link/referência].\n\nMe diga com honestidade:\n1) Você tem certeza de que essa fonte existe como descrita,\n   ou pode ter reconstruído a partir de padrões?\n2) O que exatamente eu devo digitar numa busca pra confirmar.\n3) Se não tiver certeza, diga \"PODE SER INVENTADA\" agora,\n   antes que eu use isso em algo público."
+   }
+  ]
+ }
+];
+
+const list = document.getElementById('list');
+let n = 0;
+CATS.forEach(cat => {
+  const h = document.createElement('div');
+  h.className = 'cat';
+  h.innerHTML = '<span class="ic">'+cat.ic+'</span><h3>'+cat.nome+'</h3><span class="ln"></span>';
+  list.appendChild(h);
+  cat.prompts.forEach(pr => {
+    n++;
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.innerHTML =
+      '<span class="n">'+n+'</span>' +
+      '<h4>'+esc(pr.t)+'</h4>' +
+      '<div class="pbox">'+esc(pr.p)+'</div>' +
+      '<div class="row">' +
+        '<div class="tip">💡 '+pr.tip+'</div>' +
+        '<button class="copy no-print">Copiar</button>' +
+      '</div>';
+    const btn = c.querySelector('.copy');
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pr.p).then(() => {
+        btn.textContent = '✓ Copiado'; btn.classList.add('done');
+        setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('done'); }, 1600);
+      }).catch(() => { btn.textContent = 'Selecione e copie'; });
+    });
+    list.appendChild(c);
+  });
+});
+
+function esc(s){ return String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+</script>
+</body>
+</html>

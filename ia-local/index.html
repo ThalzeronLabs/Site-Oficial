@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia: rode uma IA no seu PC (LLM local, do zero) — IA NA PRÁTICA</title>
+<meta name="description" content="Guia gratuito do canal IA NA PRÁTICA: como rodar uma IA (LLM) no seu próprio computador, de graça, offline e sem enviar seus dados pra nuvem. Passo a passo com Ollama e LM Studio.">
+<meta property="og:title" content="Rode uma IA no seu PC — guia grátis do zero">
+<meta property="og:description" content="Ollama, LM Studio, qual modelo cabe na sua placa e o que fazer quando trava. De graça.">
+<style>
+  :root{
+    --bg:#0b0f1a; --card:#121a2b; --card2:#0f1626; --ink:#eaf0ff; --muted:#9fb0d0;
+    --brand:#3ba0ff; --brand2:#7c5cff; --ok:#2ec16b; --amber:#ffc531; --line:#22304d;
+    --red:#ff5d6c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(160deg,#0b0f1a 0%,#0e1526 100%);
+    color:var(--ink); line-height:1.55; min-height:100vh;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:28px 18px 90px}
+  header.brand{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .logo{
+    width:46px;height:46px;border-radius:12px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff;
+    box-shadow:0 6px 22px rgba(59,160,255,.35)
+  }
+  .brand h1{font-size:17px;margin:0;letter-spacing:.3px}
+  .brand small{color:var(--muted);font-size:12px}
+  .hero{
+    background:linear-gradient(150deg,rgba(255,197,49,.10),var(--card));
+    border:1px solid var(--line);border-left:6px solid var(--amber);
+    border-radius:18px;padding:26px 24px;margin:18px 0 10px;box-shadow:0 10px 34px rgba(0,0,0,.28)
+  }
+  .hero .kick{color:var(--amber);font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase}
+  .hero h2{margin:6px 0 8px;font-size:27px;line-height:1.2}
+  .hero p{margin:0;color:var(--muted);font-size:15px}
+  .how{
+    background:var(--card2);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:14px 0 6px;font-size:14px;color:var(--muted)
+  }
+  .how b{color:var(--ink)}
+  .cat{margin:30px 0 10px;display:flex;align-items:center;gap:10px}
+  .cat h3{margin:0;font-size:18px;letter-spacing:.3px}
+  .cat .ic{font-size:20px}
+  .cat .ln{flex:1;height:1px;background:var(--line)}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 16px;margin:12px 0;box-shadow:0 8px 26px rgba(0,0,0,.22);
+    position:relative
+  }
+  .card .n{
+    position:absolute;top:-11px;left:16px;background:linear-gradient(135deg,var(--brand),var(--brand2));
+    color:#fff;font-weight:800;font-size:12.5px;padding:3px 10px;border-radius:20px;
+    box-shadow:0 4px 14px rgba(124,92,255,.4)
+  }
+  .card h4{margin:8px 0 10px;font-size:16px}
+  .pbox{
+    background:#0d1526;border:1px solid var(--line);border-left:4px solid var(--amber);
+    border-radius:10px;padding:14px 15px;font-size:14.5px;line-height:1.55;
+    white-space:pre-wrap;color:#f2f6ff;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace
+  }
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .tip{font-size:12.5px;color:var(--muted);flex:1;min-width:220px}
+  .tip b{color:var(--amber)}
+  .copy{
+    border:0;cursor:pointer;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;
+    color:#fff;background:#16203a;border:1px solid var(--line);transition:.12s;white-space:nowrap
+  }
+  .copy:hover{background:#1c2a49}
+  .copy.done{background:rgba(46,193,107,.18);border-color:var(--ok);color:#8ff0bb}
+  .foot{
+    margin-top:34px;background:var(--card2);border:1px solid var(--line);border-radius:16px;
+    padding:22px;text-align:center
+  }
+  .foot h3{margin:0 0 8px;font-size:19px}
+  .foot p{color:var(--muted);font-size:14px;margin:6px 0 14px}
+  .btn{
+    display:inline-block;border:0;cursor:pointer;font-weight:700;font-size:15px;
+    padding:13px 22px;border-radius:11px;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    box-shadow:0 8px 24px rgba(124,92,255,.30);margin:4px
+  }
+  .btn.ghost{background:#16203a;border:1px solid var(--line);box-shadow:none}
+  .note{font-size:12px;color:var(--muted);margin-top:16px;text-align:center}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  /* ===== IMPRESSÃO (Salvar como PDF) ===== */
+  @media print{
+    body{background:#fff;color:#111}
+    .wrap{max-width:100%;padding:0}
+    .no-print{display:none!important}
+    .card,.hero,.how,.foot{box-shadow:none;background:#fff;border:1px solid #ccc}
+    .hero{border-left:6px solid #d9a400}
+    .pbox{background:#f6f7fb;color:#111;border-left:4px solid #d9a400}
+    .card .n{background:#3ba0ff}
+    .cat h3,.hero h2,.hero .kick,.tip b{color:#111}
+    .tip{color:#444}
+    a{color:#0b57d0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brand">
+    <div class="logo">IA</div>
+    <div>
+      <h1>IA NA PRÁTICA</h1>
+      <small>IA e tecnologia de verdade, na prática — sem hype, sem enganação.</small>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="kick">Material da comunidade · 100% grátis</div>
+    <h2>Rode uma IA no seu PC, do zero</h2>
+    <p>Sem assinatura, sem limite de mensagem, sem mandar seus dados pra nuvem. Este guia vai do <b>"será que meu PC aguenta?"</b> até a IA respondendo offline na sua máquina.</p>
+  </div>
+
+  <div class="how no-print"><b>Como usar:</b> siga na ordem. Cada bloco tem o comando exato pra copiar — clique em <b>Copiar</b>, cole no terminal e siga. Se quiser levar offline, use <b>“Baixar em PDF”</b> lá embaixo.</div>
+
+  <div id="list"></div>
+
+  <div class="foot">
+    <h3>Quer ver isso funcionando na tela?</h3>
+    <p>No canal a gente monta, testa e mostra o resultado real — incluindo o que dá errado. Tudo de graça.</p>
+    <a class="btn" href="https://www.youtube.com/@ia_na_pratica_ofc?sub_confirmation=1" target="_blank" rel="noopener">▶ Inscrever no canal</a>
+    <button class="btn ghost no-print" onclick="window.print()">⬇ Baixar em PDF</button>
+    <div class="note">Feito com carinho pelo IA NA PRÁTICA · use à vontade, compartilhe com quem precisa.</div>
+  </div>
+
+</div>
+
+<script>
+const CATS = [
+ {
+  "ic": "🧭",
+  "nome": "Antes de começar: o que dá pra rodar no SEU PC",
+  "prompts": [
+   {
+    "t": "Descubra quanta VRAM sua placa tem",
+    "tip": "A <b>memória da placa de vídeo (VRAM)</b> é o que manda. Mais VRAM = modelo maior. Se não tiver placa dedicada, dá pra rodar na CPU — só que mais devagar.",
+    "p": "No Windows: aperte Ctrl + Shift + Esc → aba \"Desempenho\" → clique em \"GPU\".\nO valor que importa é \"Memória de GPU dedicada\".\n\nNo Linux (placa NVIDIA):\nnvidia-smi\n\nNo Linux (placa AMD):\nrocm-smi"
+   },
+   {
+    "t": "Tabela honesta: sua VRAM → o modelo que cabe",
+    "tip": "Modelo \"quantizado\" (Q4) é o modelo encolhido pra caber na placa, perdendo pouquíssima qualidade. É o padrão pra rodar em casa.",
+    "p": "Sem placa dedicada (só CPU) → modelos de 1B a 3B. Funciona, mas devagar.\n4 GB de VRAM      → 3B quantizado\n6-8 GB de VRAM    → 7B / 8B quantizado (o ponto doce pra maioria)\n12 GB de VRAM     → 8B com folga, ou 14B quantizado\n16 GB de VRAM     → 14B tranquilo\n24 GB ou mais     → 32B quantizado\n\nRegra de bolso: um modelo de X bilhões de parâmetros em Q4\nocupa mais ou menos (X × 0,6) GB de VRAM."
+   },
+   {
+    "t": "Quanto custa? Zero.",
+    "tip": "Tudo aqui é software livre e modelo de pesos abertos. Você não paga assinatura, não precisa de cartão e não tem limite de mensagem.",
+    "p": "Ollama .............. grátis e de código aberto\nLM Studio ........... grátis (interface gráfica)\nModelos abertos ..... grátis (Llama, Qwen, Gemma, Mistral, Phi…)\n\nO único custo é a energia elétrica do seu PC enquanto ele pensa."
+   }
+  ]
+ },
+ {
+  "ic": "⚙️",
+  "nome": "Caminho 1: Ollama (o mais simples, por comando)",
+  "prompts": [
+   {
+    "t": "Instalar o Ollama",
+    "tip": "No Windows e no macOS é instalador normal, next-next-finish. No Linux é uma linha só.",
+    "p": "Windows / macOS:\nBaixe o instalador em  ollama.com/download\n\nLinux (uma linha):\ncurl -fsSL https://ollama.com/install.sh | sh"
+   },
+   {
+    "t": "Baixar e conversar com seu primeiro modelo",
+    "tip": "Esse único comando baixa o modelo (só na primeira vez) e já abre o chat. Pra sair da conversa, digite <b>/bye</b>.",
+    "p": "ollama run llama3.2\n\nPrimeira vez: ele baixa alguns gigabytes.\nDepois disso, abre na hora — e funciona sem internet."
+   },
+   {
+    "t": "Modelos que valem a pena testar",
+    "tip": "Comece pelo menor. Se voar, sobe de tamanho. Se travar ou encher a VRAM, desce.",
+    "p": "ollama run llama3.2          # 3B - leve, roda quase em qualquer lugar\nollama run qwen2.5:7b        # 7B - ótimo em português\nollama run gemma2:9b         # 9B - equilibrado\nollama run qwen2.5-coder:7b  # 7B - focado em programação\nollama run phi3.5            # 3.8B - pequeno e esperto"
+   },
+   {
+    "t": "Comandos do dia a dia",
+    "tip": "<b>ollama ps</b> é o mais útil: mostra se o modelo entrou na placa de vídeo ou está apanhando na CPU.",
+    "p": "ollama list            # o que já baixei\nollama ps              # o que está rodando agora\nollama pull <modelo>   # só baixar, sem abrir o chat\nollama rm <modelo>     # apagar e liberar disco"
+   }
+  ]
+ },
+ {
+  "ic": "🖱️",
+  "nome": "Caminho 2: LM Studio (sem digitar comando)",
+  "prompts": [
+   {
+    "t": "Se você não curte terminal, use este",
+    "tip": "O LM Studio tem loja de modelos, chat e um medidor que avisa se o modelo cabe na sua máquina antes de você baixar.",
+    "p": "1. Baixe em  lmstudio.ai\n2. Aba \"Discover\" (a lupa) → procure por  qwen2.5 7b instruct\n3. Escolha uma versão marcada como Q4_K_M\n4. Baixe, vá na aba de chat e converse.\n\nO próprio programa te avisa: \"Full GPU Offload Possible\"\n= cabe todo na sua placa. É o que você quer ver."
+   }
+  ]
+ },
+ {
+  "ic": "🔌",
+  "nome": "Usando de verdade",
+  "prompts": [
+   {
+    "t": "Interface bonita no navegador (Open WebUI)",
+    "tip": "Deixa a coisa com cara de ChatGPT, mas 100% na sua máquina. Precisa ter o Docker instalado.",
+    "p": "docker run -d -p 3000:8080 \\\n  --add-host=host.docker.internal:host-gateway \\\n  -v open-webui:/app/backend/data \\\n  --name open-webui --restart always \\\n  ghcr.io/open-webui/open-webui:main\n\nDepois abra:  http://localhost:3000"
+   },
+   {
+    "t": "Chamar sua IA local de dentro de um programa",
+    "tip": "O Ollama sobe uma API local na porta 11434. Dá pra plugar em script, planilha, app próprio — sem chave de API, sem custo por token.",
+    "p": "curl http://localhost:11434/api/generate -d '{\n  \"model\": \"llama3.2\",\n  \"prompt\": \"Explique o que é RAG em 3 linhas\",\n  \"stream\": false\n}'"
+   },
+   {
+    "t": "Dar a SUA base de conhecimento pra ela (RAG)",
+    "tip": "É assim que a IA passa a responder sobre os SEUS documentos, e não sobre a internet inteira.",
+    "p": "No Open WebUI: clique no ícone de documento dentro do chat\ne suba seus PDFs. Depois, na conversa, chame o arquivo com  #\n\nO modelo passa a responder consultando o seu material primeiro."
+   }
+  ]
+ },
+ {
+  "ic": "🧯",
+  "nome": "Quando dá errado",
+  "prompts": [
+   {
+    "t": "Está lento demais / travando",
+    "tip": "Quase sempre é o modelo não ter cabido na VRAM e ter vazado pra memória do sistema — aí a velocidade despenca.",
+    "p": "1. Rode  ollama ps  e veja a coluna PROCESSOR.\n   Se aparecer \"CPU\" (ou uma % alta de CPU), o modelo não coube.\n2. Baixe um modelo menor, ou uma quantização mais agressiva:\n   ollama run qwen2.5:7b-instruct-q4_K_M\n3. Feche jogo, navegador com muitas abas e editor de vídeo:\n   tudo isso come VRAM."
+   },
+   {
+    "t": "As respostas vieram ruins ou em inglês",
+    "tip": "Modelo pequeno é mais burrinho, e alguns puxam pro inglês. Peça explicitamente o português.",
+    "p": "Comece o prompt com:\n\"Responda sempre em português do Brasil, de forma clara e direta.\"\n\nSe continuar fraco, suba de tamanho (7B → 14B)\nou troque por um modelo forte em português, como o Qwen 2.5."
+   },
+   {
+    "t": "O que a IA local NÃO faz (a verdade)",
+    "tip": "Rodar em casa é privacidade e custo zero — não é bater de frente com os modelos gigantes da nuvem. Saber disso evita frustração.",
+    "p": "• Um modelo de 7B não chega perto de um modelo de nuvem de ponta\n  em raciocínio complexo. É bom, não é mágico.\n• Ele não navega na internet sozinho (a não ser que você ligue isso).\n• O conhecimento dele parou na data de treino.\n\nO que ele ENTREGA de verdade:\nprivacidade total, custo zero, sem limite de uso e funciona offline."
+   }
+  ]
+ }
+];
+
+const list = document.getElementById('list');
+let n = 0;
+CATS.forEach(cat => {
+  const h = document.createElement('div');
+  h.className = 'cat';
+  h.innerHTML = '<span class="ic">'+cat.ic+'</span><h3>'+cat.nome+'</h3><span class="ln"></span>';
+  list.appendChild(h);
+  cat.prompts.forEach(pr => {
+    n++;
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.innerHTML =
+      '<span class="n">'+n+'</span>' +
+      '<h4>'+esc(pr.t)+'</h4>' +
+      '<div class="pbox">'+esc(pr.p)+'</div>' +
+      '<div class="row">' +
+        '<div class="tip">💡 '+pr.tip+'</div>' +
+        '<button class="copy no-print">Copiar</button>' +
+      '</div>';
+    const btn = c.querySelector('.copy');
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pr.p).then(() => {
+        btn.textContent = '✓ Copiado'; btn.classList.add('done');
+        setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('done'); }, 1600);
+      }).catch(() => { btn.textContent = 'Selecione e copie'; });
+    });
+    list.appendChild(c);
+  });
+});
+
+function esc(s){ return String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+</script>
+</body>
+</html>
