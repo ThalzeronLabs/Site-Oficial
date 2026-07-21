@@ -444,7 +444,7 @@ document.getElementById("lead-form").addEventListener("submit", async (e) => {
   const code = (slug.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,4) || "IANP") + "-" +
                d.getFullYear() + ("0"+(d.getMonth()+1)).slice(-2) + ("0"+d.getDate()).slice(-2) + "-" +
                Math.abs(hash(nome+email+slug)).toString(36).toUpperCase().slice(0,6);
-  document.getElementById("cert-verif").textContent = "Código de verificação: " + code + " · IA NA PRÁTICA · youtube.com/@ia-na-pratica";
+  document.getElementById("cert-verif").textContent = "Código de verificação: " + code + " · IA NA PRÁTICA · youtube.com/@ia_na_pratica_ofc";
   document.getElementById("certificado-area").classList.remove("hidden");
   document.getElementById("certificado-area").scrollIntoView({behavior:"smooth"});
 });

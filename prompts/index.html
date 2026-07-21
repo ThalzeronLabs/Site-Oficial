@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 Prompts de IA que resolvem o seu dia — IA NA PRÁTICA</title>
+<meta name="description" content="PDF gratuito do canal IA NA PRÁTICA: 30 prompts prontos de IA (ChatGPT, Gemini, Claude) para usar no trabalho, estudo e dia a dia. Copie, cole e use.">
+<meta property="og:title" content="30 Prompts de IA que resolvem o seu dia — grátis">
+<meta property="og:description" content="30 prompts prontos pra usar em qualquer IA. Presente da comunidade IA NA PRÁTICA.">
+<style>
+  :root{
+    --bg:#0b0f1a; --card:#121a2b; --card2:#0f1626; --ink:#eaf0ff; --muted:#9fb0d0;
+    --brand:#3ba0ff; --brand2:#7c5cff; --ok:#2ec16b; --amber:#ffc531; --line:#22304d;
+    --red:#ff5d6c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(160deg,#0b0f1a 0%,#0e1526 100%);
+    color:var(--ink); line-height:1.55; min-height:100vh;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:28px 18px 90px}
+  header.brand{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .logo{
+    width:46px;height:46px;border-radius:12px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff;
+    box-shadow:0 6px 22px rgba(59,160,255,.35)
+  }
+  .brand h1{font-size:17px;margin:0;letter-spacing:.3px}
+  .brand small{color:var(--muted);font-size:12px}
+  .hero{
+    background:linear-gradient(150deg,rgba(255,197,49,.10),var(--card));
+    border:1px solid var(--line);border-left:6px solid var(--amber);
+    border-radius:18px;padding:26px 24px;margin:18px 0 10px;box-shadow:0 10px 34px rgba(0,0,0,.28)
+  }
+  .hero .kick{color:var(--amber);font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase}
+  .hero h2{margin:6px 0 8px;font-size:27px;line-height:1.2}
+  .hero p{margin:0;color:var(--muted);font-size:15px}
+  .how{
+    background:var(--card2);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:14px 0 6px;font-size:14px;color:var(--muted)
+  }
+  .how b{color:var(--ink)}
+  .cat{margin:30px 0 10px;display:flex;align-items:center;gap:10px}
+  .cat h3{margin:0;font-size:18px;letter-spacing:.3px}
+  .cat .ic{font-size:20px}
+  .cat .ln{flex:1;height:1px;background:var(--line)}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 16px;margin:12px 0;box-shadow:0 8px 26px rgba(0,0,0,.22);
+    position:relative
+  }
+  .card .n{
+    position:absolute;top:-11px;left:16px;background:linear-gradient(135deg,var(--brand),var(--brand2));
+    color:#fff;font-weight:800;font-size:12.5px;padding:3px 10px;border-radius:20px;
+    box-shadow:0 4px 14px rgba(124,92,255,.4)
+  }
+  .card h4{margin:8px 0 10px;font-size:16px}
+  .pbox{
+    background:#0d1526;border:1px solid var(--line);border-left:4px solid var(--amber);
+    border-radius:10px;padding:14px 15px;font-size:14.5px;line-height:1.55;
+    white-space:pre-wrap;color:#f2f6ff;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace
+  }
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .tip{font-size:12.5px;color:var(--muted);flex:1;min-width:220px}
+  .tip b{color:var(--amber)}
+  .copy{
+    border:0;cursor:pointer;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;
+    color:#fff;background:#16203a;border:1px solid var(--line);transition:.12s;white-space:nowrap
+  }
+  .copy:hover{background:#1c2a49}
+  .copy.done{background:rgba(46,193,107,.18);border-color:var(--ok);color:#8ff0bb}
+  .foot{
+    margin-top:34px;background:var(--card2);border:1px solid var(--line);border-radius:16px;
+    padding:22px;text-align:center
+  }
+  .foot h3{margin:0 0 8px;font-size:19px}
+  .foot p{color:var(--muted);font-size:14px;margin:6px 0 14px}
+  .btn{
+    display:inline-block;border:0;cursor:pointer;font-weight:700;font-size:15px;
+    padding:13px 22px;border-radius:11px;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    box-shadow:0 8px 24px rgba(124,92,255,.30);margin:4px
+  }
+  .btn.ghost{background:#16203a;border:1px solid var(--line);box-shadow:none}
+  .note{font-size:12px;color:var(--muted);margin-top:16px;text-align:center}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  /* ===== IMPRESSÃO (Salvar como PDF) ===== */
+  @media print{
+    body{background:#fff;color:#111}
+    .wrap{max-width:100%;padding:0}
+    .no-print{display:none!important}
+    .card,.hero,.how,.foot{box-shadow:none;background:#fff;border:1px solid #ccc}
+    .hero{border-left:6px solid #d9a400}
+    .pbox{background:#f6f7fb;color:#111;border-left:4px solid #d9a400}
+    .card .n{background:#3ba0ff}
+    .cat h3,.hero h2,.hero .kick,.tip b{color:#111}
+    .tip{color:#444}
+    a{color:#0b57d0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brand">
+    <div class="logo">IA</div>
+    <div>
+      <h1>IA NA PRÁTICA</h1>
+      <small>IA e tecnologia de verdade, na prática — sem hype, sem enganação.</small>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="kick">Presente da comunidade · 100% grátis</div>
+    <h2>30 prompts de IA que resolvem o seu dia</h2>
+    <p>Prontos pra copiar e colar em qualquer IA (ChatGPT, Gemini, Claude, Copilot…). Troque o que está <b>[entre colchetes]</b> pelo seu caso e mande ver.</p>
+  </div>
+
+  <div class="how no-print">
+    <b>Como usar:</b> clique em <b>Copiar</b> no prompt que quiser, cole na sua IA favorita e substitua os <b>[campos entre colchetes]</b>. Quer levar tudo com você? Toque em <b>“Baixar em PDF”</b> lá embaixo.
+  </div>
+
+  <div id="list"></div>
+
+  <div class="foot">
+    <h3>Gostou? Isso é só o começo.</h3>
+    <p>Todo dia a gente ensina IA e tecnologia na prática, de graça. Se esse PDF te ajudou, se inscreve — é o que mantém a comunidade viva.</p>
+    <a class="btn" href="https://www.youtube.com/@ia_na_pratica_ofc?sub_confirmation=1" target="_blank" rel="noopener">▶ Inscrever no canal</a>
+    <button class="btn ghost no-print" onclick="window.print()">⬇ Baixar em PDF</button>
+    <div class="note">Feito com carinho pelo IA NA PRÁTICA · use à vontade, compartilhe com quem precisa.</div>
+  </div>
+
+</div>
+
+<script>
+// 30 prompts reais e úteis, agrupados por uso do dia a dia. pt-BR, prontos pra colar.
+const CATS = [
+  { ic:"💼", nome:"Trabalho & produtividade", prompts:[
+    { t:"Resumir um texto ou reunião", tip:"Peça o <b>formato</b> (tópicos) e para <b>quem</b> é — muda tudo.",
+      p:"Resuma o texto abaixo em no máximo 5 tópicos curtos, em português claro, para alguém que não acompanhou o assunto. No fim, liste em 1 linha as decisões ou próximos passos.\n\nTexto: [cole aqui]" },
+    { t:"Transformar bagunça em lista de tarefas", tip:"A IA organiza o caos melhor que você às 8h da manhã.",
+      p:"Abaixo está um desabafo do que eu preciso fazer. Transforme numa lista de tarefas objetivas, ordenadas por prioridade (urgente → pode esperar), cada uma começando com um verbo. Marque com ⏰ o que tem prazo.\n\n[escreva tudo que está na sua cabeça]" },
+    { t:"Preparar uma reunião em 5 min", tip:"Chegue com pauta e perguntas prontas.",
+      p:"Vou ter uma reunião sobre [assunto] com [quem]. Me ajude a chegar preparado: (1) uma pauta com 4 pontos, (2) 3 perguntas boas pra eu fazer, (3) 1 risco que talvez ninguém vá levantar. Seja direto." },
+    { t:"Explicar algo difícil pra um leigo", tip:"Bom pra apresentar ideia pra chefe ou cliente.",
+      p:"Explique [tema/conceito] de forma simples, como se eu tivesse 12 anos, com 1 exemplo do dia a dia e 1 analogia. No fim, uma frase que eu possa usar pra explicar isso pra outra pessoa." },
+    { t:"Achar o erro no seu raciocínio", tip:"Use a IA como advogado do diabo antes de decidir.",
+      p:"Vou tomar esta decisão: [descreva]. Aja como um consultor cético e aponte os 3 principais riscos ou pontos cegos que eu posso estar ignorando. Depois, diga o que eu faria diferente no seu lugar." },
+  ]},
+  { ic:"✉️", nome:"E-mails & mensagens", prompts:[
+    { t:"Reescrever um e-mail profissional", tip:"Diga o <b>tom</b> que você quer (gentil, firme, formal).",
+      p:"Reescreva a mensagem abaixo de forma profissional, gentil e objetiva, com no máximo 4 linhas. Mantenha o sentido, mas tire qualquer coisa que soe mal-educada ou confusa.\n\n[cole sua mensagem]" },
+    { t:"Responder um e-mail chato com elegância", tip:"Diplomacia instantânea.",
+      p:"Recebi este e-mail e preciso responder [dizendo não / pedindo mais prazo / discordando] sem criar atrito. Escreva uma resposta educada, curta e firme.\n\nE-mail recebido: [cole aqui]" },
+    { t:"Cobrar alguém sem parecer grosso", tip:"O clássico 'seguindo nosso alinhamento'.",
+      p:"Preciso cobrar [pessoa] sobre [assunto pendente] de forma leve e profissional, sem soar ríspido. Escreva uma mensagem curta de follow-up, com um tom cordial mas que deixe claro que estou esperando." },
+    { t:"Escrever uma mensagem difícil", tip:"Pra aquela conversa que você adia há dias.",
+      p:"Preciso mandar uma mensagem para [quem] sobre [situação delicada]. Me ajude a escrever de forma honesta, respeitosa e clara, sem rodeios e sem magoar. Me dê 2 versões: uma mais direta e uma mais suave." },
+    { t:"Criar respostas prontas (templates)", tip:"Automatize o que você repete toda semana.",
+      p:"Eu respondo muito a [tipo de mensagem, ex.: pedido de orçamento]. Crie 3 modelos de resposta reutilizáveis, com espaços [assim] pra eu preencher, variando o tom entre formal e amigável." },
+  ]},
+  { ic:"📚", nome:"Estudo & aprendizado", prompts:[
+    { t:"Um plano de estudos do zero", tip:"Peça um cronograma realista, não uma enciclopédia.",
+      p:"Quero aprender [assunto] partindo do zero, tenho [X] horas por semana. Monte um plano de estudos de 4 semanas, dividido por semana, com o que estudar, na ordem certa, e 1 exercício prático por semana. Nada de teoria demais." },
+    { t:"Explique como se eu fosse iniciante", tip:"Vá fundo só depois que a base estiver clara.",
+      p:"Me ensine [tema] do básico ao intermediário, em passos numerados. A cada passo, pare e me faça 1 pergunta pra checar se eu entendi antes de continuar. Comece agora pelo passo 1." },
+    { t:"Virar um assunto em flashcards", tip:"Ótimo pra prova e concurso.",
+      p:"Transforme o conteúdo abaixo em 10 flashcards de pergunta e resposta, curtos e diretos, focados no que mais cai / mais importa. Formato: Q: ... / R: ...\n\n[cole o conteúdo]" },
+    { t:"Resumir um vídeo ou artigo longo", tip:"Cole a transcrição ou o texto.",
+      p:"Resuma o conteúdo abaixo em: (1) a ideia central em 1 frase, (2) 5 pontos principais, (3) 3 coisas práticas que eu posso aplicar hoje. \n\n[cole a transcrição/texto]" },
+    { t:"Me faça uma prova sobre o que estudei", tip:"Testar é o melhor jeito de fixar.",
+      p:"Sobre o tema [assunto], me faça um teste com 8 perguntas de dificuldade crescente. Uma de cada vez: espere minha resposta, corrija, explique o porquê, e só então vá pra próxima." },
+  ]},
+  { ic:"🏠", nome:"Casa & dia a dia", prompts:[
+    { t:"Cardápio da semana com o que tem", tip:"Menos desperdício, menos 'o que fazer pra janta?'.",
+      p:"Tenho estes ingredientes em casa: [liste]. Monte um cardápio de [X] dias (almoço/janta) usando principalmente o que tenho, com receitas simples de até 30 min. Diga o que falta comprar." },
+    { t:"Lista de compras organizada por seção", tip:"Você não volta no corredor 3 vezes.",
+      p:"Organize esta lista de compras por seção do mercado (hortifruti, açougue, limpeza, etc.) pra eu comprar rápido. Some quantidades repetidas.\n\n[cole a lista bagunçada]" },
+    { t:"Planejar uma viagem econômica", tip:"Roteiro realista, não folder de agência.",
+      p:"Vou pra [destino] por [X] dias com orçamento apertado, gosto de [interesses]. Monte um roteiro dia a dia, com dicas pra gastar pouco, o que vale a pena e o que dá pra pular." },
+    { t:"Resolver um problema doméstico", tip:"Antes de chamar (e pagar) alguém.",
+      p:"Meu [aparelho/objeto] está com este problema: [descreva]. Liste as causas mais prováveis, da mais simples pra mais grave, e o que eu posso testar sozinho com segurança antes de chamar um profissional. Avise se for perigoso." },
+    { t:"Escrever uma mensagem pessoal com carinho", tip:"Aniversário, agradecimento, condolências.",
+      p:"Preciso escrever uma mensagem de [ocasião] para [quem é a pessoa pra você]. Quero que soe sincera e minha, não genérica. Detalhes sobre a pessoa: [conte algo]. Me dê 2 versões, uma curta e uma mais longa." },
+  ]},
+  { ic:"💰", nome:"Dinheiro & decisões", prompts:[
+    { t:"Comparar duas opções com clareza", tip:"Prós e contras lado a lado, sem enrolação.",
+      p:"Estou em dúvida entre [opção A] e [opção B] para [objetivo]. Faça uma comparação honesta em tabela (prós, contras, custo, pra quem serve). No fim, diga qual você escolheria e por quê — assumindo uma recomendação, não em cima do muro." },
+    { t:"Entender um contrato ou termo antes de assinar", tip:"IA não é advogado, mas acha as pegadinhas.",
+      p:"Leia o trecho abaixo e me explique em português simples o que ele significa na prática, quais são as minhas obrigações, e me alerte sobre qualquer cláusula que pareça arriscada ou incomum pra mim.\n\n[cole o trecho]" },
+    { t:"Montar um orçamento pessoal simples", tip:"O primeiro passo pra sair do vermelho.",
+      p:"Minha renda mensal é [R$X] e meus principais gastos são [liste]. Monte um orçamento simples no modelo 50/30/20, aponte onde eu provavelmente estou gastando demais e sugira 3 cortes realistas." },
+    { t:"Preparar-se pra uma negociação", tip:"Salário, aluguel, compra grande.",
+      p:"Vou negociar [o quê] com [quem]. Me prepare: qual é uma faixa realista, 3 argumentos fortes do meu lado, e como responder se a pessoa disser [objeção provável]. Seja prático." },
+    { t:"Explicar um assunto financeiro sem juridiquês", tip:"Do CDB ao imposto de renda.",
+      p:"Explique [tema financeiro] de forma simples e direta, como se estivesse ensinando um amigo. Diga o que é, pra que serve, os riscos, e 1 erro comum que iniciantes cometem. Sem jargão." },
+  ]},
+  { ic:"✨", nome:"Criatividade & conteúdo", prompts:[
+    { t:"10 títulos que dão vontade de clicar", tip:"Pra vídeo, post, artigo ou anúncio.",
+      p:"Crie 10 títulos chamativos para [tema], com no máximo 6 palavras cada. Varie o estilo (curiosidade, número, pergunta, urgência). No fim, marque com ⭐ os 3 que você acha mais fortes e diga o porquê." },
+    { t:"Ideias de conteúdo pra uma semana", tip:"Nunca mais 'não sei o que postar'.",
+      p:"Sou [o que você faz/seu nicho] e quero postar sobre [tema]. Me dê 7 ideias de conteúdo (1 por dia), cada uma com o gancho de abertura e o formato ideal (texto curto, vídeo, carrossel). Foque no que gera salvamento e compartilhamento." },
+    { t:"Melhorar um texto que você escreveu", tip:"Peça o que melhorar, não só 'melhore'.",
+      p:"Revise o texto abaixo: corrija erros, melhore a clareza e o ritmo, mas mantenha a minha voz e o meu jeito de escrever. No fim, me diga em 2 linhas o que você mudou e por quê.\n\n[cole seu texto]" },
+    { t:"Brainstorm sem julgamento", tip:"Quantidade primeiro, filtra depois.",
+      p:"Preciso de ideias para [objetivo/problema]. Me dê 15 ideias, das mais óbvias às mais malucas, sem se preocupar se são viáveis. Depois, aponte as 3 com melhor custo-benefício pra começar." },
+    { t:"Criar seu próprio prompt (meta-prompt)", tip:"O prompt que faz a IA te dar o prompt.",
+      p:"Quero usar uma IA para [seu objetivo], mas não sei escrever um bom prompt pra isso. Me faça 3 perguntas pra entender o que eu preciso e, com as respostas, escreva pra mim o prompt ideal, pronto pra colar." },
+  ]},
+];
+
+const list = document.getElementById('list');
+let n = 0;
+CATS.forEach(cat => {
+  const h = document.createElement('div');
+  h.className = 'cat';
+  h.innerHTML = '<span class="ic">'+cat.ic+'</span><h3>'+cat.nome+'</h3><span class="ln"></span>';
+  list.appendChild(h);
+  cat.prompts.forEach(pr => {
+    n++;
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.innerHTML =
+      '<span class="n">'+n+'</span>' +
+      '<h4>'+esc(pr.t)+'</h4>' +
+      '<div class="pbox">'+esc(pr.p)+'</div>' +
+      '<div class="row">' +
+        '<div class="tip">💡 '+pr.tip+'</div>' +
+        '<button class="copy no-print">Copiar</button>' +
+      '</div>';
+    const btn = c.querySelector('.copy');
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pr.p).then(() => {
+        btn.textContent = '✓ Copiado'; btn.classList.add('done');
+        setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('done'); }, 1600);
+      }).catch(() => { btn.textContent = 'Selecione e copie'; });
+    });
+    list.appendChild(c);
+  });
+});
+
+function esc(s){ return String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+</script>
+</body>
+</html>
