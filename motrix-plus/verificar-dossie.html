@@ -88,10 +88,11 @@
 
   <script>
     (function () {
-      var PROJECT = "motrix-e2197";
-      var DATABASE = "bancomotrix";
-      var API_KEY = "AIzaSyAUQ_sKKbsPuNfft5Kl71aYW_vZhRSQCv4";
-      var COLLECTION = "dossies";
+      // 🔐 [19/08/2026] A verificação passou a ser feita por uma Cloud Function, que lê o Firestore
+      // pelo servidor. Assim o App Check pode ficar IMPOSTO no banco (só o app de verdade escreve)
+      // e esta página recebe SÓ os campos exibidos — nenhum dado interno do usuário vem junto.
+      // Se o deploy imprimir uma URL diferente, troque a linha abaixo por ela.
+      var VERIFY_ENDPOINT = "https://southamerica-east1-motrix-e2197.cloudfunctions.net/verificarDocumento";
 
       var statusEl = document.getElementById("vrStatus");
       var detailsEl = document.getElementById("vrDetails");
@@ -110,7 +111,9 @@
       }
       // Extrai o valor de um campo do formato REST do Firestore.
       function fv(f) {
-        if (!f) return null;
+        if (f === undefined || f === null) return null;
+        // A Cloud Function devolve valores SIMPLES; o REST antigo devolvia {stringValue:...}.
+        if (typeof f !== "object") return f;
         if (f.stringValue !== undefined) return f.stringValue;
         if (f.integerValue !== undefined) return parseInt(f.integerValue, 10);
         if (f.doubleValue !== undefined) return f.doubleValue;
@@ -176,9 +179,7 @@
             "Abra esta página pelo QR do documento ou informe o código na barra de endereço (?d=CÓDIGO).");
           return;
         }
-        var url = "https://firestore.googleapis.com/v1/projects/" + PROJECT +
-                  "/databases/" + DATABASE + "/documents/" + COLLECTION + "/" +
-                  encodeURIComponent(id) + "?key=" + API_KEY;
+        var url = VERIFY_ENDPOINT + "?d=" + encodeURIComponent(id);
 
         fetch(url).then(function (r) {
           if (r.status === 404) { renderNotFound(id); return null; }
@@ -186,9 +187,9 @@
           return r.json();
         }).then(function (data) {
           if (!data) return;
-          if (data.fields && fv(data.fields.valid) !== false) {
-            renderOk(data.fields);
-          } else if (data.fields) {
+          if (data.encontrado && !data.revogado && data.doc) {
+            renderOk(data.doc);
+          } else if (data.revogado) {
             setStatus("vr-bad", "✕", "Documento revogado",
               "Este documento existe, mas foi marcado como inválido pelo emissor.");
           } else {
