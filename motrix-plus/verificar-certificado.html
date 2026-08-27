@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Verificar Certificado | Motrix+ | Thalzeron Labs</title>
-  <meta name="description" content="Verifique a autenticidade de um certificado de curso livre da Elite AI Academy do Motrix+ pelo código impresso no documento." />
+  <meta name="description" content="Verifique a autenticidade de um certificado de curso livre da Motrix+ AI Academy do Motrix+ pelo código impresso no documento." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -37,11 +37,11 @@
   <main class="legal-page">
     <section class="legal-card">
       <span class="mini">Verificação de Certificado</span>
-      <h1>Elite AI Academy — Motrix+</h1>
+      <h1>Motrix+ AI Academy — Motrix+</h1>
 
       <p>
         Esta é a página oficial de <strong>verificação de certificados</strong> do Curso Livre de Mecânica
-        Automotiva da <strong>Elite AI Academy</strong>, no aplicativo <strong>Motrix+</strong> da
+        Automotiva da <strong>Motrix+ AI Academy</strong>, no aplicativo <strong>Motrix+</strong> da
         <strong>Thalzeron Labs</strong>. A conferência abaixo é feita em tempo real na base oficial de certificados emitidos.
       </p>
 
@@ -123,7 +123,7 @@
         var issuedAt = fv(fields.issuedAt);
         var certId = esc(fv(fields.certId) || "");
         setStatus("vr-ok", "✓", "Certificado autêntico",
-          "Emitido pela Elite AI Academy · confira se os dados batem com o documento.");
+          "Emitido pela Motrix+ AI Academy · confira se os dados batem com o documento.");
         detailsEl.innerHTML =
           '<div class="vr-grid">' +
             '<div class="vr-cell full"><div class="k">Aluno(a)</div><div class="v">' + (name || "—") + '</div></div>' +
@@ -136,7 +136,7 @@
       }
       function renderNotFound(code) {
         setStatus("vr-bad", "✕", "Certificado não encontrado",
-          "Nenhum certificado com este código foi emitido pela Elite AI Academy.");
+          "Nenhum certificado com este código foi emitido pela Motrix+ AI Academy.");
         detailsEl.innerHTML =
           '<div class="vr-grid"><div class="vr-cell full"><div class="k">Código consultado</div>' +
           '<div class="v mono">' + esc(code || "—") + '</div></div></div>';

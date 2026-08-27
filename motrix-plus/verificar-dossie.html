@@ -140,7 +140,10 @@
         var records = fv(fields.recordCount);
         var genAt = fv(fields.generatedAt);
         var docId = esc(fv(fields.docId) || "");
-        var hl = healthLabel(health || 0);
+        // Sem exame nao ha nota: a bolinha nao pode acusar. `healthLabel(health || 0)` calculava
+        // a cor a partir de ZERO quando o campo vem ausente, entao o carro que ninguem vistoriou
+        // aparecia com o ponto VERMELHO de "Critico" ao lado do texto "-". Cinza neutro e o certo.
+        var hl = (health != null) ? healthLabel(health) : { t: "nao informado", c: "#8a8a8a" };
 
         var veic = (brand + " " + model).trim() + (year ? " · " + year : "");
         setStatus("vr-ok", "✓", "Documento autêntico",
