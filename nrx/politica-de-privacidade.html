@@ -56,15 +56,17 @@
             <p><strong>1.2. Dados guardados no seu computador</strong></p>
             <ul>
               <li><strong>Perfis, presets e ajustes:</strong> os nomes dos perfis que você cria, os presets que salva (valores de ajuste do NRX) e quais são favoritos, no arquivo <code>conta.json</code> da pasta <code>%LOCALAPPDATA%\Thalzeron\NRX</code>.</li>
-              <li><strong>Jogos em que o NRX rodou:</strong> nome do jogo, nome do executável, datas da primeira e da última vez, número de sessões e minutos com a renderização neural ativa — para o NRX mostrar seu histórico e aplicar os presets certos.</li>
+              <li><strong>A sua configuração de cada jogo:</strong> uma cópia das opções que você escolhe no NRX para aquele jogo (ajustes da renderização, efeito OLED, o monitor de desempenho, o tamanho do painel, as teclas), no mesmo <code>conta.json</code> — para elas voltarem sozinhas se você reinstalar o NRX ou trocar de computador.</li>
+              <li><strong>Jogos em que o NRX rodou:</strong> nome do jogo, nome do executável, datas da primeira e da última vez, número de sessões, minutos jogados com o NRX e minutos com a renderização neural ativa — para o NRX mostrar o seu histórico e aplicar os presets certos.</li>
+              <li><strong>Leituras de desempenho (monitor na tela):</strong> quadros por segundo, tempo de quadro e o uso da CPU, da GPU, da RAM e da memória de vídeo, lidos dos contadores do próprio Windows enquanto o jogo roda, <strong>só para mostrar na tela</strong>. Essas leituras não são gravadas nem enviadas.</li>
               <li><strong>Configurações por jogo:</strong> as opções do NRX, na pasta do próprio jogo.</li>
               <li><strong>Registros de diagnóstico:</strong> arquivos de log técnicos (desempenho, erros, estado do motor) na mesma pasta, usados para o recurso "Verificar e corrigir" e para suporte. Eles não contêm imagens nem dados pessoais além do nome de usuário que o Windows eventualmente inclui em caminhos de pasta.</li>
             </ul>
 
             <p><strong>1.3. Se você usar o login com Google (opcional)</strong></p>
             <ul>
-              <li><strong>Seu endereço de e-mail do Google</strong> (permissões <code>openid</code> e <code>email</code>): usado somente para mostrar no NRX qual conta está conectada.</li>
-              <li><strong>A pasta de dados do app no seu Google Drive</strong> (permissão <code>drive.appdata</code>): uma pasta <strong>oculta</strong>, exclusiva do NRX, onde ele guarda uma cópia do <code>conta.json</code> (perfis, presets, ajustes e a lista de jogos). O NRX <strong>não tem acesso</strong> a nenhum outro arquivo do seu Drive, não lê seus documentos, fotos ou e-mails.</li>
+              <li><strong>Seu nome, e-mail e foto de perfil do Google</strong> (permissões <code>openid</code>, <code>email</code> e <code>profile</code>): usados somente para mostrar no painel do NRX qual conta está conectada. A foto é baixada do Google e guardada como uma imagem pequena (<code>foto.png</code>) na pasta <code>%LOCALAPPDATA%\Thalzeron\NRX</code>; o nome e o e-mail ficam no arquivo do token, cifrado (veja abaixo). Nada disso é enviado a outro lugar.</li>
+              <li><strong>A pasta de dados do app no seu Google Drive</strong> (permissão <code>drive.appdata</code>): uma pasta <strong>oculta</strong>, exclusiva do NRX, onde ele guarda uma cópia do <code>conta.json</code> (perfis, presets, a configuração de cada jogo e a lista de jogos com o tempo jogado). O NRX <strong>não tem acesso</strong> a nenhum outro arquivo do seu Drive, não lê seus documentos, fotos ou e-mails.</li>
               <li><strong>O token de acesso</strong> que o Google entrega ao NRX após o seu login fica guardado no seu computador, <strong>cifrado</strong> com a proteção de dados do Windows (DPAPI): só a sua conta de usuário do Windows, naquele computador, consegue lê-lo. A sua senha do Google <strong>nunca</strong> passa pelo NRX: o login acontece no seu navegador, na página do próprio Google.</li>
             </ul>
           </div>
@@ -75,7 +77,8 @@
           <div class="policy-body">
             <ul>
               <li>Aplicar a renderização neural e os demais recursos gráficos ao jogo, em tempo real.</li>
-              <li>Guardar e aplicar os seus perfis, presets e ajustes, e mostrar o seu histórico de uso por jogo.</li>
+              <li>Guardar e aplicar os seus perfis, presets, ajustes e a configuração de cada jogo, e mostrar o seu histórico por jogo (sessões e horas jogadas).</li>
+              <li>Mostrar, se você quiser, o monitor de desempenho na tela (FPS, tempo de quadro, CPU, GPU, RAM e memória de vídeo).</li>
               <li>Fazer o backup e a sincronização desses dados entre os seus computadores, <strong>somente</strong> se você entrar com a sua conta Google.</li>
               <li>Diagnosticar e corrigir problemas de instalação e funcionamento.</li>
             </ul>
@@ -92,7 +95,7 @@
               incluindo os requisitos de <strong>Uso Limitado</strong>.
             </p>
             <ul>
-              <li>Os dados do Google são usados apenas para a função que você vê: o backup e a sincronização dos seus perfis e presets, e a exibição da conta conectada.</li>
+              <li>Os dados do Google são usados apenas para a função que você vê: o backup e a sincronização dos seus perfis, presets e configurações, e a exibição da conta conectada (nome, e-mail e foto) no painel do NRX.</li>
               <li>Não transferimos esses dados a terceiros, não os usamos para publicidade e nenhuma pessoa os lê.</li>
               <li>Os dados trafegam apenas entre o seu computador e a sua conta Google, por conexão criptografada (HTTPS).</li>
             </ul>
@@ -115,7 +118,7 @@
           <div class="policy-body">
             <ul>
               <li><strong>No computador:</strong> os dados ficam até você apagá-los. Para excluir tudo, apague a pasta <code>%LOCALAPPDATA%\Thalzeron\NRX</code>; a desinstalação do NRX remove os arquivos que ele colocou no jogo.</li>
-              <li><strong>Desconectar a conta Google:</strong> no painel do NRX (tecla Insert), cartão <strong>Perfil e Presets → Nuvem → Sair</strong>. Isso apaga o token do seu computador.</li>
+              <li><strong>Desconectar a conta Google:</strong> no painel do NRX (tecla Insert), cartão <strong>Perfil e Presets</strong>, botão <strong>Sair</strong> (ao lado da sua foto). Isso apaga do seu computador o token, o nome, o e-mail e a cópia da foto.</li>
               <li><strong>Apagar os dados da nuvem:</strong> no Google Drive pela web, clique em <strong>⚙ Configurações → Gerenciar apps</strong>, encontre <strong>NRX — Thalzeron Labs</strong>, abra <strong>Opções</strong> e escolha <strong>Excluir dados de apps ocultos</strong>.</li>
               <li><strong>Revogar o acesso do NRX à sua conta:</strong> acesse <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">myaccount.google.com/permissions</a>, selecione <strong>NRX — Thalzeron Labs</strong> e clique em <strong>Remover acesso</strong>.</li>
             </ul>
