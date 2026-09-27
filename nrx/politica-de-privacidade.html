@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade | NRX | Thalzeron Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .accordion-wrap { display:grid; gap:14px; margin-top:20px; }
+    .privacy-intro { margin-bottom:10px; text-align:justify; }
+    .policy-accordion { border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.02); overflow:hidden; }
+    .policy-accordion summary { list-style:none; cursor:pointer; padding:18px 20px; font-weight:800; display:flex; align-items:center; gap:10px; user-select:none; }
+    .policy-accordion summary::-webkit-details-marker { display:none; }
+    .policy-accordion[open] summary { border-bottom:1px solid rgba(255,255,255,0.08); color:#ffe100; }
+    .policy-body { padding:18px 20px 20px; }
+    .policy-body p { margin:0 0 12px; text-align:justify; color:#b8b8be; }
+    .policy-body ul { margin:0 0 12px 20px; padding:0; color:#b8b8be; }
+    .policy-body li { margin-bottom:8px; }
+    .policy-body code { font-size:.92em; background:rgba(255,255,255,0.06); padding:1px 6px; border-radius:6px; color:#e4e4e7; }
+    .policy-body a { text-decoration:underline; text-underline-offset:3px; }
+    .policy-note { margin-top:18px; padding:16px 18px; border-radius:16px; border:1px solid rgba(255,225,0,0.16); background:rgba(255,225,0,0.05); color:#d8d8dd; text-align:justify; }
+  </style>
+</head>
+<body>
+  <main class="legal-page">
+    <section class="legal-card">
+      <span class="mini">Política de Privacidade</span>
+      <h1>NRX</h1>
+
+      <p class="privacy-intro"><strong>Última atualização:</strong> 27 de setembro de 2026</p>
+
+      <p class="privacy-intro">
+        A <strong>Thalzeron Labs</strong> leva a sua privacidade a sério. Esta Política de Privacidade descreve quais informações o
+        <strong>NRX</strong> — ferramenta para jogos de PC que aplica renderização neural e outros recursos gráficos aos jogos — utiliza,
+        onde elas ficam, com quem são compartilhadas e como você pode controlá-las ou excluí-las.
+      </p>
+
+      <p class="privacy-intro">
+        Em resumo: o NRX funciona no seu computador. Ele <strong>não envia dados para servidores da Thalzeron Labs</strong> (não há
+        servidores nossos), não tem telemetria nem anúncios, e o único serviço externo — o backup opcional com a sua conta Google —
+        guarda os dados no <strong>seu próprio Google Drive</strong>.
+      </p>
+
+      <div class="accordion-wrap">
+        <details class="policy-accordion" open>
+          <summary>🎮 1. Informações que o NRX utiliza</summary>
+          <div class="policy-body">
+            <p><strong>1.1. Imagens do jogo (processadas, nunca guardadas)</strong></p>
+            <ul>
+              <li>Para funcionar, o NRX lê na placa de vídeo, a cada quadro, a imagem do jogo, a profundidade e os vetores de movimento, e devolve a imagem processada. Esse processamento acontece <strong>em tempo real, na memória do seu computador</strong>. As imagens <strong>não são gravadas em disco nem transmitidas</strong> para lugar nenhum.</li>
+            </ul>
+
+            <p><strong>1.2. Dados guardados no seu computador</strong></p>
+            <ul>
+              <li><strong>Perfis, presets e ajustes:</strong> os nomes dos perfis que você cria, os presets que salva (valores de ajuste do NRX) e quais são favoritos, no arquivo <code>conta.json</code> da pasta <code>%LOCALAPPDATA%\Thalzeron\NRX</code>.</li>
+              <li><strong>Jogos em que o NRX rodou:</strong> nome do jogo, nome do executável, datas da primeira e da última vez, número de sessões e minutos com a renderização neural ativa — para o NRX mostrar seu histórico e aplicar os presets certos.</li>
+              <li><strong>Configurações por jogo:</strong> as opções do NRX, na pasta do próprio jogo.</li>
+              <li><strong>Registros de diagnóstico:</strong> arquivos de log técnicos (desempenho, erros, estado do motor) na mesma pasta, usados para o recurso "Verificar e corrigir" e para suporte. Eles não contêm imagens nem dados pessoais além do nome de usuário que o Windows eventualmente inclui em caminhos de pasta.</li>
+            </ul>
+
+            <p><strong>1.3. Se você usar o login com Google (opcional)</strong></p>
+            <ul>
+              <li><strong>Seu endereço de e-mail do Google</strong> (permissões <code>openid</code> e <code>email</code>): usado somente para mostrar no NRX qual conta está conectada.</li>
+              <li><strong>A pasta de dados do app no seu Google Drive</strong> (permissão <code>drive.appdata</code>): uma pasta <strong>oculta</strong>, exclusiva do NRX, onde ele guarda uma cópia do <code>conta.json</code> (perfis, presets, ajustes e a lista de jogos). O NRX <strong>não tem acesso</strong> a nenhum outro arquivo do seu Drive, não lê seus documentos, fotos ou e-mails.</li>
+              <li><strong>O token de acesso</strong> que o Google entrega ao NRX após o seu login fica guardado no seu computador, <strong>cifrado</strong> com a proteção de dados do Windows (DPAPI): só a sua conta de usuário do Windows, naquele computador, consegue lê-lo. A sua senha do Google <strong>nunca</strong> passa pelo NRX: o login acontece no seu navegador, na página do próprio Google.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>🧭 2. Como utilizamos as informações</summary>
+          <div class="policy-body">
+            <ul>
+              <li>Aplicar a renderização neural e os demais recursos gráficos ao jogo, em tempo real.</li>
+              <li>Guardar e aplicar os seus perfis, presets e ajustes, e mostrar o seu histórico de uso por jogo.</li>
+              <li>Fazer o backup e a sincronização desses dados entre os seus computadores, <strong>somente</strong> se você entrar com a sua conta Google.</li>
+              <li>Diagnosticar e corrigir problemas de instalação e funcionamento.</li>
+            </ul>
+            <p>Não usamos as informações para publicidade, perfilamento, venda de dados ou treinamento de modelos de inteligência artificial.</p>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>🔐 3. Dados do Google (Uso Limitado)</summary>
+          <div class="policy-body">
+            <p>
+              O uso e a transferência, pelo NRX, de informações recebidas das APIs do Google seguem a
+              <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Política de Dados do Usuário dos Serviços de API do Google</a>,
+              incluindo os requisitos de <strong>Uso Limitado</strong>.
+            </p>
+            <ul>
+              <li>Os dados do Google são usados apenas para a função que você vê: o backup e a sincronização dos seus perfis e presets, e a exibição da conta conectada.</li>
+              <li>Não transferimos esses dados a terceiros, não os usamos para publicidade e nenhuma pessoa os lê.</li>
+              <li>Os dados trafegam apenas entre o seu computador e a sua conta Google, por conexão criptografada (HTTPS).</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>☁️ 4. Compartilhamento com terceiros</summary>
+          <div class="policy-body">
+            <p>A Thalzeron Labs <strong>não compartilha, não vende e não recebe</strong> os seus dados. Não existe servidor da Thalzeron Labs no caminho.</p>
+            <ul>
+              <li><strong>Google:</strong> quando você usa o backup opcional, os dados ficam na infraestrutura do Google, na sua própria conta, sujeitos à <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a>.</li>
+              <li><strong>Obrigações legais:</strong> como não armazenamos os seus dados, não temos o que entregar; qualquer pedido legal sobre dados do Google Drive é tratado pelo próprio Google.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>🗑️ 5. Retenção e exclusão</summary>
+          <div class="policy-body">
+            <ul>
+              <li><strong>No computador:</strong> os dados ficam até você apagá-los. Para excluir tudo, apague a pasta <code>%LOCALAPPDATA%\Thalzeron\NRX</code>; a desinstalação do NRX remove os arquivos que ele colocou no jogo.</li>
+              <li><strong>Desconectar a conta Google:</strong> no painel do NRX (tecla Insert), cartão <strong>Perfil e Presets → Nuvem → Sair</strong>. Isso apaga o token do seu computador.</li>
+              <li><strong>Apagar os dados da nuvem:</strong> no Google Drive pela web, clique em <strong>⚙ Configurações → Gerenciar apps</strong>, encontre <strong>NRX — Thalzeron Labs</strong>, abra <strong>Opções</strong> e escolha <strong>Excluir dados de apps ocultos</strong>.</li>
+              <li><strong>Revogar o acesso do NRX à sua conta:</strong> acesse <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">myaccount.google.com/permissions</a>, selecione <strong>NRX — Thalzeron Labs</strong> e clique em <strong>Remover acesso</strong>.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>🛡️ 6. Segurança</summary>
+          <div class="policy-body">
+            <ul>
+              <li>Login pelo navegador, na página oficial do Google, com o padrão OAuth 2.0 e PKCE — o NRX nunca vê a sua senha.</li>
+              <li>Token cifrado com a proteção de dados do Windows (DPAPI).</li>
+              <li>Comunicação com o Google somente por HTTPS.</li>
+              <li>Gravação dos arquivos locais com cópia de segurança, para evitar perda de dados em quedas de energia.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>⚖️ 7. Seus direitos (LGPD)</summary>
+          <div class="policy-body">
+            <p>Nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você pode, a qualquer momento:</p>
+            <ul>
+              <li><strong>Acessar e portar</strong> os seus dados: o <code>conta.json</code> é um arquivo aberto, legível, na sua pasta.</li>
+              <li><strong>Corrigir</strong> os dados pelo próprio painel do NRX.</li>
+              <li><strong>Excluir</strong> os dados e <strong>revogar o consentimento</strong> do login com Google, conforme a seção 5.</li>
+              <li><strong>Tirar dúvidas</strong> ou fazer solicitações pelo contato oficial (seção 10).</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>👶 8. Crianças</summary>
+          <div class="policy-body">
+            <p>O NRX não é direcionado a crianças e não coleta intencionalmente dados de crianças. A classificação etária de cada jogo continua valendo.</p>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>🔄 9. Alterações nesta política</summary>
+          <div class="policy-body">
+            <p>Esta política pode ser atualizada conforme o NRX evolui. A data da última atualização aparece no topo. Mudanças relevantes serão informadas nas notas de versão do NRX.</p>
+          </div>
+        </details>
+
+        <details class="policy-accordion">
+          <summary>📩 10. Contato</summary>
+          <div class="policy-body">
+            <p><strong>Responsável:</strong> Thalzeron Labs — Esdras Souza</p>
+            <p><strong>E-mail:</strong> <a href="mailto:thalzeronlabs@gmail.com">thalzeronlabs@gmail.com</a></p>
+            <p><strong>Página do NRX:</strong> <a href="https://thalzeronlabs.github.io/Site-Oficial/nrx/">https://thalzeronlabs.github.io/Site-Oficial/nrx/</a></p>
+          </div>
+        </details>
+      </div>
+
+      <div class="policy-note">
+        Esta política foi escrita para ser clara e fiel ao que o NRX realmente faz, em linha com a LGPD e com a Política de Dados do
+        Usuário dos Serviços de API do Google.
+      </div>
+
+      <div class="legal-actions">
+        <a class="back-link" href="index.html">Voltar ao NRX</a>
+        <a class="secondary-link" href="termos-de-uso.html">Termos de Uso</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
