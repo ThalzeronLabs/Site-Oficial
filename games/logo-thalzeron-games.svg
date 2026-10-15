@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Thalzeron Games">
+  <rect width="64" height="64" rx="14" fill="#050506"/>
+  <ellipse cx="32" cy="33" rx="27" ry="10" fill="none" stroke="#ffe100" stroke-width="2.2" stroke-opacity=".55" transform="rotate(-18 32 33)"/>
+  <path d="M15 16h34v8H36.5v26h-9V24H15z" fill="#ffe100"/>
+  <path d="M7.6 41.5a27 10 -18 0 0 52.8-17.2" fill="none" stroke="#ffe100" stroke-width="2.2" stroke-linecap="round" transform="rotate(0)"/>
+  <circle cx="52.5" cy="20" r="3" fill="#7fd1e8"/>
+</svg>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Thalzeron Games: o estúdio de jogos para PC da Thalzeron. Mundos inteiros, com a física do mundo real." />
+  <meta property="og:title" content="Thalzeron Games" />
+  <meta property="og:description" content="Mundos inteiros, com a física do mundo real. O estúdio de jogos para PC da Thalzeron." />
+  <meta property="og:image" content="https://thalzeronlabs.github.io/Site-Oficial/games/og-thalzeron-games.png" />
+  <meta property="og:type" content="website" />
+  <title>Thalzeron Games | Estúdio de jogos para PC</title>
+  <link rel="icon" href="logo-thalzeron-games.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--fundo:#020203;--placa:#0c0c10;--linha:rgba(255,255,255,.08);--texto:#f4f4f5;--suave:#b8b8be;--amarelo:#ffe100;--amarelo2:#ffef62;--ceu:#7fd1e8}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--fundo);color:var(--texto);line-height:1.65;overflow-x:hidden}
+    a{color:inherit}
+    .w{width:min(1120px,calc(100% - 32px));margin:0 auto}
+    .topo{position:sticky;top:0;z-index:20;background:rgba(2,2,3,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--linha)}
+    .topo .w{display:flex;align-items:center;justify-content:space-between;min-height:68px;gap:16px}
+    .marca{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.14em;font-size:14px;text-decoration:none}
+    .marca img{width:30px;height:30px}
+    .topo nav{display:flex;gap:18px;font-size:14px;color:var(--suave);flex-wrap:wrap}
+    .topo nav a{text-decoration:none}.topo nav a:hover{color:var(--amarelo)}
+    /* o ceu estrelado */
+    .hero{position:relative;padding-block:110px 90px;isolation:isolate;overflow:hidden}
+    #estrelas{position:absolute;inset:0;z-index:-2;width:100%;height:100%}
+    .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 55% at 70% 30%,rgba(255,225,0,.10),transparent 60%),radial-gradient(45% 50% at 15% 80%,rgba(127,209,232,.08),transparent 65%),linear-gradient(180deg,transparent 60%,var(--fundo))}
+    .selo{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.18em;color:#000;background:var(--amarelo);padding:6px 12px;border-radius:999px}
+    h1{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(44px,8vw,96px);line-height:1;margin:22px 0 0;letter-spacing:-.03em;text-wrap:balance}
+    h1 span{color:var(--amarelo)}
+    .sub{font-size:clamp(18px,2.4vw,24px);color:var(--texto);margin-top:20px;max-width:34ch}
+    .txt{color:var(--suave);max-width:62ch;margin-top:14px}
+    .acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:12px;font-weight:700;text-decoration:none;transition:.2s}
+    .btn.p{background:var(--amarelo);color:#000}.btn.p:hover{background:var(--amarelo2);transform:translateY(-2px)}
+    .btn.s{border:1px solid var(--linha);color:var(--texto)}.btn.s:hover{border-color:var(--amarelo)}
+    section{padding-block:70px}
+    .tag{font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--amarelo)}
+    h2{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(28px,4vw,42px);margin:10px 0 14px;line-height:1.1;text-wrap:balance}
+    .lema{border-left:4px solid var(--amarelo);padding:8px 0 8px 24px;font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(20px,2.8vw,30px);line-height:1.35;max-width:46ch}
+    .lema small{display:block;font-family:Inter,sans-serif;font-size:14px;color:var(--suave);margin-top:12px}
+    .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:26px}
+    .card{background:linear-gradient(180deg,#111117,var(--placa));border:1px solid var(--linha);border-radius:18px;padding:24px;transition:transform .25s,border-color .25s}
+    .card:hover{transform:translateY(-4px);border-color:rgba(255,225,0,.35)}
+    .card .ic{font-size:26px}
+    .card h3{margin:10px 0 6px;font-size:19px}
+    .card p{margin:0;color:var(--suave);font-size:15px}
+    .projeto{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;background:var(--placa);border:1px solid var(--linha);border-radius:24px;padding:34px;overflow:hidden;position:relative}
+    .projeto .planeta{aspect-ratio:1;max-width:340px;width:100%;justify-self:center;border-radius:50%;
+      background:radial-gradient(circle at 32% 30%,#ffe9a8,#e0a23b 30%,#8a4a1c 58%,#2a1408 80%);box-shadow:inset -40px -30px 80px rgba(0,0,0,.75),0 0 90px rgba(255,190,80,.25);animation:gira 30s linear infinite}
+    @keyframes gira{50%{filter:hue-rotate(12deg) brightness(1.08)}}
+    .pill{display:inline-block;font-size:12px;font-weight:700;color:var(--amarelo);border:1px solid rgba(255,225,0,.4);border-radius:999px;padding:4px 10px}
+    .lista{margin:14px 0 0;padding-left:20px;color:var(--suave)}
+    .rodape{border-top:1px solid var(--linha);padding-block:30px;color:var(--suave);font-size:14px}
+    .rodape .w{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+    @media (max-width:760px){.projeto{grid-template-columns:1fr}.topo nav{display:none}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topo">
+    <div class="w">
+      <a class="marca" href="#topo"><img src="logo-thalzeron-games.svg" alt="" />THALZERON GAMES</a>
+      <nav><a href="#lema">O lema</a><a href="#como">Como fazemos</a><a href="#projeto">O 1º jogo</a><a href="#tecnologia">Tecnologia</a><a href="../">Thalzeron Labs</a></nav>
+    </div>
+  </header>
+
+  <header class="hero" id="topo">
+    <canvas id="estrelas" aria-hidden="true"></canvas>
+    <div class="w">
+      <span class="selo">ESTÚDIO DE JOGOS PARA PC</span>
+      <h1>Mundos inteiros,<br>com a <span>física</span> do mundo real.</h1>
+      <p class="sub">A Thalzeron Games cria jogos de exploração para PC, feitos com obsessão por detalhe.</p>
+      <p class="txt">Somos o braço de jogos da Thalzeron, fundada por <strong>Esdras Souza</strong>. Cada planeta, cada pedra e cada gota d'água nasce de estudo real e de engenharia medida, não de atalhos.</p>
+      <div class="acoes"><a class="btn p" href="#projeto">O primeiro jogo</a><a class="btn s" href="#lema">O nosso lema</a></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="lema">
+      <div class="w">
+        <span class="tag">O LEMA</span>
+        <blockquote class="lema">"Podemos ser uma equipe de 2, podemos não sermos gênios, mas tudo aquilo que decidimos fazer, fazemos melhor que qualquer um no planeta!"<small>— Esdras Souza, fundador da Thalzeron Games</small></blockquote>
+      </div>
+    </section>
+
+    <section id="como">
+      <div class="w">
+        <span class="tag">COMO FAZEMOS</span>
+        <h2>Os princípios de cada jogo</h2>
+        <div class="grade">
+          <article class="card"><div class="ic">🪨</div><h3>Nada atravessa nada</h3><p>A física real em tudo: colisão, peso, água, luz. A Terra é a régua do que é "normal"; fora dela, a imaginação é livre, mas a coerência nunca.</p></article>
+          <article class="card"><div class="ic">📷</div><h3>Fotos reais antes do código</h3><p>Antes de construir um bioma, estudamos centenas de fotografias reais: o capim, a casca das árvores, a lama, as pegadas. Só depois vem o código.</p></article>
+          <article class="card"><div class="ic">🌌</div><h3>Universos procedurais</h3><p>Planetas, sistemas e galáxias gerados por código, em escala real, e determinísticos: o mesmo universo para todos os jogadores.</p></article>
+          <article class="card"><div class="ic">🖥️</div><h3>Feitos para telas largas</h3><p>Pensados desde o primeiro dia para monitores ultrawide e super ultrawide (até 32:9), sem bordas e sem distorção.</p></article>
+          <article class="card"><div class="ic">⏱️</div><h3>Desempenho medido</h3><p>Metas de quadros por segundo definidas antes e medidas sempre, em hardware real. O que não é medido não está pronto.</p></article>
+          <article class="card"><div class="ic">🧪</div><h3>Puro, sem truques</h3><p>A imagem do jogo é do jogo: a renderização é nossa, de ponta a ponta, sem filtros que inventam o que não está lá.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projeto">
+      <div class="w">
+        <div class="projeto">
+          <div>
+            <span class="pill">EM DESENVOLVIMENTO</span>
+            <h2>O primeiro jogo</h2>
+            <p class="txt">Um jogo de exploração espacial, com planetas em escala real para pousar, caminhar e descobrir: biomas estudados a partir da natureza, fauna e flora vivas e um universo inteiro para atravessar.</p>
+            <ul class="lista"><li>O nome e as primeiras imagens serão revelados aqui.</li><li>Para PC (Windows).</li></ul>
+          </div>
+          <div class="planeta" role="img" aria-label="Ilustração de um planeta"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tecnologia">
+      <div class="w">
+        <span class="tag">TECNOLOGIA</span>
+        <h2>Ferramentas próprias</h2>
+        <div class="grade">
+          <article class="card"><div class="ic">⚙️</div><h3>Thalzeron Engine</h3><p>O nosso motor de jogos próprio, em desenvolvimento, construído sobre uma base de código aberto para que cada parte do jogo seja nossa.</p></article>
+          <article class="card"><div class="ic">🛰️</div><h3>Escala de planeta</h3><p>Planetas de milhares de quilômetros, origem flutuante e pré-geração: caminhar do chão até a órbita sem telas de carregamento é a meta.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="w">
+      <span>© 2026 Thalzeron Games · uma divisão da <a href="../">Thalzeron Labs</a></span>
+      <span>Esdras Souza · Brasil</span>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var c=document.getElementById("estrelas"),x=c.getContext("2d"),e=[],dpr=Math.min(window.devicePixelRatio||1,2),W,H;
+    var calmo=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function tam(){W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+      e=[];for(var i=0;i<Math.round(W*H/2600);i++)e.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.2,f:Math.random()*6.28,v:Math.random()*.15+.03})}
+    function quadro(t){x.clearRect(0,0,W,H);for(var i=0;i<e.length;i++){var s=e[i],a=.35+.65*Math.abs(Math.sin(s.f+t/1600));
+      x.fillStyle="rgba(255,"+(240+Math.round(15*a))+",220,"+a.toFixed(2)+")";x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);x.fill();
+      if(!calmo){s.x-=s.v;if(s.x<0)s.x=W}}if(!calmo)requestAnimationFrame(quadro)}
+    tam();addEventListener("resize",tam);requestAnimationFrame(quadro);
+  })();
+  </script>
+</body>
+</html>

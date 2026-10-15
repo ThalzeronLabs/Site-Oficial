@@ -3,194 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="NRX — a caixa de ferramentas do gamer Radeon: renderização neural em tempo real, efeito OLED, perfis e presets com backup no seu Google Drive. Por Thalzeron Labs." />
-  <title>NRX — Neural Rendering | Thalzeron Labs</title>
+  <meta name="description" content="NRX: projeto interno da Thalzeron Labs, sem distribuição pública." />
+  <meta name="robots" content="noindex" />
+  <title>NRX | Thalzeron Labs</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Chakra+Petch:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css" />
-  <style>
-    :root { --nrx: #ed1c24; --nrx-soft: rgba(237, 28, 36, 0.12); --nrx-line: rgba(237, 28, 36, 0.35); --ok: #3ddc84; }
-    body {
-      background:
-        radial-gradient(circle at 18% 0%, rgba(237, 28, 36, 0.16), transparent 34%),
-        radial-gradient(circle at 90% 30%, rgba(237, 28, 36, 0.06), transparent 30%),
-        linear-gradient(180deg, #050506 0%, #0a0a0d 100%);
-    }
-    .nrx-hero { padding: 72px 0 40px; }
-    .nrx-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .14em; font-size: 12px; color: #c9c9d2; text-transform: uppercase; }
-    .nrx-eyebrow::before { content: ""; width: 4px; height: 22px; background: var(--nrx); border-radius: 2px; }
-    .nrx-logo { font-family: "Chakra Petch", "Inter", sans-serif; font-weight: 700; font-size: clamp(64px, 12vw, 128px); line-height: .95; letter-spacing: .02em; margin: 16px 0 6px; }
-    .nrx-logo span { color: var(--nrx); }
-    .nrx-tagline { font-size: clamp(20px, 2.6vw, 28px); font-weight: 700; margin: 0 0 14px; max-width: 22ch; line-height: 1.25; }
-    .nrx-lead { color: var(--muted); font-size: 17px; max-width: 64ch; margin: 0 0 26px; }
-    .nrx-status { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--nrx-line); background: var(--nrx-soft); color: #ffd5d7; border-radius: 999px; padding: 7px 14px; font-weight: 700; font-size: 13px; }
-    .nrx-status i { width: 8px; height: 8px; border-radius: 50%; background: var(--nrx); box-shadow: 0 0 12px var(--nrx); }
-    .nrx-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-    .btn-nrx { background: var(--nrx); color: #fff; border: 1px solid var(--nrx); }
-    .btn-nrx:hover { filter: brightness(1.1); }
-    .nrx-section { padding: 46px 0; }
-    .nrx-section h2 { font-size: clamp(24px, 3vw, 34px); margin: 8px 0 10px; }
-    .nrx-section .intro { color: var(--muted); max-width: 70ch; margin: 0 0 26px; }
-    .nrx-tag { color: var(--nrx); font-weight: 800; letter-spacing: .14em; font-size: 12px; text-transform: uppercase; }
-    .nrx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
-    .nrx-card { border: 1px solid var(--border); background: rgba(255,255,255,0.025); border-radius: 18px; padding: 22px; transition: border-color .2s, transform .2s; }
-    .nrx-card:hover { border-color: var(--nrx-line); transform: translateY(-2px); }
-    .nrx-card h3 { margin: 10px 0 6px; font-size: 18px; }
-    .nrx-card p { margin: 0; color: var(--muted); font-size: 15px; }
-    .nrx-ico { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--nrx-soft); border: 1px solid var(--nrx-line); font-size: 18px; }
-    .nrx-steps { counter-reset: s; display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-    .nrx-steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; border: 1px solid var(--border); background: rgba(255,255,255,0.02); border-radius: 16px; padding: 16px 18px; }
-    .nrx-steps li::before { content: counter(s); font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: 26px; color: var(--nrx); line-height: 1; }
-    .nrx-steps b { display: block; margin-bottom: 2px; }
-    .nrx-steps span { color: var(--muted); font-size: 15px; }
-    .nrx-spec { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-    .nrx-spec div { border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; background: rgba(255,255,255,0.02); }
-    .nrx-spec small { display: block; color: var(--muted); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-    .nrx-road { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-    .nrx-road div { border-left: 3px solid var(--nrx); padding: 6px 0 6px 14px; }
-    .nrx-road b { display: block; }
-    .nrx-road span { color: var(--muted); font-size: 14px; }
-    .nrx-privacy { border: 1px solid var(--nrx-line); background: linear-gradient(90deg, var(--nrx-soft), rgba(255,255,255,0.02) 70%); border-radius: 20px; padding: 24px; }
-    .nrx-privacy ul { margin: 10px 0 0 18px; padding: 0; color: #d8d8dd; }
-    .nrx-privacy li { margin-bottom: 6px; }
-    .nrx-links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 16px; }
-    .nrx-links a { color: #fff; text-decoration: underline; text-decoration-color: var(--nrx); text-underline-offset: 4px; }
-    .nrx-disclaimer { color: #8e8e9b; font-size: 13px; border-top: 1px solid var(--border); padding-top: 18px; margin-top: 10px; }
-    @media (max-width: 640px) { .nrx-hero { padding-top: 44px; } }
-  </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <a class="brand-mark" href="../index.html">THALZERON LABS</a>
-      <nav class="nav-tabs" aria-label="Navegação do NRX">
-        <a href="#recursos">Recursos</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#privacidade">Privacidade</a>
-        <a href="../index.html#pc">PC &amp; Gaming</a>
-      </nav>
-      <div class="topbar-tools">
-        <a class="topbar-cta" href="mailto:thalzeronlabs@gmail.com">Contato</a>
+  <header class="hero" id="top">
+    <div class="container narrow">
+      <div class="brand-badge">THALZERON LABS</div>
+      <h1>NRX</h1>
+      <p class="hero-text">
+        O NRX é um projeto interno da Thalzeron Labs e não está disponível para o público.
+        Esta página e os documentos abaixo continuam publicados apenas para referência e para quem já usa o aplicativo.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-secondary" href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a class="btn btn-secondary" href="termos-de-uso.html">Termos de Uso</a>
+        <a class="btn btn-primary" href="../games/">Conheça a Thalzeron Games</a>
       </div>
     </div>
   </header>
-
-  <main>
-    <section class="nrx-hero">
-      <div class="container">
-        <span class="nrx-eyebrow">Neural Rendering · Thalzeron Labs</span>
-        <h1 class="nrx-logo">NR<span>X</span></h1>
-        <p class="nrx-tagline">A caixa de ferramentas do gamer Radeon.</p>
-        <p class="nrx-lead">
-          O NRX leva <strong>renderização neural em tempo real</strong> para os seus jogos de PC: uma rede neural reilumina cada quadro,
-          com luz e materiais mais realistas, direto na sua placa Radeon. E vai além: efeito OLED, nitidez inteligente, perfis e
-          presets com backup no seu próprio Google Drive, diagnóstico que se corrige sozinho. Feito pela comunidade, para a
-          comunidade — <strong>sem depender de nada instalado pela fabricante</strong>.
-        </p>
-        <span class="nrx-status"><i></i> Em desenvolvimento · acesso antecipado em breve</span>
-        <div class="nrx-actions">
-          <a class="btn btn-nrx" href="#recursos">Conheça os recursos</a>
-          <a class="btn btn-secondary" href="politica-de-privacidade.html">Política de Privacidade</a>
-          <a class="btn btn-secondary" href="termos-de-uso.html">Termos de Uso</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="nrx-section" id="recursos">
-      <div class="container">
-        <span class="nrx-tag">Recursos</span>
-        <h2>Tudo o que o NRX faz pelo seu jogo</h2>
-        <p class="intro">Cada recurso nasce medido no jogo, quadro a quadro, antes de chegar até você.</p>
-        <div class="nrx-grid">
-          <article class="nrx-card"><div class="nrx-ico">✦</div><h3>Renderização neural</h3><p>Uma rede neural reilumina a imagem em tempo real: iluminação, sombras e materiais mais realistas, preservando o detalhe original do jogo.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">◐</div><h3>Efeito OLED</h3><p>Preto mais profundo, contraste e cor ajustados ao seu tipo de painel — IPS, VA ou OLED — com intensidade regulável e tecla própria.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">◇</div><h3>Nitidez inteligente</h3><p>O detalhe fino do jogo com a luz da rede, mais um realce de contraste que afia a imagem sem afiar o tremor.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">≋</div><h3>Estabilidade</h3><p>Um estabilizador temporal contém a cintilação que redes neurais costumam criar em folhagens e texturas finas.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">✋</div><h3>Primeira pessoa limpa</h3><p>Mãos, itens e relógio ficam com a imagem original do jogo, sem artefatos da rede.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">★</div><h3>Perfil e presets</h3><p>Seu perfil com foto, nome e horas jogadas em cada jogo. Salve presets favoritos e aplique com um clique. Tudo o que você configura fica na memória do NRX: reinstalou, voltou igual.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">☁</div><h3>Backup no seu Google Drive</h3><p>Opcional: entre com sua conta Google e seus perfis, presets e configurações vão sozinhos para a pasta oculta do app, no <strong>seu</strong> Drive — ou na hora, com um botão. Sem servidor nosso.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">⚙</div><h3>Diagnóstico que corrige</h3><p>Abriu o jogo no modo errado? O NRX reabre em DirectX 12 sozinho, antes da janela aparecer. E tem botões para recarregar e verificar a instalação.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">▣</div><h3>Painel sob medida</h3><p>Um painel no jogo (tecla Insert) que cabe em qualquer monitor, de 16:9 a 32:9.</p></article>
-          <article class="nrx-card"><div class="nrx-ico">◔</div><h3>Monitor de desempenho</h3><p>FPS, tempo de quadro, 1% low, gráfico por quadro, uso de GPU, VRAM, CPU e RAM — no canto que você escolher, do super simples ao completo. Lido do próprio Windows, sem depender de software de fabricante.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="nrx-section" id="como-funciona">
-      <div class="container">
-        <span class="nrx-tag">Como funciona</span>
-        <h2>Do instalador ao jogo, em minutos</h2>
-        <ol class="nrx-steps">
-          <li><div><b>Instale</b><span>O instalador do NRX coloca os componentes no jogo e registra cada arquivo. A desinstalação remove exatamente o que foi instalado e confere que o jogo voltou idêntico.</span></div></li>
-          <li><div><b>Jogue</b><span>Abra o jogo normalmente, pela sua loja. O NRX entra junto, confere o que precisa e liga a renderização neural.</span></div></li>
-          <li><div><b>Ajuste do seu jeito</b><span>Aperte Insert para abrir o painel: compare antes e depois, ajuste intensidade, nitidez, cor e OLED, e salve como preset.</span></div></li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="nrx-section">
-      <div class="container">
-        <span class="nrx-tag">Requisitos</span>
-        <h2>Compatibilidade</h2>
-        <div class="nrx-spec">
-          <div><small>Sistema</small>Windows 10 ou 11, 64 bits</div>
-          <div><small>Gráficos</small>Placa Radeon com DirectX 12 (desenvolvido e medido numa RX 9070 XT)</div>
-          <div><small>Jogos</small>Primeiro alvo: jogos Unity com TAA — começando por Green Hell</div>
-          <div><small>Monitores</small>16:9, 21:9 e 32:9 (testado a 5120×1440)</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="nrx-section">
-      <div class="container">
-        <span class="nrx-tag">O que vem aí</span>
-        <h2>Próximos passos</h2>
-        <div class="nrx-road">
-          <div><b>Geração de quadros própria</b><span>Mais FPS na tela, embutido no NRX.</span></div>
-          <div><b>Mais jogos</b><span>O NRX pelo TAA, o caminho que quase todo jogo moderno tem.</span></div>
-          <div><b>Boas-vindas e sons</b><span>Confirmação visual e sonora de que tudo está funcionando.</span></div>
-          <div><b>Modelo próprio</b><span>A rede neural treinada por nós.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="nrx-section" id="privacidade">
-      <div class="container">
-        <div class="nrx-privacy">
-          <span class="nrx-tag">Privacidade</span>
-          <h2 style="margin:8px 0 6px">Seus dados ficam com você</h2>
-          <ul>
-            <li>O NRX processa as imagens do jogo na sua placa de vídeo, em tempo real, e <strong>não salva nem envia</strong> essas imagens.</li>
-            <li>Sem telemetria, sem anúncios, sem servidores próprios. Nada é vendido.</li>
-            <li>O login com Google é <strong>opcional</strong>: o NRX só acessa o seu nome, e-mail e foto (para mostrar a conta conectada no painel) e a pasta oculta dele no seu Google Drive.</li>
-            <li>Você pode desconectar a qualquer momento e apagar os dados da nuvem pelas configurações do Google Drive.</li>
-          </ul>
-          <div class="nrx-links">
-            <a href="politica-de-privacidade.html">Política de Privacidade completa</a>
-            <a href="termos-de-uso.html">Termos de Uso</a>
-            <a href="mailto:thalzeronlabs@gmail.com">thalzeronlabs@gmail.com</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="nrx-section">
-      <div class="container">
-        <p class="nrx-disclaimer">
-          O NRX é um projeto independente da Thalzeron Labs, sem afiliação, patrocínio ou endosso da AMD, NVIDIA, Intel, Microsoft,
-          Valve ou dos desenvolvedores dos jogos. AMD, Radeon e FidelityFX são marcas da Advanced Micro Devices, Inc.; DirectX é marca
-          da Microsoft Corporation; Green Hell é marca de seus respectivos titulares; Google e Google Drive são marcas da Google LLC.
-          Todas as marcas citadas pertencem aos seus titulares e aparecem apenas para indicar compatibilidade.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>Thalzeron Labs © 2026 · NRX · <a href="politica-de-privacidade.html">Privacidade</a> · <a href="termos-de-uso.html">Termos</a> · <a href="../index.html">Site oficial</a></p>
-    </div>
-  </footer>
 </body>
 </html>
