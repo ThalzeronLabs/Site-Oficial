@@ -1,305 +1,365 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Site oficial da Thalzeron Labs: apps Android e a Thalzeron Games, o estúdio de jogos para PC." />
-  <title>Thalzeron Labs | Site Oficial</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thalzeron Labs · apps, ferramentas de IA e jogos</title>
+<meta name="description" content="A Thalzeron Labs faz apps Android, o Thalzeron Code (um agente de IA para o seu computador) e jogos para PC. Sempre fazemos melhor, sempre.">
+<meta property="og:title" content="Thalzeron Labs">
+<meta property="og:description" content="Apps Android, o Thalzeron Code e a Thalzeron Games.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--fundo:#0A0A0A;--cartao:rgba(255,255,255,.035);--linha:rgba(255,255,255,.08);--texto:#ECECEE;--suave:#A1A1A6;--fraco:#8E8E93;--verde:#7fdc8a;--verde-escuro:#1b5e20}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fundo);color:var(--texto);font-family:Inter,"Segoe UI",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--verde)}a:hover{color:#b9f6ca}
+.fundo{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.mancha{position:absolute;border-radius:50%;filter:blur(40px)}
+.m1{width:640px;height:640px;left:-120px;top:-160px;background:radial-gradient(circle,rgba(76,175,80,.32),transparent 65%);animation:d1 20s ease-in-out infinite}
+.m2{width:720px;height:720px;right:-200px;top:30%;background:radial-gradient(circle,rgba(38,166,154,.24),transparent 65%);animation:d2 24s ease-in-out infinite}
+.m3{width:560px;height:560px;left:30%;bottom:-240px;background:radial-gradient(circle,rgba(124,77,255,.18),transparent 65%);animation:d3 28s ease-in-out infinite}
+@keyframes d1{50%{transform:translate(140px,80px) scale(1.15)}}
+@keyframes d2{50%{transform:translate(-160px,-60px) scale(.92)}}
+@keyframes d3{50%{transform:translate(80px,-100px)}}
+@keyframes respira{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.06),0 0 30px 4px rgba(127,220,138,.25)}50%{box-shadow:0 0 0 1px rgba(255,255,255,.06),0 0 52px 12px rgba(127,220,138,.38)}}
+@keyframes sobe{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.mancha,.orbe,.revela{animation:none!important}.revela{opacity:1!important;transform:none!important}}
+.conteudo{position:relative;z-index:1}
+.largura{max-width:1160px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:5;backdrop-filter:blur(16px);background:rgba(10,10,10,.6);border-bottom:1px solid var(--linha)}
+.barra{display:flex;align-items:center;gap:22px;height:64px}
+.marca{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px;color:var(--texto);text-decoration:none}
+.orbe{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b9f6ca 0,#4caf50 38%,#1b5e20 78%);animation:respira 4.5s ease-in-out infinite;flex:none}
+.menu{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+.menu a{color:var(--suave);text-decoration:none;font-size:14px}.menu a:hover{color:var(--texto)}
+.heroi{padding:96px 0 72px;text-align:center}
+.olho{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--suave);border:1px solid var(--linha);border-radius:999px;padding:6px 14px;background:var(--cartao)}
+.olho i{width:8px;height:8px;border-radius:50%;background:var(--verde);box-shadow:0 0 10px var(--verde)}
+h1{font-size:clamp(40px,7vw,76px);line-height:1.04;letter-spacing:-1.5px;margin:22px auto 18px;max-width:900px;font-weight:800}
+h1 span{background:linear-gradient(90deg,#b9f6ca,#7fdc8a 40%,#4dd0c4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.heroi p{font-size:clamp(16px,2vw,19px);color:var(--suave);max-width:660px;margin:0 auto 32px}
+.botoes{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.botao{display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 22px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s,background .15s}
+.botao:hover{transform:translateY(-2px)}
+.principal{background:var(--verde);color:#0A0A0A}.principal:hover{color:#0A0A0A;background:#9be7a4}
+.secundario{border:1px solid rgba(255,255,255,.16);color:var(--texto)}.secundario:hover{color:var(--texto);background:rgba(255,255,255,.05)}
+section{padding:64px 0}
+.rotulo{font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--verde);margin:0 0 10px}
+h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.6px;margin:0 0 12px;line-height:1.15}
+.lead{color:var(--suave);max-width:640px;margin:0 0 34px}
+.pilares{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.pilar{position:relative;padding:28px;border-radius:20px;background:var(--cartao);border:1px solid var(--linha);overflow:hidden;transition:transform .2s,border-color .2s}
+.pilar:hover{transform:translateY(-4px);border-color:rgba(127,220,138,.35)}
+.pilar::after{content:"";position:absolute;width:220px;height:220px;right:-80px;top:-80px;border-radius:50%;background:radial-gradient(circle,var(--brilho),transparent 70%);opacity:.6}
+.pilar .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.06);margin-bottom:18px}
+.pilar svg,.app-icone svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pilar h3{font-size:21px;margin:0 0 8px}
+.pilar p{color:var(--suave);margin:0 0 18px;font-size:15px}
+.pilar a{font-weight:600;text-decoration:none}
+.estado{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--fraco);margin:0 0 14px}
+.busca{display:flex;align-items:center;gap:10px;max-width:420px;height:46px;padding:0 14px;border-radius:12px;background:var(--cartao);border:1px solid var(--linha);margin-bottom:22px}
+.busca svg{width:18px;height:18px;fill:none;stroke:var(--fraco);stroke-width:2;stroke-linecap:round}
+.busca input{flex:1;background:transparent;border:0;outline:none;color:var(--texto);font:inherit;font-size:15px}
+.apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.app{padding:20px;border-radius:16px;background:var(--cartao);border:1px solid var(--linha);display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s}
+.app:hover{border-color:rgba(255,255,255,.18);transform:translateY(-2px)}
+.app-topo{display:flex;align-items:center;gap:12px}
+.app-icone{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(127,220,138,.1);color:var(--verde);flex:none}
+.app h3{margin:0;font-size:17px;flex:1}
+.selo{font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 10px}
+.selo.novo{background:var(--verde);color:#0A0A0A}.selo.breve{border:1px solid rgba(255,255,255,.18);color:var(--suave)}
+.app p{margin:0;color:var(--suave);font-size:14.5px;flex:1}
+.app-links{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px}
+.app-links a{color:var(--texto);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2)}.app-links a:hover{color:var(--verde);border-color:var(--verde)}
+.vazio{display:none;color:var(--suave)}
+.faixa{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.faixa div{padding:22px;border-radius:16px;border:1px solid var(--linha);background:var(--cartao)}
+.faixa h3{margin:0 0 6px;font-size:16px}.faixa p{margin:0;color:var(--suave);font-size:14.5px}
+.sobre{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:40px;align-items:center}
+.cita{font-size:clamp(22px,3vw,30px);font-weight:700;line-height:1.3;letter-spacing:-.3px}
+.cita span{color:var(--verde)}
+footer{border-top:1px solid var(--linha);padding:34px 0 48px;color:var(--fraco);font-size:14px}
+.rodape{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.rodape nav{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.rodape a{color:var(--suave);text-decoration:none}.rodape a:hover{color:var(--texto)}
+.revela{opacity:0;transform:translateY(14px)}
+.revela.visivel{animation:sobe .6s ease-out forwards}
+@media (max-width:760px){.menu{display:none}.sobre{grid-template-columns:1fr}.heroi{padding:64px 0 48px}}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <a class="brand-mark" href="#top">THALZERON LABS</a>
+<div class="fundo" aria-hidden="true"><div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div></div>
+<div class="conteudo">
+<header>
+  <div class="largura barra">
+    <a class="marca" href="#topo"><span class="orbe" aria-hidden="true"></span>Thalzeron Labs</a>
+    <nav class="menu" aria-label="Seções do site">
+      <a href="#produtos">Produtos</a>
+      <a href="#apps">Apps</a>
+      <a href="games/">Games</a>
+      <a href="#transparencia">Transparência</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+  </div>
+</header>
 
-      <nav class="nav-tabs" aria-label="Navegação principal">
-        <a href="#apps">Apps</a>
-        <a href="#pc">PC &amp; Gaming</a>
-        <a href="#sobre">Sobre</a>
-        <a href="solicitacao-exclusao-de-conta.html">Exclusão de Conta</a>
-        <a href="#suporte">Suporte</a>
-      </nav>
+<main id="topo">
+  <div class="largura heroi">
+    <span class="olho"><i></i>Estúdio independente · Brasil</span>
+    <h1>Software com alma de produto. <span>Sempre fazemos melhor, sempre.</span></h1>
+    <p>A Thalzeron Labs faz apps Android, o Thalzeron Code (um agente de IA que trabalha no seu computador) e jogos para PC, com engenharia limpa, identidade forte e utilidade de verdade.</p>
+    <div class="botoes">
+      <a class="botao principal" href="#produtos">Conheça os produtos</a>
+      <a class="botao secundario" href="https://play.google.com/store/apps/dev?id=5631578905073739839" rel="noopener">Na Google Play</a>
+    </div>
+  </div>
 
-      <div class="topbar-tools">
-        <div class="topbar-search">
-          <input id="appSearchTop" type="text" placeholder="Pesquisar app..." aria-label="Pesquisar aplicativo" />
-        </div>
-        <a class="topbar-cta" href="https://play.google.com/store/apps/dev?id=5631578905073739839" target="_blank" rel="noopener noreferrer">Play Store</a>
+  <section id="produtos" class="largura">
+    <p class="rotulo revela">O que fazemos</p>
+    <h2 class="revela">Três frentes, um padrão</h2>
+    <p class="lead revela">Cada produto nasce com arquitetura pensada para evoluir, design funcional e obsessão por qualidade.</p>
+    <div class="pilares">
+      <article class="pilar revela" style="--brilho:rgba(127,220,138,.45)">
+        <div class="ic" style="color:#7fdc8a"><svg viewBox="0 0 24 24"><path d="M4 6l6 6-6 6M12 18h8"/></svg></div>
+        <h3>Thalzeron Code</h3>
+        <p class="estado">Windows · site · extensão do Chrome</p>
+        <p>Um agente de IA que trabalha com você: lê e escreve código, roda comandos, navega e testa, com qualquer modelo, do seu PC ou da nuvem. Powered by Claude.</p>
+        <a href="https://thalzeron-code-tzc.web.app/">Conhecer o Thalzeron Code →</a>
+      </article>
+      <article class="pilar revela" style="--brilho:rgba(124,77,255,.45)">
+        <div class="ic" style="color:#b39dff"><svg viewBox="0 0 24 24"><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01M7 7h10a5 5 0 0 1 0 10H7A5 5 0 0 1 7 7z"/></svg></div>
+        <h3>Thalzeron Games</h3>
+        <p class="estado">PC · em desenvolvimento</p>
+        <p>O estúdio de jogos para PC: mundos inteiros, com a física do mundo real. O primeiro jogo, de exploração espacial, está em desenvolvimento.</p>
+        <a href="games/">Conhecer a Thalzeron Games →</a>
+      </article>
+      <article class="pilar revela" style="--brilho:rgba(38,166,154,.45)">
+        <div class="ic" style="color:#4dd0c4"><svg viewBox="0 0 24 24"><path d="M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM11 18h2"/></svg></div>
+        <h3>Apps Android</h3>
+        <p class="estado">Google Play · 12 apps</p>
+        <p>Apps para o dia a dia: o carro, a hidratação, as contas, os estudos e a rotina, com IA onde ela ajuda de verdade.</p>
+        <a href="#apps">Ver os apps →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="apps" class="largura">
+    <p class="rotulo revela">Apps</p>
+    <h2 class="revela">A central oficial dos apps</h2>
+    <p class="lead revela">Cada app tem aqui a política de privacidade, os termos de uso e o caminho para apagar a conta e os dados.</p>
+    <label class="busca"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="busca" type="search" placeholder="Procurar um app" aria-label="Procurar um app"></label>
+    <div class="apps" id="lista">
+        <article class="app" data-nome="motrix+">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 17h14M6 17l1.5-6h9L18 17M7 17v2M17 17v2M8.5 14h.01M15.5 14h.01M9 11l1-3h4l1 3"/></svg></span>
+            <h3>Motrix+</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Seu carro, no controle total: abastecimentos, manutenções, despesas, odômetro e saúde mecânica num lugar só, com uma IA que entende a sua rotina, prevê custos e avisa a hora certa de cada troca.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Motrix+">
+            <a href="motrix-plus/politica-de-privacidade.html">Privacidade</a>
+            <a href="motrix-plus/termos-de-uso.html">Termos</a>
+            <a href="motrix-plus/exclusao-de-conta-e-dados.html">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="calc pro max">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6zM9 7h6M9 11h.01M12 11h.01M15 11h.01M9 14h.01M12 14h.01M15 14h.01M9 17h.01M12 17h3"/></svg></span>
+            <h3>Calc Pro Max</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Calculadora avançada com IA integrada, conversores e histórico inteligente.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Calc Pro Max">
+            <a href="calc-pro-max/politica-de-privacidade.html">Privacidade</a>
+            <a href="calc-pro-max/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#calc-pro-max">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="qalc">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6zM9 7h6M9 11h.01M12 11h.01M15 11h.01M9 14h.01M12 14h.01M15 14h.01M9 17h.01M12 17h3"/></svg></span>
+            <h3>Qalc</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Calculadora com OCR, recursos inteligentes e backup.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Qalc">
+            <a href="qalc/politica-de-privacidade.html">Privacidade</a>
+            <a href="qalc/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#qalc">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="h2oflow">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span>
+            <h3>H2OFlow</h3>
+            <span class="selo novo">Novo</span>
+          </div>
+          <p>Hidratação com controle simples, visual limpo e constância de rotina, para evoluir o hábito todo dia.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do H2OFlow">
+            <a href="h2oflow/politica-de-privacidade.html">Privacidade</a>
+            <a href="h2oflow/termos-de-uso.html">Termos</a>
+            <a href="h2oflow/exclusao-de-conta-e-dados.html">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="luminex pro">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1 .9 1.6V16h5.2v-.5c0-.6.3-1.2.9-1.6A6 6 0 0 0 12 3z"/></svg></span>
+            <h3>Luminex Pro</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Página oficial preparada; a descrição completa chega com a publicação.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Luminex Pro">
+            <a href="luminex-pro/politica-de-privacidade.html">Privacidade</a>
+            <a href="luminex-pro/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#luminex-pro">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="infinigrid">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></span>
+            <h3>InfiniGrid</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Página oficial preparada; a descrição completa chega com a publicação.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do InfiniGrid">
+            <a href="infinigrid/politica-de-privacidade.html">Privacidade</a>
+            <a href="infinigrid/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#infinigrid">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="boltgap">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
+            <h3>BoltGap</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Página oficial preparada; a descrição completa chega com a publicação.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do BoltGap">
+            <a href="boltgap/politica-de-privacidade.html">Privacidade</a>
+            <a href="boltgap/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#boltgap">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="lume">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1 .9 1.6V16h5.2v-.5c0-.6.3-1.2.9-1.6A6 6 0 0 0 12 3z"/></svg></span>
+            <h3>Lume</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Página oficial preparada; a descrição completa chega com a publicação.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Lume">
+            <a href="lume/politica-de-privacidade.html">Privacidade</a>
+            <a href="lume/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#lume">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="ignis">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c1 3 4 5 4 9a4 4 0 0 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-2-5 0-8z"/></svg></span>
+            <h3>Ignis</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Página oficial preparada; a descrição completa chega com a publicação.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Ignis">
+            <a href="ignis/politica-de-privacidade.html">Privacidade</a>
+            <a href="ignis/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#ignis">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="metas semanais">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01"/></svg></span>
+            <h3>Metas Semanais</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Página oficial preparada; a descrição completa chega com a publicação.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Metas Semanais">
+            <a href="metas-semanais/politica-de-privacidade.html">Privacidade</a>
+            <a href="metas-semanais/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#metas-semanais">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="astro">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></span>
+            <h3>Astro</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Página oficial preparada; a descrição completa chega com a publicação.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Astro">
+            <a href="astro/politica-de-privacidade.html">Privacidade</a>
+            <a href="astro/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#astro">Exclusão de dados</a>
+          </nav>
+        </article>
+        <article class="app" data-nome="meu shape pro">
+          <div class="app-topo">
+            <span class="app-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12"/></svg></span>
+            <h3>Meu Shape Pro</h3>
+            <span class="selo breve">Em breve</span>
+          </div>
+          <p>Página oficial preparada; a descrição completa chega com a publicação.</p>
+          <nav class="app-links" aria-label="Páginas oficiais do Meu Shape Pro">
+            <a href="meu-shape-pro/politica-de-privacidade.html">Privacidade</a>
+            <a href="meu-shape-pro/termos-de-uso.html">Termos</a>
+            <a href="solicitacao-exclusao-de-conta.html#meu-shape-pro">Exclusão de dados</a>
+          </nav>
+        </article>
+    </div>
+    <p class="vazio" id="vazio">Nenhum app com esse nome.</p>
+  </section>
+
+  <section id="transparencia" class="largura">
+    <p class="rotulo revela">Transparência</p>
+    <h2 class="revela">Os seus dados, do seu jeito</h2>
+    <div class="faixa">
+      <div class="revela"><h3>Privacidade de cada app</h3><p>As políticas e os termos ficam aqui, num endereço fixo, para você ler antes de instalar.</p></div>
+      <div class="revela"><h3>Apagar a conta e os dados</h3><p>Peça a exclusão a qualquer momento: <a href="solicitacao-exclusao-de-conta.html">a página de exclusão</a> explica o que é apagado e em quanto tempo.</p></div>
+      <div class="revela"><h3>Sem anúncios</h3><p>Os apps não têm anúncio. O modelo é grátis com um Premium opcional.</p></div>
+    </div>
+  </section>
+
+  <section id="sobre" class="largura">
+    <div class="sobre">
+      <p class="cita revela">"Podemos ser uma equipe de 2, mas tudo aquilo que decidimos fazer, <span>fazemos melhor que qualquer um.</span>"</p>
+      <div class="revela">
+        <p class="rotulo">Quem faz</p>
+        <h2>Esdras Souza</h2>
+        <p style="color:var(--suave)">Desenvolvedor Android e de PC, da comunidade AMD, com foco em produto, coerência técnica, identidade visual forte e experiência prática de uso. Cada produto da Thalzeron Labs segue a mesma premissa: software com propósito claro, sensação premium e estrutura preparada para crescer.</p>
       </div>
     </div>
-  </header>
+  </section>
+</main>
 
-  <header class="hero" id="top">
-    <div class="container">
-      <div class="brand-badge">THALZERON LABS</div>
-      <h1>Apps Android, ferramentas para gamers de PC e jogos — com identidade forte, engenharia limpa e utilidade real.</h1>
-      <p class="hero-text">
-        A <strong>Thalzeron Labs</strong> é um estúdio independente fundado por <strong>Esdras Souza</strong>,
-        desenvolvedor Android e de PC, da comunidade AMD, focado em construir aplicativos, ferramentas para gamers e jogos
-        modernos, rápidos, confiáveis e realmente úteis. Cada produto nasce com arquitetura estratégica, design funcional
-        e obsessão por qualidade.
-      </p>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#apps">Conheça os apps</a>
-        <a class="btn btn-secondary" href="games/">Thalzeron Games</a>
-        <a class="btn btn-secondary" href="solicitacao-exclusao-de-conta.html">Exclusão de conta e dados</a>
-      </div>
-
-      <div class="hero-grid">
-        <article class="info-card">
-          <h2>Transparência</h2>
-          <p>Este site centraliza páginas oficiais, políticas de privacidade, termos de uso, suporte e instruções de exclusão de conta ou dados quando aplicável.</p>
-        </article>
-        <article class="info-card">
-          <h2>Arquitetura de Produto</h2>
-          <p>Cada aplicativo é pensado com mentalidade de evolução contínua: base sólida, interface limpa, desempenho consistente e documentação organizada.</p>
-        </article>
-        <article class="info-card">
-          <h2>Operação Enxuta</h2>
-          <p>O ecossistema da Thalzeron Labs cresce de forma modular. Novos apps, links oficiais e documentos legais são adicionados continuamente aqui.</p>
-        </article>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="section" id="apps">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">APPS</span>
-          <h2>Central oficial de aplicativos</h2>
-          <p>Os projetos abaixo já possuem base oficial no site. Onde a publicação ainda não estiver concluída, o status permanecerá como <strong>Em breve</strong>.</p>
-        </div>
-
-        <div class="app-grid" id="appGrid">
-          <article class="app-card" data-app-name="motrix+ motrix plus">
-            <div class="app-top"><h3>Motrix+</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Seu carro, no controle total. O Motrix+ reúne abastecimentos, manutenções, despesas, odômetro e saúde mecânica em um só lugar — com uma IA que entende sua rotina, prevê custos e avisa a hora certa de cada troca. Simples, offline e do seu jeito.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="motrix-plus/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="motrix-plus/termos-de-uso.html">Termos de Uso</a>
-              <a href="motrix-plus/exclusao-de-conta-e-dados.html">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="calc pro max">
-            <div class="app-top"><h3>Calc Pro Max</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Aplicativo pago com IA integrada, calculadora avançada, conversores e histórico inteligente. Valor e disponibilidade devem ser consultados na Play Store.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="calc-pro-max/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="calc-pro-max/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#calc-pro-max">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="qalc">
-            <div class="app-top"><h3>Qalc</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Calculadora com OCR, recursos inteligentes, backup e documentação legal já estruturada no site oficial.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="qalc/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="qalc/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#qalc">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="h2oflow h2o flow">
-            <div class="app-top"><h3>H2OFlow</h3><span class="status-pill">Novo</span></div>
-            <p class="app-desc">Aplicativo de hidratação com proposta focada em controle simples, visual limpo, constância de rotina e evolução do hábito diário.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="h2oflow/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="h2oflow/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#h2oflow">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="luminex pro">
-            <div class="app-top"><h3>Luminex Pro</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="luminex-pro/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="luminex-pro/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#luminex-pro">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="infinigrid">
-            <div class="app-top"><h3>InfiniGrid</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="infinigrid/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="infinigrid/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#infinigrid">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="boltgap">
-            <div class="app-top"><h3>BoltGap</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="boltgap/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="boltgap/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#boltgap">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="lume">
-            <div class="app-top"><h3>Lume</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="lume/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="lume/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#lume">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="ignis">
-            <div class="app-top"><h3>Ignis</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="ignis/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="ignis/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#ignis">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="metas semanais">
-            <div class="app-top"><h3>Metas Semanais</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="metas-semanais/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="metas-semanais/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#metas-semanais">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="astro">
-            <div class="app-top"><h3>Astro</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="astro/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="astro/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#astro">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-
-          <article class="app-card" data-app-name="meu shape pro">
-            <div class="app-top"><h3>Meu Shape Pro</h3><span class="status-pill">Em breve</span></div>
-            <p class="app-desc">Página oficial preparada. Publicação, descrição final e detalhes completos serão adicionados em atualizações futuras.</p>
-            <div class="app-links">
-              <span class="ghost-link disabled">Play Store · Em breve</span>
-              <a href="meu-shape-pro/politica-de-privacidade.html">Política de Privacidade</a>
-              <a href="meu-shape-pro/termos-de-uso.html">Termos de Uso</a>
-              <a href="solicitacao-exclusao-de-conta.html#meu-shape-pro">Exclusão de Conta / Dados</a>
-            </div>
-          </article>
-        </div>
-
-        <p id="noResults" class="no-results" hidden>Nenhum app encontrado com esse nome.</p>
-      </div>
-    </section>
-
-    <section class="section" id="pc">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">PC &amp; GAMING</span>
-          <h2>Ferramentas e jogos para PC</h2>
-          <p>O estúdio de jogos da Thalzeron e os projetos para PC.</p>
-        </div>
-
-        <div class="app-grid">
-          <article class="app-card" data-app-name="thalzeron games jogos pc games estudio">
-            <div class="app-top"><h3>Thalzeron Games</h3><span class="status-pill">Em desenvolvimento</span></div>
-            <p class="app-desc">O estúdio de jogos para PC da Thalzeron: mundos inteiros, com a física do mundo real. O primeiro jogo, de exploração espacial, está em desenvolvimento.</p>
-            <div class="app-links">
-              <a href="games/">Conheça a Thalzeron Games</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-dark" id="sobre">
-      <div class="container narrow">
-        <div class="section-heading center">
-          <span class="section-tag">DESENVOLVEDOR</span>
-          <h2>Esdras Souza</h2>
-          <p class="subtitle">Desenvolvedor Android e de PC, da comunidade AMD, com foco em produto, coerência técnica, identidade visual forte e experiência prática de uso.</p>
-        </div>
-
-        <div class="developer-box">
-          <p>
-            Esdras Souza atua com mentalidade de produto, arquitetura orientada à evolução e atenção rigorosa à experiência do usuário.
-            Seu trabalho na Play Store, na comunidade AMD e nos projetos da Thalzeron Labs segue uma premissa simples: criar software com propósito claro,
-            sensação premium e estrutura preparada para crescer sem perder desempenho, legibilidade e utilidade.
-          </p>
-          <p>
-            A assinatura da Thalzeron Labs está na combinação entre visão estratégica, refinamento técnico e foco absoluto em resolver
-            necessidades reais com software bem construído — no Android e no PC.
-          </p>
-          <a class="btn btn-primary" href="https://play.google.com/store/apps/dev?id=5631578905073739839" target="_blank" rel="noopener noreferrer">Abrir página geral na Play Store</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="suporte">
-      <div class="container narrow">
-        <div class="support-card">
-          <span class="section-tag">SUPORTE &amp; LEGAL</span>
-          <h2>Contato oficial</h2>
-          <p>Dúvidas, solicitações, bugs, privacidade, termos de uso, exclusão de conta/dados ou assuntos relacionados aos apps da Thalzeron Labs.</p>
-          <a class="email-link" href="mailto:thalzeronlabs@gmail.com">thalzeronlabs@gmail.com</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>Thalzeron Labs © 2026 · Plataforma oficial de apps, ferramentas para PC, documentos legais e suporte.</p>
-    </div>
-  </footer>
-
-  <script>
-    const searchInput = document.getElementById('appSearchTop');
-    const appCards = Array.from(document.querySelectorAll('.app-card'));   // apps Android + PC & Gaming
-    const noResults = document.getElementById('noResults');
-
-    function normalize(text) {
-      return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    }
-
-    searchInput.addEventListener('input', function () {
-      const query = normalize(this.value.trim());
-      let visibleCount = 0;
-
-      appCards.forEach(card => {
-        const name = normalize(card.dataset.appName || '');
-        const match = !query || name.includes(query);
-        card.style.display = match ? '' : 'none';
-        if (match) visibleCount++;
-      });
-
-      noResults.hidden = visibleCount !== 0;
-
-      if (query) {
-        document.getElementById('apps').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  </script>
+<footer>
+  <div class="largura rodape">
+    <span>© 2026 Thalzeron Labs</span>
+    <nav aria-label="Rodapé">
+      <a href="mailto:thalzeronlabs@gmail.com">thalzeronlabs@gmail.com</a>
+      <a href="solicitacao-exclusao-de-conta.html">Exclusão de conta</a>
+      <a href="https://play.google.com/store/apps/dev?id=5631578905073739839" rel="noopener">Google Play</a>
+      <a href="games/">Thalzeron Games</a>
+    </nav>
+  </div>
+</footer>
+</div>
+<script>
+// a busca dos apps
+const busca = document.getElementById("busca");
+const cartoes = [...document.querySelectorAll(".app")];
+busca.addEventListener("input", () => {
+  const q = busca.value.trim().toLowerCase();
+  let vistos = 0;
+  for (const c of cartoes) { const ok = c.dataset.nome.includes(q); c.style.display = ok ? "" : "none"; if (ok) vistos++; }
+  document.getElementById("vazio").style.display = vistos ? "none" : "block";
+});
+// as seções aparecem ao rolar
+const olho = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); olho.unobserve(e.target); } }), { threshold: 0.15 });
+document.querySelectorAll(".revela").forEach((el) => olho.observe(el));
+</script>
 </body>
 </html>
