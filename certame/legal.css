@@ -1,0 +1,1095 @@
+/* ==========================================================================
+   Certame · Documentos legais — legal.css · versão 1.0 (29/09/2026)
+
+   O visual das páginas legais: privacidade, termos, exclusão, diretrizes,
+   segurança infantil e a página inicial (index.html).
+   O contrato do HTML está no briefing comum (legal-brief.md).
+
+   - NADA externo: sem fonte da web, sem CDN, sem imagem remota. Quem abre a
+     Política de Privacidade não tem o IP enviado a ninguém. Os ícones, a
+     marca e a rede da capa são desenhados aqui (SVG em data URI e CSS puro).
+   - A paleta é a Motrix do app (o Cores.kt): no escuro, o verde #00FF00 sobre
+     o preto; no claro, o branco-gelo #F5F6F5 com o verde 800 (#2E7D32).
+     O neon é luz (brilho, borda, marca, barra); o corpo do texto nunca é neon.
+   - Tema: segue o sistema; data-tema="claro|escuro" no <html> vence.
+   - Leitura primeiro: corpo 17px (18px a partir de 768px), entrelinha 1,7,
+     medida de ~70 caracteres, contraste AA ou melhor nos dois temas.
+   - Tudo o que mexe some com prefers-reduced-motion; a impressão é preto no
+     branco, sem topo nem índice, com a URL de cada link.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens: o tema CLARO é a base
+   -------------------------------------------------------------------------- */
+:root{
+  color-scheme:light;
+
+  --fundo:#F5F6F5;                 /* Motrix clara: o branco-gelo */
+  --fundo-vidro:rgba(245,246,245,.84);
+  --fundo-rodape:#ECEEEC;
+  --brilho-fundo:rgba(46,125,50,.09);
+  --cartao:#FFFFFF;
+  --cartao-vidro:rgba(255,255,255,.72);
+  --cartao-tinta:#EFF7EF;          /* cartaoDestaque do app */
+  --variante:#EEEFEE;
+  --realce:rgba(18,18,18,.045);
+  --borda:rgba(18,18,18,.11);
+  --borda-forte:rgba(18,18,18,.2);
+
+  --texto:#121212;                 /* 17,3:1 sobre o fundo */
+  --texto-forte:#000000;
+  --texto-2:#55565A;               /* 6,8:1 */
+  --texto-3:#5F6064;               /* 5,8:1 */
+
+  --acento:#2E7D32;                /* verde 800: botão (texto branco 5,1:1) */
+  --acento-texto:#1B5E20;          /* link e texto de destaque: 7,3:1 */
+  --acento-marca:#2E7D32;          /* a marca da abertura no claro */
+  --acento-luz:#00C853;            /* só luz: barra, feixe, trilho; nunca texto */
+  --acento-brilho:#4CAF50;
+  --acento-suave:#E3F1E4;
+  --acento-borda:rgba(46,125,50,.34);
+  --acento-halo:rgba(46,125,50,.16);
+  --acento-halo-forte:rgba(46,125,50,.42);
+  --sobre-acento:#FFFFFF;
+  --icone-cor:#2E7D32;
+
+  --alerta-fundo:#EAF5EA;
+  --conferir-fundo:#FFF1BF;        /* âmbar: o que o revisor precisa achar */
+  --conferir-texto:#5B3A00;        /* 9,1:1 */
+  --conferir-borda:#C98A00;
+  --conferir-faixa:#1A1400;
+
+  --sombra:0 1px 2px rgba(18,18,18,.05),0 12px 32px -18px rgba(18,18,18,.2);
+  --brilho:0 0 0 1px rgba(46,125,50,.12),0 16px 36px -18px rgba(46,125,50,.45);
+  --dica-rolagem:rgba(18,18,18,.18);
+  --rede-opacidade:.2;
+  --foco:#1B5E20;
+  --selecao:#C8E6C9;
+
+  /* As fontes: só as do aparelho. A ordem lembra a referência (Literata,
+     Public Sans, JetBrains Mono, Big Shoulders): se a pessoa tiver a fonte
+     instalada, ela entra; senão, a do sistema mais parecida. */
+  --f-titulo:"Literata","Sitka Heading","Sitka Text","Iowan Old Style","Charter","Bitstream Charter","Source Serif 4","Source Serif Pro","Noto Serif",Cambria,Georgia,serif;
+  --f-texto:"Public Sans","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Roboto","Noto Sans","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono","Cascadia Mono","Cascadia Code",ui-monospace,"SF Mono","Roboto Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --f-marca:"Big Shoulders Display","Bahnschrift","Roboto Condensed","Arial Narrow","sans-serif-condensed",sans-serif;
+
+  --largura:72rem;                 /* a página inteira */
+  --medida:40rem;                  /* a linha de leitura: ~70 caracteres a 18px */
+  --margem:clamp(16px,4vw,40px);
+  --lateral:max(var(--margem),calc((100% - var(--largura)) / 2 + var(--margem)));
+  --topo-h:6.25rem;                /* o legal.js mede o de verdade */
+  --raio:16px;
+  --t-corpo:1.0625rem;
+  --curva:cubic-bezier(.2,.8,.2,1);
+  --mola:cubic-bezier(.3,1.45,.5,1);
+
+  /* ícones (24x24, traço 2): o contrato usa data-icone; os demais são internos */
+  --i-cadeado:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4.5' y='10.5' width='15' height='10.5' rx='2.5'/%3E%3Cpath d='M8 10.5V7.5a4 4 0 0 1 8 0v3'/%3E%3Cpath d='M12 14.5v2.5'/%3E%3C/svg%3E");
+  --i-escudo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2.8l7.5 3v5.4c0 4.6-3.1 8.4-7.5 10-4.4-1.6-7.5-5.4-7.5-10V5.8z'/%3E%3Cpath d='M8.8 12.2l2.2 2.2 4.3-4.4'/%3E%3C/svg%3E");
+  --i-nuvem:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.2 19h9.9a4.4 4.4 0 0 0 .5-8.77A6.2 6.2 0 0 0 5.8 11 4 4 0 0 0 7.2 19z'/%3E%3C/svg%3E");
+  --i-pessoa:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4.5 21a7.5 7.5 0 0 1 15 0'/%3E%3C/svg%3E");
+  --i-pessoas:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8.5' r='3.5'/%3E%3Cpath d='M2.5 20.5a6.5 6.5 0 0 1 13 0'/%3E%3Cpath d='M15.5 5.1a3.5 3.5 0 0 1 0 6.8'/%3E%3Cpath d='M18 14.6a6.5 6.5 0 0 1 3.5 5.9'/%3E%3C/svg%3E");
+  --i-balao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 4.5h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-5 4v-4H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z'/%3E%3Cpath d='M7.5 9.5h9M7.5 12.8h5.5'/%3E%3C/svg%3E");
+  --i-estrela:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.4 6.3-.9z'/%3E%3C/svg%3E");
+  --i-chave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7.5' cy='16.5' r='4'/%3E%3Cpath d='M10.4 13.6L20.5 3.5'/%3E%3Cpath d='M17.2 6.8l2.8 2.8'/%3E%3Cpath d='M14.6 9.4l2 2'/%3E%3C/svg%3E");
+  --i-relogio:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5.2l3.4 2.1'/%3E%3C/svg%3E");
+  --i-alerta:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.3 4.1L2.5 17.6A2 2 0 0 0 4.2 20.6h15.6a2 2 0 0 0 1.7-3L13.7 4.1a2 2 0 0 0-3.4 0z'/%3E%3Cpath d='M12 9.2v4.6'/%3E%3Cpath d='M12 17.2h.01'/%3E%3C/svg%3E");
+  --i-livro:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 18.5v-13A2.5 2.5 0 0 1 7.5 3H19v14.5H7.5a2 2 0 0 0 0 4H19'/%3E%3Cpath d='M9 7.5h6'/%3E%3C/svg%3E");
+  --i-raio:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13.5 2.5L4.5 13.5h6.5l-1 8 9-11h-6.5z'/%3E%3C/svg%3E");
+  --i-lixeira:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 6.5h17'/%3E%3Cpath d='M9 6.5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2.5'/%3E%3Cpath d='M6 6.5l.9 13.1A1.5 1.5 0 0 0 8.4 21h7.2a1.5 1.5 0 0 0 1.5-1.4L18 6.5'/%3E%3Cpath d='M10 10.5v6.5M14 10.5v6.5'/%3E%3C/svg%3E");
+  --i-email:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='4.5' width='19' height='15' rx='2.5'/%3E%3Cpath d='M3.5 6.5l8.5 6.5 8.5-6.5'/%3E%3C/svg%3E");
+  --i-celular:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='6' y='2.5' width='12' height='19' rx='2.5'/%3E%3Cpath d='M10.5 18h3'/%3E%3C/svg%3E");
+  --i-olho:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+  --i-bandeira:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 21.5V3.5'/%3E%3Cpath d='M5 4h12.5l-2.5 4.5 2.5 4.5H5'/%3E%3C/svg%3E");
+  --i-coracao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20.5s-7.8-4.7-9.3-9.5C1.6 7.4 3.8 4 7.3 4c2 0 3.4 1.1 4.7 2.9C13.3 5.1 14.7 4 16.7 4c3.5 0 5.7 3.4 4.6 7-1.5 4.8-9.3 9.5-9.3 9.5z'/%3E%3C/svg%3E");
+  --i-moeda:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M14.9 9.3c-.5-1-1.6-1.5-2.9-1.5-1.6 0-2.9.8-2.9 2.1 0 2.9 6 1.5 6 4.3 0 1.3-1.4 2.1-3.1 2.1-1.4 0-2.6-.6-3.1-1.6'/%3E%3Cpath d='M12 6v1.8M12 16.3V18'/%3E%3C/svg%3E");
+  --i-robo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='8' width='16' height='12' rx='3'/%3E%3Cpath d='M12 8V5'/%3E%3Ccircle cx='12' cy='3.8' r='1.2'/%3E%3Cpath d='M9.2 13v1.6M14.8 13v1.6'/%3E%3Cpath d='M1.8 12.5v3.5M22.2 12.5v3.5'/%3E%3C/svg%3E");
+  --i-sol:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2.5v2M12 19.5v2M4.6 4.6L6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4'/%3E%3C/svg%3E");
+  --i-lua:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.5 14.3A8.5 8.5 0 1 1 9.7 3.5a6.8 6.8 0 0 0 10.8 10.8z'/%3E%3C/svg%3E");
+  --i-sistema:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 3a9 9 0 0 1 0 18z' fill='%23000'/%3E%3C/svg%3E");
+  --i-seta-cima:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19.5v-15M5.5 11L12 4.5 18.5 11'/%3E%3C/svg%3E");
+  --i-seta-direita:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5'/%3E%3C/svg%3E");
+  --i-divisa:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  --i-ponto:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E");
+  /* a rede da capa: a mesma topologia do desenho da Rede Viva */
+  --rede:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 330 240'%3E%3Cpath d='M60 60L120 36M120 36L182 66M182 66L252 44M252 44L296 108M296 108L236 128M236 128L162 138M162 138L92 120M92 120L60 60M92 120L38 170M38 170L116 204M116 204L198 206M198 206L278 192M278 192L296 108M162 138L116 204M162 138L198 206M182 66L236 128M38 170L92 120M20 100L60 60M20 100L38 170M312 160L278 192M312 160L296 108M116 88L60 60M116 88L120 36M116 88L92 120M116 88L162 138M214 96L182 66M214 96L252 44M214 96L236 128M240 166L236 128M240 166L278 192M240 166L198 206' fill='none' stroke='%23000' stroke-width='1.2' stroke-opacity='.55'/%3E%3Cg fill='%23000'%3E%3Ccircle cx='60' cy='60' r='3.2'/%3E%3Ccircle cx='120' cy='36' r='2.6'/%3E%3Ccircle cx='182' cy='66' r='3.2'/%3E%3Ccircle cx='252' cy='44' r='2.6'/%3E%3Ccircle cx='296' cy='108' r='3.2'/%3E%3Ccircle cx='236' cy='128' r='2.6'/%3E%3Ccircle cx='162' cy='138' r='3.8'/%3E%3Ccircle cx='92' cy='120' r='2.6'/%3E%3Ccircle cx='38' cy='170' r='3.2'/%3E%3Ccircle cx='116' cy='204' r='2.6'/%3E%3Ccircle cx='198' cy='206' r='3.2'/%3E%3Ccircle cx='278' cy='192' r='2.6'/%3E%3Ccircle cx='20' cy='100' r='2.2'/%3E%3Ccircle cx='312' cy='160' r='2.2'/%3E%3Ccircle cx='116' cy='88' r='5.5'/%3E%3Ccircle cx='214' cy='96' r='5.5'/%3E%3Ccircle cx='240' cy='166' r='5.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   2. Tokens: o tema ESCURO (o do Motrix). O sistema decide, o manual vence.
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme:dark){
+  :root:not([data-tema="claro"]){
+    color-scheme:dark;
+    --fundo:#0A0A0A;               /* a folha de leitura do app (sem o rastro do OLED) */
+    --fundo-vidro:rgba(0,0,0,.8);
+    --fundo-rodape:#000000;
+    --brilho-fundo:rgba(0,255,0,.075);
+    --cartao:#141416;
+    --cartao-vidro:rgba(20,20,22,.72);
+    --cartao-tinta:#0C1A0E;
+    --variante:#1C1C1E;
+    --realce:rgba(255,255,255,.06);
+    --borda:rgba(255,255,255,.1);
+    --borda-forte:rgba(255,255,255,.2);
+    --texto:#E3E4E3;               /* 15,5:1; nunca o branco puro (halação) */
+    --texto-forte:#F4F5F4;
+    --texto-2:#A1A1A6;             /* 7,7:1 */
+    --texto-3:#8E8E93;             /* 6,1:1 */
+    --acento:#00FF00;              /* o MotrixGreen, igual: botão com texto preto 15,3:1 */
+    --acento-texto:#00E676;        /* link: 11,9:1, sem a vibração do neon puro no texto */
+    --acento-marca:#00FF00;
+    --acento-luz:#00FF00;
+    --acento-brilho:#66FF66;
+    --acento-suave:rgba(0,255,0,.1);
+    --acento-borda:rgba(0,255,0,.34);
+    --acento-halo:rgba(0,255,0,.22);
+    --acento-halo-forte:rgba(0,255,0,.5);
+    --sobre-acento:#000000;
+    --icone-cor:#00FF00;
+    --alerta-fundo:#0C1A0E;
+    --conferir-fundo:#2B2106;
+    --conferir-texto:#FFD54F;      /* 11,3:1 */
+    --conferir-borda:#FFB300;
+    --conferir-faixa:#000000;
+    --sombra:inset 0 1px 0 rgba(255,255,255,.035),0 24px 48px -28px rgba(0,0,0,.95);
+    --brilho:0 0 0 1px rgba(0,255,0,.2),0 0 34px -10px rgba(0,255,0,.38);
+    --dica-rolagem:rgba(0,255,0,.24);
+    --rede-opacidade:.32;
+    --foco:#00FF00;
+    --selecao:rgba(0,255,0,.3);
+  }
+}
+:root[data-tema="escuro"]{
+  color-scheme:dark;
+  --fundo:#0A0A0A;
+  --fundo-vidro:rgba(0,0,0,.8);
+  --fundo-rodape:#000000;
+  --brilho-fundo:rgba(0,255,0,.075);
+  --cartao:#141416;
+  --cartao-vidro:rgba(20,20,22,.72);
+  --cartao-tinta:#0C1A0E;
+  --variante:#1C1C1E;
+  --realce:rgba(255,255,255,.06);
+  --borda:rgba(255,255,255,.1);
+  --borda-forte:rgba(255,255,255,.2);
+  --texto:#E3E4E3;
+  --texto-forte:#F4F5F4;
+  --texto-2:#A1A1A6;
+  --texto-3:#8E8E93;
+  --acento:#00FF00;
+  --acento-texto:#00E676;
+  --acento-marca:#00FF00;
+  --acento-luz:#00FF00;
+  --acento-brilho:#66FF66;
+  --acento-suave:rgba(0,255,0,.1);
+  --acento-borda:rgba(0,255,0,.34);
+  --acento-halo:rgba(0,255,0,.22);
+  --acento-halo-forte:rgba(0,255,0,.5);
+  --sobre-acento:#000000;
+  --icone-cor:#00FF00;
+  --alerta-fundo:#0C1A0E;
+  --conferir-fundo:#2B2106;
+  --conferir-texto:#FFD54F;
+  --conferir-borda:#FFB300;
+  --conferir-faixa:#000000;
+  --sombra:inset 0 1px 0 rgba(255,255,255,.035),0 24px 48px -28px rgba(0,0,0,.95);
+  --brilho:0 0 0 1px rgba(0,255,0,.2),0 0 34px -10px rgba(0,255,0,.38);
+  --dica-rolagem:rgba(0,255,0,.24);
+  --rede-opacidade:.32;
+  --foco:#00FF00;
+  --selecao:rgba(0,255,0,.3);
+}
+:root[data-tema="claro"]{color-scheme:light}
+
+/* --------------------------------------------------------------------------
+   3. Base
+   -------------------------------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;text-size-adjust:100%;
+  background:var(--fundo);
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{
+  margin:0;min-height:100vh;display:flex;flex-direction:column;
+  background:radial-gradient(60rem 32rem at 86% -9rem,var(--brilho-fundo),transparent 64%) no-repeat,var(--fundo);
+  color:var(--texto);
+  font-family:var(--f-texto);font-size:var(--t-corpo);line-height:1.7;
+  font-kerning:normal;text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-wrap:break-word;
+}
+@media (min-width:768px){:root{--t-corpo:1.125rem}}
+h1,h2,h3{margin:0;font-family:var(--f-titulo);color:var(--texto-forte);line-height:1.18;text-wrap:balance}
+p,ul,ol,dl,dd,figure{margin:0}
+img,svg{max-width:100%;height:auto}
+a{
+  color:var(--acento-texto);
+  text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:.22em;
+  text-decoration-color:var(--acento-borda);
+  transition:color .2s,text-decoration-color .2s,background-color .2s,border-color .2s,box-shadow .25s;
+}
+a:hover{text-decoration-color:currentColor;text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--foco);outline-offset:3px;border-radius:6px}
+::selection{background:var(--selecao);color:var(--texto-forte)}
+strong,b{font-weight:700;color:var(--texto-forte)}
+button{font:inherit}
+
+/* pular para o conteúdo: some da tela, aparece no foco */
+.pular{
+  position:fixed;z-index:100;left:var(--margem);top:.75rem;
+  padding:.75rem 1.1rem;border-radius:12px;
+  background:var(--acento);color:var(--sobre-acento);font-weight:700;text-decoration:none;
+  box-shadow:var(--brilho);
+  transform:translateY(-220%);transition:transform .25s var(--curva);
+}
+.pular:focus,.pular:focus-visible{transform:none;outline-offset:3px;color:var(--sobre-acento)}
+
+/* a barra de leitura: o legal.js põe o quanto foi lido em --lido (0 a 1) */
+.progresso{
+  position:fixed;z-index:90;inset:0 0 auto 0;height:3px;pointer-events:none;
+  transform-origin:0 50%;transform:scaleX(var(--lido,0));
+  background:linear-gradient(90deg,var(--acento),var(--acento-luz) 65%,var(--acento-brilho));
+  box-shadow:0 0 12px var(--acento-halo-forte),0 0 2px var(--acento-luz);
+}
+@supports (animation-timeline:scroll()){
+  html:not(.js) .progresso{animation:ler linear both;animation-timeline:scroll(root block)}
+}
+@keyframes ler{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* --------------------------------------------------------------------------
+   4. O topo: a marca, as abas e o botão de tema
+   -------------------------------------------------------------------------- */
+.topo{
+  position:sticky;top:0;z-index:80;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"marca tema" "abas abas";
+  align-items:center;column-gap:.75rem;
+  padding:.5rem var(--lateral) 0;
+  background:var(--fundo-vidro);
+  -webkit-backdrop-filter:saturate(1.7) blur(16px);backdrop-filter:saturate(1.7) blur(16px);
+  border-bottom:1px solid var(--borda);
+  transition:transform .35s var(--curva),box-shadow .3s;
+}
+.topo.rolou{box-shadow:0 12px 30px -24px rgba(0,0,0,.55)}
+.topo.topo-oculto{transform:translateY(calc(-100% - 2px))}
+/* o feixe que corre o fio de baixo uma vez, ao abrir (o EliteNeonScanner do Motrix) */
+.topo::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--acento-luz),transparent) no-repeat;
+  background-size:38% 100%;background-position:-70% 0;
+  box-shadow:0 0 8px var(--acento-halo);
+}
+
+.marca{
+  grid-area:marca;justify-self:start;
+  display:inline-flex;align-items:center;gap:.7rem;min-width:0;max-width:100%;min-height:44px;
+  color:var(--texto-forte);text-decoration:none;border-radius:12px;
+}
+.marca:hover{color:var(--texto-forte)}
+/* o símbolo: o anel com o "certo" do Cebraspe dentro (o ic_launcher do app), em CSS puro */
+.marca-simbolo{
+  position:relative;flex:none;width:30px;height:30px;border-radius:50%;
+  border:2.5px solid var(--acento-marca);
+  box-shadow:0 0 14px -2px var(--acento-halo-forte),inset 0 0 10px -3px var(--acento-halo-forte);
+}
+.marca-simbolo::after{
+  content:"";position:absolute;left:50%;top:50%;
+  width:7px;height:13px;margin:-8.5px 0 0 -4.5px;
+  border:solid var(--acento-marca);border-width:0 3px 3px 0;border-radius:0 1px 2px 1px;
+  transform:rotate(43deg);
+  filter:drop-shadow(0 0 3px var(--acento-halo-forte));
+}
+.marca:hover .marca-simbolo{box-shadow:0 0 22px 0 var(--acento-halo-forte),inset 0 0 12px -2px var(--acento-halo-forte)}
+.marca-nome{
+  font-family:var(--f-marca);font-weight:800;font-stretch:80%;
+  font-size:1.375rem;line-height:1;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--texto-forte);
+}
+.marca-sub{
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  padding-left:.7rem;border-left:1px solid var(--borda-forte);
+  font-family:var(--f-mono);font-size:.6875rem;line-height:1.3;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--texto-2);
+}
+@media (max-width:399px){.marca-sub{display:none}}
+
+.abas{
+  grid-area:abas;position:relative;
+  display:flex;gap:.25rem;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;
+  margin-inline:calc(-1 * var(--margem));padding:.25rem var(--margem) .5rem;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--margem),#000 calc(100% - 2.25rem),transparent);
+  mask-image:linear-gradient(90deg,transparent 0,#000 var(--margem),#000 calc(100% - 2.25rem),transparent);
+}
+.abas::-webkit-scrollbar{display:none}
+.abas a{
+  flex:none;display:inline-flex;align-items:center;min-height:38px;
+  padding:.3rem .85rem;border-radius:999px;border:1px solid transparent;
+  color:var(--texto-2);font-size:.875rem;font-weight:600;line-height:1.2;white-space:nowrap;text-decoration:none;
+}
+.abas a:hover{color:var(--texto-forte);background:var(--realce)}
+.abas a[aria-current="page"],
+body[data-pagina="privacidade"] .abas a[href="privacidade.html"],
+body[data-pagina="termos"] .abas a[href="termos.html"],
+body[data-pagina="exclusao"] .abas a[href="exclusao.html"],
+body[data-pagina="diretrizes"] .abas a[href="diretrizes.html"],
+body[data-pagina="seguranca-infantil"] .abas a[href="seguranca-infantil.html"]{
+  color:var(--acento-texto);background:var(--acento-suave);border-color:var(--acento-borda);
+  box-shadow:0 0 20px -6px var(--acento-halo-forte);
+}
+
+/* o botão de tema: sem JS ele não faz nada, então some */
+.tema{
+  grid-area:tema;justify-self:end;
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  min-width:40px;min-height:40px;padding:0 .8rem 0 .7rem;
+  border-radius:999px;border:1px solid var(--borda-forte);background:var(--cartao);color:var(--texto);
+  font-size:.8125rem;font-weight:600;line-height:1;cursor:pointer;
+  transition:border-color .2s,box-shadow .25s,transform .2s var(--curva);
+}
+.tema:hover{border-color:var(--acento-borda);box-shadow:var(--brilho)}
+.tema:active{transform:scale(.96)}
+html:not(.js) .tema{display:none}
+.tema-icone{
+  flex:none;width:18px;height:18px;background-color:currentColor;
+  -webkit-mask:var(--ic,var(--i-sistema)) center/contain no-repeat;mask:var(--ic,var(--i-sistema)) center/contain no-repeat;
+  transition:transform .45s var(--mola);
+}
+.tema[data-estado="claro"] .tema-icone{--ic:var(--i-sol);color:var(--conferir-borda)}
+.tema[data-estado="escuro"] .tema-icone{--ic:var(--i-lua);color:var(--acento-texto)}
+.tema[data-estado] .tema-icone{animation:girar-icone .5s var(--mola)}
+@keyframes girar-icone{from{transform:rotate(-120deg) scale(.4);opacity:0}}
+@media (max-width:439px){
+  .tema{width:40px;padding:0}
+  .tema-rotulo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+}
+
+/* --------------------------------------------------------------------------
+   5. A página e a capa
+   -------------------------------------------------------------------------- */
+.pagina{flex:1 0 auto;width:100%;max-width:var(--largura);margin-inline:auto;padding-inline:var(--margem)}
+.pagina:focus{outline:none}
+[id]{scroll-margin-top:calc(var(--topo-h) + 1rem)}
+
+.capa{
+  position:relative;isolation:isolate;
+  display:grid;justify-items:start;gap:1.1rem;
+  padding-block:clamp(2.25rem,7vw,5rem) clamp(1.25rem,3vw,2rem);
+}
+/* a rede ao fundo: pontos e ligações, em degradê neon, só decoração */
+.capa::before{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  top:clamp(.25rem,2.5vw,1.75rem);right:calc(-.25 * var(--margem));
+  width:min(31rem,82%);aspect-ratio:330/240;
+  background:linear-gradient(140deg,var(--acento-luz) 10%,var(--acento-brilho) 40%,transparent 82%);
+  -webkit-mask:var(--rede) center/contain no-repeat;mask:var(--rede) center/contain no-repeat;
+  opacity:calc(var(--rede-opacidade) * .6);
+}
+@media (min-width:768px){.capa::before{opacity:var(--rede-opacidade)}}
+
+/* o selo: um carimbo, como o "Proposta" da Rede Viva */
+.selo{
+  display:inline-block;margin:0 0 .25rem;
+  padding:.36rem .72rem;border:1.5px solid currentColor;border-radius:6px;
+  outline:1px solid var(--acento-borda);outline-offset:3px;
+  font-family:var(--f-mono);font-size:.75rem;font-weight:600;line-height:1.3;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--acento-texto);background:var(--cartao-vidro);
+  text-shadow:0 0 14px var(--acento-halo-forte);
+  transform:rotate(-2deg);transform-origin:12% 50%;
+}
+.capa h1{
+  max-width:19ch;
+  font-size:clamp(2.125rem,1.3rem + 4.2vw,3.875rem);font-weight:700;line-height:1.06;letter-spacing:-.022em;
+  font-variation-settings:"opsz" 72;
+}
+.lide{
+  max-width:40rem;color:var(--texto-2);
+  font-size:clamp(1.0625rem,.98rem + .5vw,1.3125rem);line-height:1.55;text-wrap:pretty;
+}
+
+/* os dados do documento: no celular, uma ficha; a partir de 720px, blocos */
+.meta{
+  width:100%;max-width:34rem;margin-top:.6rem;padding:.2rem 1rem;
+  border:1px solid var(--borda);border-radius:14px;
+  background:var(--cartao);background:var(--cartao-vidro);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  box-shadow:var(--sombra);
+}
+.meta>div{
+  display:grid;grid-template-columns:7.4rem minmax(0,1fr);gap:.75rem;align-items:baseline;
+  padding:.62rem 0;border-top:1px solid var(--borda);
+}
+.meta>div:first-child{border-top:0}
+.meta dt{font-family:var(--f-mono);font-size:.6875rem;line-height:1.35;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-3)}
+.meta dd{margin:0;min-width:0;font-size:.9375rem;font-weight:600;line-height:1.45;color:var(--texto-forte);overflow-wrap:anywhere}
+.meta dd a{font-weight:600}
+@media (max-width:399px){.meta>div{grid-template-columns:minmax(0,1fr);gap:.15rem}}
+@media (min-width:720px){
+  .meta{display:flex;flex-wrap:wrap;gap:.5rem;max-width:none;padding:0;border:0;background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .meta>div{
+    display:block;flex:1 1 auto;min-width:8.5rem;padding:.72rem 1rem .78rem;
+    border:1px solid var(--borda);border-radius:12px;background:var(--cartao);background:var(--cartao-vidro);box-shadow:var(--sombra);
+  }
+  .meta>div:first-child{border-top:1px solid var(--borda)}
+  .meta dd{margin-top:.2rem;overflow-wrap:break-word}
+}
+
+/* --------------------------------------------------------------------------
+   6. Em resumo: os cartões com ícone
+   -------------------------------------------------------------------------- */
+.resumo{margin-top:clamp(1.75rem,5vw,3rem)}
+.resumo>h2,.documentos>h2,.contato>h2{
+  display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;
+  font-size:clamp(1.375rem,1.2rem + .8vw,1.75rem);font-weight:600;letter-spacing:-.01em;
+}
+.resumo>h2::after,.documentos>h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--borda-forte),transparent)}
+.cartoes{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr));gap:.75rem;
+}
+.cartoes>li{margin:0}
+.cartao{
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:.95rem;row-gap:.3rem;align-content:start;
+  padding:1.1rem 1.15rem 1.15rem;
+  border:1px solid var(--borda);border-radius:var(--raio);background:var(--cartao);box-shadow:var(--sombra);
+}
+.cartao::before{ /* o fio de luz no alto (a "borda neon" do Motrix, calma) */
+  content:"";position:absolute;inset:0 0 auto;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent 6%,var(--acento-borda) 50%,transparent 94%);
+}
+.cartao>.icone{grid-row:1 / span 2;align-self:start}
+.cartao>h3{
+  align-self:center;margin:0;
+  font-size:1.125rem;font-weight:600;line-height:1.3;letter-spacing:-.005em;
+}
+.cartao>p{grid-column:2;margin:0;font-size:.9375rem;line-height:1.58;color:var(--texto-2)}
+.cartao>p+p{margin-top:.4rem}
+
+/* o ícone: um ladrilho verde com o desenho em máscara */
+.icone{
+  --i:var(--i-ponto);
+  display:inline-grid;place-items:center;flex:none;
+  width:2.75rem;height:2.75rem;border-radius:12px;
+  color:var(--icone-cor);background:var(--acento-suave);border:1px solid var(--acento-borda);
+  box-shadow:0 0 22px -8px var(--acento-halo-forte),inset 0 0 14px -6px var(--acento-halo-forte);
+}
+.icone::before{
+  content:"";width:1.375rem;height:1.375rem;background-color:currentColor;
+  -webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;
+  filter:drop-shadow(0 0 3px var(--acento-halo));
+}
+[data-icone="cadeado"]{--i:var(--i-cadeado)} [data-icone="escudo"]{--i:var(--i-escudo)} [data-icone="nuvem"]{--i:var(--i-nuvem)} [data-icone="pessoa"]{--i:var(--i-pessoa)} [data-icone="pessoas"]{--i:var(--i-pessoas)} [data-icone="balao"]{--i:var(--i-balao)} [data-icone="estrela"]{--i:var(--i-estrela)} [data-icone="chave"]{--i:var(--i-chave)} [data-icone="relogio"]{--i:var(--i-relogio)} [data-icone="alerta"]{--i:var(--i-alerta)} [data-icone="livro"]{--i:var(--i-livro)} [data-icone="raio"]{--i:var(--i-raio)} [data-icone="lixeira"]{--i:var(--i-lixeira)} [data-icone="email"]{--i:var(--i-email)} [data-icone="celular"]{--i:var(--i-celular)} [data-icone="olho"]{--i:var(--i-olho)} [data-icone="bandeira"]{--i:var(--i-bandeira)} [data-icone="coracao"]{--i:var(--i-coracao)} [data-icone="moeda"]{--i:var(--i-moeda)} [data-icone="robo"]{--i:var(--i-robo)}
+
+/* --------------------------------------------------------------------------
+   7. O corpo: o índice e o texto
+   -------------------------------------------------------------------------- */
+.corpo{margin-top:clamp(2rem,6vw,4rem);padding-bottom:clamp(1rem,4vw,2rem)}
+
+.indice{
+  margin-bottom:clamp(2rem,6vw,2.75rem);
+  border:1px solid var(--borda);border-radius:var(--raio);background:var(--cartao);box-shadow:var(--sombra);
+}
+.indice h2{
+  margin:0;padding:1rem 1.1rem .4rem;
+  font-family:var(--f-mono);font-size:.75rem;font-weight:600;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--texto-2);
+}
+.indice ol,.indice ul{list-style:none;margin:0;padding:0 .5rem .7rem}
+.indice li{margin:0}
+.indice a{
+  position:relative;display:flex;align-items:baseline;gap:.55rem;
+  min-height:44px;padding:.62rem .65rem;border-radius:10px;
+  color:var(--texto-2);font-size:.9375rem;line-height:1.4;text-decoration:none;
+}
+.indice a:hover{color:var(--texto-forte);background:var(--realce)}
+.indice a[aria-current]{color:var(--acento-texto);background:var(--acento-suave);font-weight:600}
+.indice-num{
+  flex:none;min-width:1.3rem;
+  font-family:var(--f-mono);font-size:.75rem;font-weight:600;color:var(--texto-3);font-variant-numeric:tabular-nums;
+}
+.indice a[aria-current] .indice-num{color:var(--acento-texto)}
+.indice .indice-grupo{
+  display:flex;align-items:center;gap:.6rem;
+  margin:1rem .65rem .35rem;
+  font-family:var(--f-mono);font-size:.6875rem;font-weight:600;line-height:1.35;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--acento-texto);
+}
+.indice-grupo::after{content:"";flex:1;min-width:1rem;height:1px;background:linear-gradient(90deg,var(--acento-borda),transparent)}
+
+/* com JS, no celular, o índice recolhe num botão que diz onde você está */
+.indice-rotulo{display:none}
+.indice-botao{
+  display:flex;align-items:center;gap:.7rem;width:100%;min-height:3.3rem;
+  margin:0;padding:.7rem 1rem;border:0;border-radius:inherit;background:none;
+  color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;text-align:left;cursor:pointer;
+}
+.indice-botao-titulo{flex:none}
+.indice-atual{
+  flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-family:var(--f-texto);font-size:.875rem;font-weight:500;letter-spacing:0;text-transform:none;color:var(--texto);
+}
+.indice-seta{
+  flex:none;width:1.25rem;height:1.25rem;background-color:currentColor;
+  -webkit-mask:var(--i-divisa) center/contain no-repeat;mask:var(--i-divisa) center/contain no-repeat;
+  transition:transform .3s var(--curva);
+}
+.indice-botao[aria-expanded="true"] .indice-seta{transform:rotate(180deg)}
+.js .indice h2{padding:0}
+.indice.recolhido ol,.indice.recolhido ul{display:none}
+
+.texto{min-width:0}
+.secao{padding-top:clamp(2rem,5vw,3rem)}
+.secao+.secao{margin-top:clamp(2rem,5vw,3rem);border-top:1px solid var(--borda)}
+.texto>.secao:first-child{padding-top:0}
+.parte+.secao{padding-top:clamp(2.25rem,5vw,3rem)}
+.secao>*{max-width:var(--medida)}
+.secao>.tabela{max-width:none}
+.secao>*+*{margin-top:1.05em}
+.secao>h2{
+  display:flex;align-items:flex-start;gap:.8rem;
+  font-size:clamp(1.45rem,1.2rem + 1vw,1.875rem);font-weight:600;line-height:1.22;letter-spacing:-.012em;
+}
+.secao>h2+*{margin-top:1.1rem}
+.num{
+  flex:none;display:inline-grid;place-items:center;
+  min-width:2.15rem;height:2.15rem;padding:0 .45rem;margin-top:-.05em;
+  border-radius:10px;border:1px solid var(--acento-borda);background:var(--acento-suave);
+  font-family:var(--f-mono);font-size:.875rem;font-weight:600;line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums;
+  color:var(--acento-texto);
+  box-shadow:0 0 18px -6px var(--acento-halo-forte);
+}
+.secao h3{
+  margin-top:2em;
+  font-size:clamp(1.1875rem,1.1rem + .35vw,1.3125rem);font-weight:600;line-height:1.3;letter-spacing:-.005em;
+}
+.secao>h3+*{margin-top:.6em}
+.num-sub{
+  margin-right:.15em;
+  font-family:var(--f-mono);font-size:.78em;font-weight:600;letter-spacing:0;color:var(--acento-texto);
+}
+.secao p{text-wrap:pretty}
+.secao ul,.secao ol{padding-left:1.4em}
+.secao li{padding-left:.2em}
+.secao li+li{margin-top:.5em}
+.secao li>ul,.secao li>ol{margin-top:.5em}
+.secao ul>li::marker{color:var(--acento-texto)}
+.secao ol:not(.passos)>li::marker{font-family:var(--f-mono);font-size:.85em;font-weight:600;color:var(--acento-texto)}
+
+/* --------------------------------------------------------------------------
+   8. Nota, alerta e o [CONFERIR]
+   -------------------------------------------------------------------------- */
+.nota,.alerta{
+  position:relative;display:block;
+  padding:1rem 1.15rem 1.05rem 3.3rem;border-radius:14px;
+  font-size:.96875rem;line-height:1.65;
+}
+.nota>*+*,.alerta>*+*{margin-top:.6em}
+.nota::before,.alerta::before{
+  content:"";position:absolute;left:1.05rem;top:1.12rem;width:1.35rem;height:1.35rem;background-color:currentColor;
+  -webkit-mask:var(--ia) center/contain no-repeat;mask:var(--ia) center/contain no-repeat;
+}
+/* nota: a explicação, neutra */
+.nota{--ia:var(--i-livro);border:1px solid var(--borda);background:var(--cartao);color:var(--texto);box-shadow:var(--sombra)}
+.nota::before{color:var(--texto-2)}
+/* alerta: o que importa (limites, prazos, o que não fazemos): o trilho de luz */
+.alerta{
+  --ia:var(--i-alerta);
+  border:1px solid var(--acento-borda);background:var(--alerta-fundo);color:var(--texto);
+  box-shadow:inset 3px 0 0 var(--acento-luz),0 0 30px -16px var(--acento-halo-forte);
+}
+.alerta::before{color:var(--icone-cor);filter:drop-shadow(0 0 4px var(--acento-halo))}
+
+/* [CONFERIR]: âmbar, tracejado e com a faixa de obra, para o revisor achar; aparece também na impressão */
+.conferir{
+  color:var(--conferir-texto);background:var(--conferir-fundo);
+  font-family:var(--f-mono);font-weight:600;
+}
+span.conferir{
+  padding:.08em .38em;border:1.5px dashed var(--conferir-borda);border-radius:6px;
+  font-size:.86em;line-height:1.55;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+}
+div.conferir{
+  position:relative;overflow:hidden;
+  padding:.9rem 1.05rem .95rem 3.25rem;border:1.5px dashed var(--conferir-borda);border-radius:12px;
+  font-size:.875rem;line-height:1.6;
+}
+div.conferir::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:.55rem;
+  background:repeating-linear-gradient(-45deg,var(--conferir-borda) 0 .42rem,var(--conferir-faixa) .42rem .84rem);
+}
+div.conferir::after{
+  content:"";position:absolute;left:1.3rem;top:.95rem;width:1.25rem;height:1.25rem;background-color:currentColor;
+  -webkit-mask:var(--i-bandeira) center/contain no-repeat;mask:var(--i-bandeira) center/contain no-repeat;
+}
+.conferir-foco{animation:piscar-conferir 1.4s ease-out 2}
+@keyframes piscar-conferir{0%,40%{box-shadow:0 0 0 4px var(--conferir-borda),0 0 24px var(--conferir-borda)}100%{box-shadow:0 0 0 0 transparent}}
+/* O texto que só entra quando o selo "Aprovado" ligar (a F1): tracejado verde, com o rótulo.
+   Antes da F1, a página publicada vai SEM estes blocos; na F1, o bloco entra e o rótulo sai. */
+.quando-selo{
+  margin-block:1.25rem;padding:.95rem 1.1rem 1rem;
+  border:1.5px dashed var(--acento-borda);border-radius:14px;background:var(--cartao);
+}
+.quando-selo>*+*{margin-top:.7em}
+.quando-selo>h3:first-of-type{margin-top:.6em}
+.quando-selo-rotulo{
+  display:inline-block;padding:.14em .6em;border:1px solid var(--acento-borda);border-radius:999px;
+  background:var(--acento-suave);color:var(--acento-texto);
+  font-family:var(--f-mono);font-size:.78rem;font-weight:600;line-height:1.4;
+}
+/* o contador de pendências (só existe se houver [CONFERIR] na página) */
+.conferir-contador{
+  position:fixed;z-index:70;left:max(1rem,env(safe-area-inset-left));bottom:max(1rem,env(safe-area-inset-bottom));
+  display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.5rem .95rem .5rem .8rem;
+  border:1.5px dashed var(--conferir-borda);border-radius:999px;
+  background:var(--conferir-fundo);color:var(--conferir-texto);
+  font-family:var(--f-mono);font-size:.78rem;font-weight:600;line-height:1.2;cursor:pointer;
+  box-shadow:0 10px 26px -14px rgba(0,0,0,.6);
+}
+.conferir-contador::before{
+  content:"";flex:none;width:1rem;height:1rem;background-color:currentColor;
+  -webkit-mask:var(--i-bandeira) center/contain no-repeat;mask:var(--i-bandeira) center/contain no-repeat;
+}
+
+/* --------------------------------------------------------------------------
+   9. Tabela (rola de lado dentro dela; a página não)
+   -------------------------------------------------------------------------- */
+.tabela{
+  margin-block:1.5rem;max-width:100%;
+  overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+  border:1px solid var(--borda);border-radius:14px;box-shadow:var(--sombra);
+  /* as sombras nas bordas só aparecem quando há mais tabela para o lado */
+  background:
+    linear-gradient(90deg,var(--cartao) 35%,transparent) 0 0 / 2.5rem 100% no-repeat local,
+    linear-gradient(270deg,var(--cartao) 35%,transparent) 100% 0 / 2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%,var(--dica-rolagem),transparent) 0 0 / .95rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%,var(--dica-rolagem),transparent) 100% 0 / .95rem 100% no-repeat scroll,
+    var(--cartao);
+  scrollbar-width:thin;scrollbar-color:var(--borda-forte) transparent;
+}
+.secao>.tabela{margin-top:1.5rem}
+.tabela table{width:100%;border-collapse:separate;border-spacing:0;font-size:.9375rem;line-height:1.55;font-variant-numeric:tabular-nums}
+.tabela caption{caption-side:top;padding:.9rem 1rem .2rem;text-align:left;font-weight:700;color:var(--texto-forte)}
+.tabela th,.tabela td{min-width:8.5rem;padding:.78rem 1rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--borda)}
+.tabela thead th{
+  background:var(--realce);border-bottom-color:var(--borda-forte);
+  font-family:var(--f-mono);font-size:.6875rem;font-weight:600;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--texto-2);
+}
+.tabela tbody th{font-weight:700;color:var(--texto-forte)}
+.tabela tbody tr:last-child>*{border-bottom:0}
+.tabela tbody tr{transition:background-color .15s}
+.tabela tbody tr:hover{background:var(--realce)}
+.tabela td>*+*{margin-top:.4em}
+
+/* --------------------------------------------------------------------------
+   10. Passos, definições e o botão
+   -------------------------------------------------------------------------- */
+.secao ol.passos,ol.passos{list-style:none;padding:0;counter-reset:passo}
+ol.passos>li{position:relative;counter-increment:passo;min-height:2.4rem;margin:0;padding:.12rem 0 1.35rem 3.35rem}
+ol.passos>li+li{margin-top:0}
+ol.passos>li:last-child{padding-bottom:0}
+ol.passos>li::before{
+  content:counter(passo);position:absolute;z-index:1;left:0;top:-.05rem;
+  display:grid;place-items:center;width:2.3rem;height:2.3rem;border-radius:50%;
+  border:1.5px solid var(--acento-borda);background:var(--cartao);
+  font-family:var(--f-mono);font-size:.875rem;font-weight:700;line-height:1;color:var(--acento-texto);
+  box-shadow:0 0 0 4px var(--fundo),0 0 20px -4px var(--acento-halo-forte);
+}
+ol.passos>li::after{
+  content:"";position:absolute;left:calc(1.15rem - 1px);top:2.45rem;bottom:.15rem;width:2px;border-radius:2px;
+  background:linear-gradient(var(--acento-borda),transparent);
+}
+ol.passos>li:last-child::after{display:none}
+
+.definicoes{border-top:1px solid var(--borda)}
+.definicoes>div{display:contents}
+.definicoes dt{padding-top:.85rem;font-weight:700;line-height:1.4;color:var(--texto-forte)}
+.definicoes dt::before{
+  content:"";display:inline-block;width:.45rem;height:.45rem;margin:0 .55rem .12em 0;border-radius:2px;
+  background:var(--acento-luz);box-shadow:0 0 8px var(--acento-halo-forte);vertical-align:middle;
+}
+.definicoes dd{margin:.25rem 0 0;padding-bottom:.85rem;border-bottom:1px solid var(--borda);color:var(--texto-2)}
+@media (min-width:640px){
+  .definicoes{display:grid;grid-template-columns:minmax(8rem,12.5rem) minmax(0,1fr);column-gap:1.5rem}
+  .definicoes dt{grid-column:1;padding-bottom:.85rem;border-bottom:1px solid var(--borda)}
+  .definicoes dd{grid-column:2;margin:0;padding-top:.85rem}
+  .definicoes dt+dd+dd{padding-top:0}
+}
+
+.botao{
+  --ib:var(--i-seta-direita);
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;max-width:100%;
+  min-height:3rem;padding:.75rem 1.35rem .75rem 1.15rem;
+  border-radius:14px;background:var(--acento);color:var(--sobre-acento);
+  font-family:var(--f-texto);font-size:1rem;font-weight:700;line-height:1.25;text-decoration:none;overflow-wrap:anywhere;
+  box-shadow:0 0 0 1px var(--acento-borda),0 12px 30px -14px var(--acento-halo-forte);
+  transition:transform .2s var(--curva),box-shadow .25s,filter .2s;
+}
+.botao[href^="mailto:"]{--ib:var(--i-email)}
+.botao::before{
+  content:"";flex:none;width:1.25rem;height:1.25rem;background-color:currentColor;
+  -webkit-mask:var(--ib) center/contain no-repeat;mask:var(--ib) center/contain no-repeat;
+}
+.botao:hover{color:var(--sobre-acento);text-decoration:none;transform:translateY(-1px);box-shadow:0 0 0 1px var(--acento),0 0 36px -6px var(--acento-halo-forte)}
+.botao:active{transform:translateY(0) scale(.98)}
+
+/* --------------------------------------------------------------------------
+   11. Parte: abre um bloco novo (os Termos da Rede dentro dos Termos)
+   -------------------------------------------------------------------------- */
+.parte{
+  position:relative;isolation:isolate;overflow:hidden;
+  margin-top:clamp(3rem,8vw,5rem);padding:clamp(1.75rem,5vw,3rem) clamp(1.25rem,4vw,2.5rem);
+  border:1px solid var(--acento-borda);border-radius:22px;
+  background:radial-gradient(120% 150% at 0% 0%,var(--acento-suave),transparent 58%),var(--cartao);
+  box-shadow:var(--brilho);
+}
+.parte::before{
+  content:"";position:absolute;z-index:-1;right:-2rem;bottom:-2.5rem;width:min(22rem,70%);aspect-ratio:330/240;pointer-events:none;
+  background:linear-gradient(320deg,var(--acento-luz),transparent 80%);
+  -webkit-mask:var(--rede) center/contain no-repeat;mask:var(--rede) center/contain no-repeat;
+  opacity:var(--rede-opacidade);
+}
+.texto>.parte:first-child{margin-top:0}
+.parte-rotulo{
+  display:flex;align-items:center;gap:.8rem;margin:0 0 .8rem;
+  font-family:var(--f-mono);font-size:.75rem;font-weight:600;line-height:1.3;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--acento-texto);
+}
+.parte-rotulo::after{content:"";flex:0 1 5rem;height:1px;background:linear-gradient(90deg,var(--acento-luz),transparent);box-shadow:0 0 6px var(--acento-halo)}
+.parte>h2{
+  max-width:22ch;
+  font-size:clamp(1.75rem,1.3rem + 2.2vw,2.625rem);font-weight:700;line-height:1.1;letter-spacing:-.018em;
+}
+.parte>p:not(.parte-rotulo){max-width:var(--medida);margin-top:.9rem;color:var(--texto-2)}
+
+/* --------------------------------------------------------------------------
+   12. O rodapé
+   -------------------------------------------------------------------------- */
+.rodape{
+  position:relative;margin-top:clamp(3rem,8vw,5rem);
+  display:grid;justify-items:start;gap:1.05rem;
+  padding:clamp(2rem,6vw,3.25rem) var(--lateral) calc(clamp(2rem,6vw,3rem) + env(safe-area-inset-bottom));
+  background:var(--fundo-rodape);border-top:1px solid var(--borda);
+  color:var(--texto-2);font-size:.9375rem;line-height:1.6;
+}
+.rodape::before{
+  content:"";position:absolute;left:0;right:0;top:-1px;height:1px;
+  background:linear-gradient(90deg,transparent 5%,var(--acento-luz) 50%,transparent 95%);opacity:.75;
+  box-shadow:0 0 10px var(--acento-halo);
+}
+.rodape>*{margin:0;max-width:46rem}
+.js .rodape{padding-bottom:calc(clamp(2rem,6vw,3rem) + 4.5rem + env(safe-area-inset-bottom))} /* folga para os botões flutuantes */
+.rodape-aviso{
+  position:relative;padding:.95rem 1.1rem 1rem 3.2rem;
+  border:1px solid var(--borda);border-radius:14px;background:var(--cartao);
+  font-size:.90625rem;line-height:1.6;color:var(--texto-2);
+}
+.rodape-aviso::before{
+  content:"";position:absolute;left:1.05rem;top:1.05rem;width:1.3rem;height:1.3rem;background-color:var(--icone-cor);
+  -webkit-mask:var(--i-escudo) center/contain no-repeat;mask:var(--i-escudo) center/contain no-repeat;
+}
+.rodape-links{display:flex;flex-wrap:wrap;gap:.5rem}
+.rodape-links a{
+  display:inline-flex;align-items:center;min-height:40px;padding:.35rem .9rem;
+  border:1px solid var(--borda-forte);border-radius:999px;
+  color:var(--texto);font-size:.875rem;font-weight:600;text-decoration:none;
+}
+.rodape-links a:hover{color:var(--acento-texto);border-color:var(--acento-borda);box-shadow:0 0 18px -6px var(--acento-halo-forte)}
+.rodape-links a[aria-current="page"],
+body[data-pagina="privacidade"] .rodape-links a[href="privacidade.html"],
+body[data-pagina="termos"] .rodape-links a[href="termos.html"],
+body[data-pagina="exclusao"] .rodape-links a[href="exclusao.html"],
+body[data-pagina="diretrizes"] .rodape-links a[href="diretrizes.html"],
+body[data-pagina="seguranca-infantil"] .rodape-links a[href="seguranca-infantil.html"]{
+  color:var(--acento-texto);border-color:var(--acento-borda);background:var(--acento-suave);
+}
+.rodape-marca{
+  display:flex;align-items:center;gap:.6rem;
+  font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-3);
+}
+.rodape-marca::before{content:"";flex:none;width:.5rem;height:.5rem;border-radius:50%;background:var(--acento-luz);box-shadow:0 0 10px var(--acento-luz)}
+
+/* --------------------------------------------------------------------------
+   13. O "voltar ao topo" (o legal.js cria): um anel que enche com a leitura
+   -------------------------------------------------------------------------- */
+.voltar-topo{
+  position:fixed;z-index:70;right:max(1rem,env(safe-area-inset-right));bottom:max(1rem,env(safe-area-inset-bottom));
+  display:grid;place-items:center;width:3rem;height:3rem;padding:0;border:0;border-radius:50%;cursor:pointer;
+  color:var(--acento-texto);
+  background:conic-gradient(var(--acento-luz) calc(var(--lido,0) * 360deg),var(--borda-forte) 0);
+  box-shadow:var(--sombra),0 0 22px -8px var(--acento-halo-forte);
+  opacity:0;visibility:hidden;transform:translateY(12px) scale(.9);
+  transition:opacity .25s,transform .35s var(--curva),visibility 0s linear .35s;
+}
+.voltar-topo::before{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--cartao)}
+.voltar-topo::after{
+  content:"";position:relative;width:1.25rem;height:1.25rem;background-color:currentColor;
+  -webkit-mask:var(--i-seta-cima) center/contain no-repeat;mask:var(--i-seta-cima) center/contain no-repeat;
+}
+.voltar-topo.visivel{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.voltar-topo:hover{box-shadow:var(--sombra),0 0 30px -6px var(--acento-halo-forte)}
+
+/* --------------------------------------------------------------------------
+   14. A página inicial (index.html): os documentos e o contato
+   -------------------------------------------------------------------------- */
+.documentos{margin-top:clamp(1.75rem,5vw,3rem)}
+.cartoes-docs{grid-template-columns:minmax(0,1fr);gap:.9rem}
+@media (min-width:720px){
+  .cartoes-docs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cartoes-docs>li:last-child:nth-child(odd){grid-column:1 / -1}
+}
+@media (min-width:1024px){
+  .cartoes-docs{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .cartoes-docs>li{grid-column:span 2}
+  .cartoes-docs>li:nth-child(-n+2){grid-column:span 3}
+  .cartoes-docs>li:last-child:nth-child(odd){grid-column:span 2}
+}
+.cartao-doc{
+  isolation:isolate;overflow:visible;
+  grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto 1fr auto;align-content:stretch;row-gap:.55rem;
+  padding:1.35rem 1.35rem 1.2rem;
+  transition:transform .3s var(--curva),box-shadow .3s,border-color .3s;
+}
+.cartao-doc>.icone{grid-row:auto;width:3.25rem;height:3.25rem;border-radius:14px;margin-bottom:.35rem}
+.cartao-doc>.icone::before{width:1.6rem;height:1.6rem}
+.cartao-doc>h3{align-self:start;font-size:clamp(1.3rem,1.15rem + .6vw,1.55rem);font-weight:700;letter-spacing:-.012em}
+.cartao-doc>h3 a{color:var(--texto-forte);text-decoration:none}
+.cartao-doc>h3 a::after{content:"";position:absolute;inset:0;z-index:1;border-radius:var(--raio)} /* o cartão inteiro é o link */
+.cartao-doc>h3 a:focus-visible{outline:none}
+.cartao-doc>h3 a:focus-visible::after{outline:2px solid var(--foco);outline-offset:3px}
+.cartao-doc>p{grid-column:1}
+.cartao-rodape{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.5rem;padding-top:.8rem;
+  border-top:1px solid var(--borda);
+}
+.cartao-versao{font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-3)}
+.cartao-ler{display:inline-flex;align-items:center;gap:.4rem;font-size:.875rem;font-weight:700;color:var(--acento-texto)}
+.cartao-ler::after{
+  content:"";width:1.1rem;height:1.1rem;background-color:currentColor;
+  -webkit-mask:var(--i-seta-direita) center/contain no-repeat;mask:var(--i-seta-direita) center/contain no-repeat;
+  transition:transform .3s var(--curva);
+}
+/* o EliteNeonBorder do Motrix: um segmento de luz percorre a borda no hover */
+@property --giro{syntax:"<angle>";inherits:false;initial-value:0deg}
+.cartao-doc::after{
+  content:"";position:absolute;inset:-1px;z-index:-1;border-radius:inherit;padding:2px;pointer-events:none;
+  background:conic-gradient(from var(--giro),transparent 0 58%,var(--acento-halo-forte) 74%,var(--acento-luz) 88%,transparent 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s;
+}
+.cartao-doc:hover,.cartao-doc:focus-within{transform:translateY(-3px);border-color:var(--acento-borda);box-shadow:var(--brilho)}
+.cartao-doc:hover::after,.cartao-doc:focus-within::after{opacity:1;animation:giro 4.5s linear infinite}
+.cartao-doc:hover .cartao-ler::after,.cartao-doc:focus-within .cartao-ler::after{transform:translateX(4px)}
+@keyframes giro{to{--giro:360deg}}
+
+.contato{
+  position:relative;overflow:hidden;isolation:isolate;
+  display:grid;gap:1rem;justify-items:start;
+  margin-top:clamp(2rem,6vw,3.5rem);padding:clamp(1.5rem,5vw,2.5rem);
+  border:1px solid var(--acento-borda);border-radius:22px;
+  background:radial-gradient(110% 140% at 100% 0%,var(--acento-suave),transparent 60%),var(--cartao);
+  box-shadow:var(--brilho);
+}
+.contato>h2{margin:0}
+.contato>p{max-width:var(--medida);color:var(--texto-2)}
+.contato>.nota{max-width:var(--medida);box-shadow:none}
+
+/* --------------------------------------------------------------------------
+   15. Desktop: o topo numa linha só e o índice como coluna fixa
+   -------------------------------------------------------------------------- */
+@media (min-width:1024px){
+  :root{--topo-h:4.4rem}
+  .topo{
+    grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"marca abas tema";
+    column-gap:1.25rem;min-height:4.4rem;padding-block:.55rem;
+  }
+  .topo.topo-oculto{transform:none}
+  .abas{justify-content:flex-end;margin:0;padding:0;overflow:visible;-webkit-mask-image:none;mask-image:none}
+  .abas a{padding-inline:.8rem}
+
+  .corpo{
+    display:grid;grid-template-columns:15.5rem minmax(0,1fr);gap:clamp(2.5rem,4vw,4.5rem);align-items:start;
+  }
+  .indice{
+    position:sticky;top:calc(var(--topo-h) + 1.75rem);
+    max-height:calc(100vh - var(--topo-h) - 3.5rem);overflow-y:auto;overscroll-behavior:contain;
+    margin:0;padding-right:.25rem;
+    border:0;border-left:1px solid var(--borda);border-radius:0;background:none;box-shadow:none;
+    scrollbar-width:thin;scrollbar-color:var(--borda-forte) transparent;
+  }
+  .indice h2,.js .indice h2{padding:.1rem 0 .8rem 1.1rem}
+  .indice-rotulo{display:inline}
+  .indice-botao{display:none}
+  .indice.recolhido ol,.indice.recolhido ul{display:block}
+  .indice ol,.indice ul{padding:0 0 .5rem}
+  .indice a{
+    min-height:0;margin-left:-1px;padding:.42rem .7rem .42rem 1.1rem;
+    border-left:2px solid transparent;border-radius:0 10px 10px 0;font-size:.875rem;
+  }
+  .indice a[aria-current]{
+    border-left-color:var(--acento-luz);
+    background:linear-gradient(90deg,var(--acento-suave),transparent 92%);
+    box-shadow:inset 6px 0 12px -10px var(--acento-luz);
+  }
+  .indice .indice-grupo{margin:1.1rem 0 .35rem 1.1rem}
+}
+@media (min-width:1024px) and (max-width:1199px){
+  .marca-sub{display:none}
+  .abas a{padding-inline:.65rem;font-size:.84375rem}
+}
+
+/* --------------------------------------------------------------------------
+   16. Movimento (desligado por inteiro em prefers-reduced-motion)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion:no-preference){
+  /* a entrada só vale com a classe .js (o legal.js põe): sem JS, ou com ele falhando, tudo aparece de cara */
+  .js .topo::after{animation:feixe 2.6s var(--curva) .45s both}
+  .js .marca-simbolo{animation:marca-acende 1.3s ease-out .1s both}
+  .js .marca-simbolo::after{animation:certo-entra .55s var(--mola) .5s both}
+  .js .capa>*{animation:subir .8s var(--curva) both}
+  .js .capa>h1{animation-delay:.1s}
+  .js .capa>.lide{animation-delay:.2s}
+  .js .capa>.meta{animation-delay:.3s}
+  .js .capa>.selo{animation:carimbar .75s var(--mola) .35s both}
+  .js .capa::before{animation:rede-surge 1.8s var(--curva) .15s both}
+  .js .resumo .cartao,.js .documentos .cartao{animation:subir .7s var(--curva) both}
+  .cartoes>li:nth-child(1){animation-delay:.3s}
+  .cartoes>li:nth-child(2){animation-delay:.36s}
+  .cartoes>li:nth-child(3){animation-delay:.42s}
+  .cartoes>li:nth-child(4){animation-delay:.48s}
+  .cartoes>li:nth-child(5){animation-delay:.54s}
+  .cartoes>li:nth-child(6){animation-delay:.6s}
+  .cartoes>li:nth-child(n+7){animation-delay:.66s}
+  /* ao rolar, os blocos sobem de leve (só onde o navegador faz isso sem JS) */
+  @supports (animation-timeline:view()){
+    .js .secao>h2,.js .nota,.js .alerta,.js div.conferir,.js .tabela,.js ol.passos>li,.js .definicoes,.js .parte,.js .contato{
+      animation:aparecer linear both;animation-timeline:view();animation-range:entry 0% entry 42%;
+    }
+  }
+  /* a seção que você abriu pelo índice acende */
+  .secao:target>h2 .num,.parte:target>.parte-rotulo{animation:realce 1.9s ease-out}
+  .js .marca-nome{animation:reflexo 1.6s ease-in-out .9s both}
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  @media (prefers-reduced-motion:no-preference){
+    /* o reflexo neon que passa pelo nome uma vez (o MotrixWatermark) */
+    .marca-nome{
+      background:linear-gradient(100deg,var(--texto-forte) 42%,var(--acento-luz) 50%,var(--texto-forte) 58%) no-repeat;
+      background-size:260% 100%;background-position:100% 0;
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    }
+  }
+}
+@keyframes feixe{from{background-position:-70% 0}to{background-position:170% 0}}
+@keyframes subir{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes aparecer{from{opacity:.001;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes carimbar{
+  0%{opacity:0;transform:rotate(-7deg) scale(1.2)}
+  60%{opacity:1;transform:rotate(-1deg) scale(.96)}
+  100%{opacity:1;transform:rotate(-2deg) scale(1)}
+}
+@keyframes rede-surge{from{opacity:0;transform:translate3d(12px,-8px,0) scale(.97)}}
+@keyframes marca-acende{
+  0%{opacity:.2;box-shadow:none}
+  55%{opacity:1;box-shadow:0 0 26px 2px var(--acento-halo-forte),inset 0 0 14px 0 var(--acento-halo-forte)}
+}
+@keyframes certo-entra{from{opacity:0;transform:rotate(43deg) scale(.2)}}
+@keyframes reflexo{from{background-position:100% 0}to{background-position:0 0}}
+@keyframes realce{
+  0%,35%{box-shadow:0 0 0 5px var(--acento-halo),0 0 34px 4px var(--acento-halo-forte)}
+  100%{box-shadow:0 0 18px -6px var(--acento-halo-forte)}
+}
+/* a troca de tema desliza as cores (o legal.js liga por 450 ms) */
+.tema-transicao,.tema-transicao *,.tema-transicao *::before,.tema-transicao *::after{
+  transition:background-color .4s ease,color .4s ease,border-color .4s ease,box-shadow .4s ease,fill .4s ease !important;
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+
+/* alto contraste do Windows: os desenhos em máscara passam a usar a cor do sistema */
+@media (forced-colors:active){
+  .icone::before,.tema-icone,.indice-seta,.botao::before,.nota::before,.alerta::before,div.conferir::after,
+  .rodape-aviso::before,.voltar-topo::after,.cartao-ler::after,.conferir-contador::before{forced-color-adjust:none;background-color:CanvasText}
+  .marca-simbolo,.marca-simbolo::after{forced-color-adjust:none;border-color:CanvasText}
+  .marca-nome{background:none !important;-webkit-text-fill-color:CanvasText}
+  .progresso{forced-color-adjust:none;background:Highlight}
+  .conferir{border-color:CanvasText}
+}
+
+/* --------------------------------------------------------------------------
+   17. Impressão: preto no branco, sem topo nem índice, com a URL dos links.
+       O [CONFERIR] continua visível (amarelo e tracejado).
+   -------------------------------------------------------------------------- */
+@page{margin:16mm 15mm 18mm}
+@media print{
+  :root,:root[data-tema]{
+    color-scheme:light;
+    --fundo:#fff;--cartao:#fff;--cartao-vidro:#fff;--cartao-tinta:#fff;--variante:#fff;--realce:transparent;
+    --borda:#9a9a9a;--borda-forte:#555;--texto:#000;--texto-forte:#000;--texto-2:#222;--texto-3:#333;
+    --acento:#000;--acento-texto:#000;--acento-marca:#000;--acento-luz:#000;--acento-suave:#fff;--acento-borda:#555;
+    --acento-halo:transparent;--acento-halo-forte:transparent;--sobre-acento:#000;--icone-cor:#000;--alerta-fundo:#fff;
+    --conferir-fundo:#FFF3B0;--conferir-texto:#000;--conferir-borda:#000;--conferir-faixa:#fff;
+    --sombra:none;--brilho:none;--brilho-fundo:transparent;--t-corpo:11pt;
+  }
+  *,*::before,*::after{animation:none !important;transition:none !important;text-shadow:none !important;box-shadow:none !important}
+  html,body{background:#fff !important;color:#000}
+  body{display:block;font-size:11pt;line-height:1.5}
+  .pular,.progresso,.topo,.indice,.voltar-topo,.conferir-contador,.tema,.rodape-links,.capa::before,.parte::before,.icone,
+  .cartao::before,.cartao-doc::after,.cartao-ler{display:none !important}
+  .pagina{max-width:none;padding:0}
+  .capa{padding:0 0 10pt;border-bottom:1.5pt solid #000}
+  .selo{transform:none;outline:0;background:none}
+  .capa h1{font-size:24pt;max-width:none}
+  .lide{font-size:12pt;color:#000}
+  .meta,.meta>div{background:none !important;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .meta{display:block;max-width:none;border:0;padding:0}
+  .meta>div{display:grid;grid-template-columns:34mm 1fr;padding:2pt 0;border:0}
+  .resumo,.corpo,.documentos,.contato{margin-top:14pt}
+  .corpo{display:block}
+  .cartoes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6pt}
+  .cartao{display:block;margin:0;padding:6pt 8pt;border:.75pt solid #777;border-radius:4pt;break-inside:avoid}
+  .cartao>h3{font-size:11.5pt}
+  .cartao>p{font-size:10pt;color:#000}
+  .cartao-doc{min-height:0}
+  .cartao-doc>h3 a::after{position:static;border-radius:0}
+  .secao{padding-top:10pt}
+  .secao+.secao{margin-top:10pt;border-top:.75pt solid #999}
+  .secao>*{max-width:none}
+  .secao>h2,.parte>h2{font-size:15pt;break-after:avoid}
+  .secao h3{font-size:12.5pt;break-after:avoid}
+  .num{border:.75pt solid #000;background:none;height:auto;min-width:0;padding:1pt 4pt;border-radius:3pt;font-size:10pt}
+  .nota,.alerta,div.conferir,.tabela,ol.passos>li,.definicoes,.cartao{break-inside:avoid}
+  .nota,.alerta{padding:6pt 8pt;border:.75pt solid #555;border-left-width:3pt;border-radius:3pt;background:none}
+  .nota::before,.alerta::before{display:none}
+  .conferir{-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#FFF3B0 !important;color:#000 !important;border:1.25pt dashed #000 !important}
+  div.conferir{padding:6pt 8pt 6pt 12pt}
+  div.conferir::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  div.conferir::after{display:none}
+  .tabela{overflow:visible;border:.75pt solid #777;border-radius:0;background:none}
+  .tabela table{font-size:9.5pt}
+  .tabela th,.tabela td{min-width:0;padding:4pt 6pt;border-bottom:.5pt solid #999}
+  .tabela thead th{background:none;color:#000}
+  thead{display:table-header-group}
+  tr{break-inside:avoid}
+  ol.passos>li::before{border:.75pt solid #000;background:#fff;color:#000;box-shadow:none}
+  ol.passos>li::after{background:#999}
+  .definicoes dt::before{display:none}
+  .botao{min-height:0;padding:0;border-radius:0;background:none;color:#000;font-weight:700;text-decoration:underline}
+  .botao::before{display:none}
+  .parte{margin-top:18pt;padding:10pt 0 0;border:0;border-top:2pt solid #000;border-radius:0;background:none;break-before:page}
+  .contato{border:.75pt solid #777;border-radius:4pt;background:none}
+  .rodape,.js .rodape{margin-top:16pt;padding:8pt 0 0;background:none;border-top:1pt solid #000;color:#000;font-size:9pt}
+  .rodape::before{display:none}
+  .rodape-aviso{padding:0;border:0;background:none;color:#000;font-size:inherit}
+  .rodape-aviso::before,.rodape-marca::before{display:none}
+  a{color:#000;text-decoration:underline}
+  /* a URL de cada link (o legal.js resolve a URL completa em data-url) */
+  a[href]:not([href^="#"]):not(.url-visivel):not(.marca)::after{content:" (" attr(href) ")";font-size:.85em;font-weight:400;overflow-wrap:anywhere}
+  a[href][data-url]:not([href^="#"]):not(.url-visivel):not(.marca)::after{content:" (" attr(data-url) ")"}
+  .marca-nome{background:none !important;-webkit-text-fill-color:#000}
+}
